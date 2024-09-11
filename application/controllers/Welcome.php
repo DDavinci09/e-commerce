@@ -22,6 +22,8 @@ class Welcome extends CI_Controller {
 	{
 		$data['users'] = $this->modelUser->getUsers();
 		
-		$this->load->view('welcome_message', $data);
+		$this->load->view('layoutHome/header', $data);
+		$this->load->view('layoutHome/index', $data);
+		$this->load->view('layoutHome/footer', $data);
 	}
 }
