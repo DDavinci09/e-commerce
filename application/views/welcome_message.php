@@ -94,6 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="body">
             <?php foreach ($users as $user): ?>
             <?= $user["username"]; ?>
+            <?= $user["password"]; ?>
             <?php endforeach; ?>
             <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
