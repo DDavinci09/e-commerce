@@ -4,7 +4,7 @@
         <a href="<?= base_url('assets'); ?>/index3.html" class="navbar-brand">
             <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <span class="brand-text font-weight-light">E-Commerce</span>
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -162,6 +162,38 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <!-- User Dropdown Login -->
+            <li class="nav-item dropdown">
+                <a class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Login
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginUser">
+                        <i class="fas fa-user mr-2"></i> Login User
+                    </a>
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginAlumni">
+                        <i class="fas fa-user mr-2"></i> Login Alumni
+                    </a>
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginAdmin">
+                        <i class="fas fa-user mr-2"></i> Login Admin
+                    </a>
+                </div>
+            </li>
+            <!-- User Dropdown Register -->
+            <li class="nav-item dropdown ml-2">
+                <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Register
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterUser">
+                        <i class="fas fa-user mr-2"></i>User
+                    </a>
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterAlumni">
+                        <i class="fas fa-user mr-2"></i>Alumni
+                    </a>
+                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterAdmin">
+                        <i class="fas fa-user mr-2"></i>Admin
+                    </a>
                 </div>
             </li>
         </ul>

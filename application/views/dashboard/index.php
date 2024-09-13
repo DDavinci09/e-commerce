@@ -5,14 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Fixed Layout</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                        <li class="breadcrumb-item active">Fixed Layout</li>
-                    </ol>
+                    <h1>Dashboard</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,14 +19,30 @@
                 <div class="col-12">
                     <!-- Default box -->
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Title</h3>
-                        </div>
                         <div class="card-body">
-                            <div class="dataTable">
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                                </table>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h2>Tentang Kami</h2>
+                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime,
+                                            hic nemo magni
+                                            voluptate id doloremque obcaecati corrupti laudantium sequi
+                                            suscipit, repellendus vitae
+                                            voluptates eligendi adipisci quisquam quas tenetur quis
+                                            cupiditate.</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                                            sunt explicabo asperiores
+                                            minima nesciunt, quia voluptatibus, alias, consectetur deleniti
+                                            ipsam expedita nisi
+                                            commodi quod! Omnis eius ab ipsam placeat repellat.</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <img class="border border-1 border-dark rounded-5" src="../assets/img/image.png"
+                                            alt="Gambar Kosong" style="width: 100;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

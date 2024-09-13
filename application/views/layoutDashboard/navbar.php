@@ -82,7 +82,7 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-        <!-- User Dropdown Menu -->
+        <!-- User Dropdown User -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fas fa-user fa-fw"></i>
