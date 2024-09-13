@@ -1,64 +1,59 @@
-</div>
-<!-- End of Main Content -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; E-Commerce 2024</span>
-        </div>
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.2.0
     </div>
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
 </footer>
-<!-- End of Footer -->
 
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
-<!-- End of Content Wrapper -->
+<!-- ./wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="../auth/proseslogout.php">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap core JavaScript-->
-<script src="<?= base_url('assets/dashboard/'); ?>vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url('assets/dashboard/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="<?= base_url('assets/dashboard/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="<?= base_url('assets/dashboard/'); ?>js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="<?= base_url('assets/dashboard/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/dashboard/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="<?= base_url('assets/dashboard/'); ?>js/demo/datatables-demo.js"></script>
-
+<!-- jQuery -->
+<script src="<?= base_url('assets'); ?>/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?= base_url('assets'); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="<?= base_url('assets'); ?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?= base_url('assets'); ?>/dist/js/adminlte.min.js"></script>
+<!-- Page specific script -->
+<!-- DataTables  & Plugins -->
+<script src="<?= base_url('assets'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/jszip/jszip.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 </body>
 
 </html>
