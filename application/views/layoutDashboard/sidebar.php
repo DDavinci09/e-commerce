@@ -28,11 +28,11 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>Data User</p>
                     </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url(); ?>Admin/DataAlumni" class="nav-link">
-                            <i class="nav-icon fas fa-user-friends"></i>
-                            <p>Data Alumni</p>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataAlumni" class="nav-link">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>Data Alumni</p>
                     </a>
                 </li>
                 <li class="nav-header">Menu</li>
@@ -41,24 +41,24 @@
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>Data Kategori</p>
                     </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url(); ?>Admin/DataProduk" class="nav-link">
-                            <i class="nav-icon fas fa-boxes"></i>
-                            <p>Data Produk</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url(); ?>Admin/DataReview" class="nav-link">
-                            <i class="nav-icon fas fa-star"></i>
-                            <p>Data Review</p>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataProduk" class="nav-link">
+                        <i class="nav-icon fas fa-boxes"></i>
+                        <p>Data Produk</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataReview" class="nav-link">
+                        <i class="nav-icon fas fa-star"></i>
+                        <p>Data Review</p>
                     </a>
                 </li>
                 <?php } ?>
-                
+
                 <!-- Dashboard Alumni -->
-                <li class="nav-header">Dashboard</li>
                 <?php if ($this->session->userdata('role') == 'Alumni') { ?>
+                <li class="nav-header">Dashboard</li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>Alumni" class="nav-link">
                         <i class="nav-icon fas fa-warehouse"></i>
