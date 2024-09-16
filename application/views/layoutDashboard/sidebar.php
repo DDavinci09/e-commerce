@@ -11,9 +11,56 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-header">Home</li>
+                <!-- Dashboard Admin -->
+                <?php if ($this->session->userdata('role') == 'Admin') { ?>
+                <li class="nav-header">Dashboard</li>
                 <li class="nav-item">
-                    <a href="<?= base_url(); ?>Dashboard" class="nav-link">
+                    <a href="<?= base_url(); ?>Admin" class="nav-link">
+                        <i class="nav-icon fas fa-warehouse"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">Users</li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataUser" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Data User</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url(); ?>Admin/DataAlumni" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>Data Alumni</p>
+                    </a>
+                </li>
+                <li class="nav-header">Menu</li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataKategori" class="nav-link">
+                        <i class="nav-icon fas fa-layer-group"></i>
+                        <p>Data Kategori</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url(); ?>Admin/DataProduk" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>Data Produk</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url(); ?>Admin/DataReview" class="nav-link">
+                            <i class="nav-icon fas fa-star"></i>
+                            <p>Data Review</p>
+                    </a>
+                </li>
+                <?php } ?>
+                
+                <!-- Dashboard Alumni -->
+                <li class="nav-header">Dashboard</li>
+                <?php if ($this->session->userdata('role') == 'Alumni') { ?>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Alumni" class="nav-link">
                         <i class="nav-icon fas fa-warehouse"></i>
                         <p>
                             Dashboard
@@ -30,32 +77,27 @@
                 </li>
                 <li class="nav-header">Menu</li>
                 <li class="nav-item">
-                    <a href="<?= base_url(); ?>User" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Data User</p>
-                    </a>
-                    </li>
-                <li class="nav-item">
-                    <a href="<?= base_url(); ?>Alumni" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>Data Alumni</p>
-                    </a>
-                    </li>
-                <li class="nav-item">
-                    <a href="<?= base_url(); ?>Kategori" class="nav-link">
+                    <a href="<?= base_url(); ?>Alumni/DataKategori" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>Data Kategori</p>
                     </a>
-                    </li>
+                </li>
                 <li class="nav-item">
-                    <a href="<?= base_url(); ?>Produk" class="nav-link">
+                    <a href="<?= base_url(); ?>Alumni/DataProduk" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>Data Produk</p>
                     </a>
-                    </li>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Alumni/DataReview" class="nav-link">
+                        <i class="nav-icon fas fa-star"></i>
+                        <p>Data Review</p>
+                    </a>
+                </li>
+                <?php } ?>
                 <li class="nav-header">Logout</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url(); ?>Auth/logout" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>

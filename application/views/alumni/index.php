@@ -13,7 +13,6 @@
 
     <!-- Main content -->
     <section class="content">
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -27,31 +26,36 @@
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Nama Toko</th>
-                                        <th>Keterangan Toko</th>
                                         <th>No Telp</th>
-                                        <th>Alamat</th>
+                                        <th>Status</th>
                                         <th>Aski</th>
                                     </tr>
                                 </thead>
-                                <tbody align="center">
-                                    <tr>
-                                        <?php
+                                <tbody>
+                                    <?php
                                         $i = 1;
                                         foreach ($alumni as $alm):
                                             ?>
-                                            <td><?= $i++; ?></td>
-                                            <td><?= $alm['nama_alumni'] ?></td>
-                                            <td><?= $alm['email'] ?></td>
-                                            <td><?= $alm['nama_toko'] ?></td>
-                                            <td><?= $alm['keterangan_toko'] ?></td>
-                                            <td><?= $alm['no_telp'] ?></td>
-                                            <td><?= $alm['alamat'] ?></td>
-                                            <td>
-                                                <a class="btn btn-primary  btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target=""><i class="fa fa-edit"></i></a>
+                                    <tr>
+                                        <td><?= $i++; ?></td>
+                                        <td><?= $alm['nama'] ?></td>
+                                        <td><?= $alm['email'] ?></td>
+                                        <td><?= $alm['nama_toko'] ?></td>
+                                        <td><?= $alm['no_telp'] ?></td>
+                                        <td>
+                                            <?php if ($alm['status'] == "Approve") { ?>
+                                                <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Decline"
+                                                    class="btn btn-sm btn-success m-1">Approved</a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Approve"
+                                                    class="btn btn-sm btn-danger m-1">Declined</a>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal" data-bs-target=""><i class="fa fa-edit"></i></a>
 
-                                                <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
-                                            </td>
+                                            <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
+                                        </td>
                                         <?php endforeach; ?>
                                     </tr>
                                 </tbody>

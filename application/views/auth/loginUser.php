@@ -1,23 +1,13 @@
-<div class="login-box">
+<div class="register-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <h1" class="h1"><b>E-C</b>ommerce Login</h1>
+            <h1" class="h1"><b>Login U</b>ser</h1>
         </div>
         <div class="card-body">
-            <form action="<?= base_url(); ?>Auth" method="post">
-                <div class="input-group mb-3">
-                    <select type="text" class="form-control" placeholder="Nama Admin" id="role" name="role">
-                        <option value="User">User</option>
-                        <option value="Alumni">Alumni</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user"></span>
-                        </div>
-                    </div>
-                </div>
+            <?= $this->session->flashdata('message'); ?>
+            <form action="<?= base_url(); ?>Auth/loginUser" method="post">
+                <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Username" id="username" name="username">
                     <div class="input-group-append">
@@ -26,6 +16,7 @@
                         </div>
                     </div>
                 </div>
+                <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                     <div class="input-group-append">

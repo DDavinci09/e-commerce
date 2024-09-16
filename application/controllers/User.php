@@ -6,12 +6,13 @@ class User extends CI_Controller
 
     public function index()
     {
-        $data['users'] = $this->modelUser->getAll();
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('user/index', $data);
-        $this->load->view('layoutDashboard/footer', $data);
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/index', $data);
+        $this->load->view('layoutHome/footer', $data);
     }
+
+    
 }

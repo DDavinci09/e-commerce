@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white sidebar-collapse">
     <div class="container">
         <a href="<?= base_url('assets'); ?>/index3.html" class="navbar-brand">
             <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
@@ -16,7 +16,10 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="<?= base_url(); ?>Home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url(); ?>Home/shop" class="nav-link">Shop</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>
@@ -164,18 +167,39 @@
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
+            <?php if ($this->session->userdata('username')): ?>
+                <!-- User Dropdown User -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-user fa-fw"></i>
+                        <span class="ml-2"><?= $user['nama_user']; ?></span> <!-- Nama pengguna -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cogs mr-2"></i> Settings
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-calendar-check mr-2"></i> Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?= base_url() ?>Auth/logout" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            <?php else: ?>
             <!-- User Dropdown Login -->
             <li class="nav-item dropdown">
                 <a class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Login
                 </a>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginUser">
+                    <a href="<?= base_url() ?>Auth/loginUser" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i> Login User
                     </a>
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginAlumni">
+                    <a href="<?= base_url() ?>Auth/loginAlumni" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i> Login Alumni
                     </a>
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#LoginAdmin">
+                    <a href="<?= base_url() ?>Auth/loginAdmin" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i> Login Admin
                     </a>
                 </div>
@@ -185,17 +209,18 @@
                 <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Register
                 </a>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterUser">
+                    <a href="<?= base_url() ?>Auth/registerUser" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i>User
                     </a>
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterAlumni">
+                    <a href="<?= base_url() ?>Auth/registerAlumni" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i>Alumni
                     </a>
-                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#RegisterAdmin">
+                    <a href="<?= base_url() ?>Auth/registerAdmin" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i>Admin
                     </a>
                 </div>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

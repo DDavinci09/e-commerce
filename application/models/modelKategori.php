@@ -3,10 +3,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class modelKategori extends CI_Model
 {
-    public function getAll()
-    {
-		return $this->db->get('kategori')->result_array();
-    }
+  public function getAll()
+  {
+    return $this->db->get('kategori')->result_array();
+  }
+
+  public function getidKategori($id_kategori)
+  {
+    return $this->db->get_where('kategori', ['id_kategori' => $id_kategori])->row_array();
+  }
+
+  public function tambah()
+  {
+    $data = [
+      "nama_kategori" => $this->input->post('nama_kategori', true),
+      "keterangan_kategori" => $this->input->post('keterangan_kategori', true)
+    ];
+
+    $this->db->insert('kategori', $data);
+  }
+
+  public function edit()
+  {
+    $data = [
+      "nama_kategori" => $this->input->post('nama_kategori', true),
+      "keterangan_kategori" => $this->input->post('keterangan_kategori', true)
+    ];
+
+    $this->db->where('id_kategori', $this->input->post('id_kategori'));
+    $this->db->update('kategori', $data);
+  }
+
+  public function hapus($id_kategori)
+  {
+    $this->db->delete('kategori', ['id_kategori' => $id_kategori]);
+  }
 
 }
-?>

@@ -32,26 +32,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <?php
+                                    <?php
                                         $i = 1;
                                         foreach ($users as $user):
                                             ?>
-                                            <td>
-                                                <?= $i++; ?>
-                                            </td>
-                                            <td><?= $user['username'] ?></td>
-                                            <td><?= $user['nama_user'] ?></td>
-                                            <td><?= $user['email'] ?></td>
-                                            <td><?= $user['no_telp'] ?></td>
-                                            <td>
-                                                <a class="btn btn-primary  btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target=""><i class="fa fa-edit"></i></a>
+                                    <tr>
+                                        <td>
+                                            <?= $i++; ?>
+                                        </td>
+                                        <td><?= $user['username'] ?></td>
+                                        <td><?= $user['nama_user'] ?></td>
+                                        <td><?= $user['email'] ?></td>
+                                        <td><?= $user['no_telp'] ?></td>
+                                        <td>
+                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal" data-bs-target=""><i class="fa fa-edit"></i></a>
 
-                                                <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
-                                            </td>
-                                        <?php endforeach; ?>
+                                            <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
