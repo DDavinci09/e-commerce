@@ -72,7 +72,7 @@ class Admin extends CI_Controller
     public function DataProduk()
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
-        $data['produk'] = $this->modelProduk->getAll();
+        $data['produk'] = $this->modelProduk->getProdukAdmin();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);

@@ -7,9 +7,11 @@
                 <div class="col-sm-6">
                     <h1>Data Kategori</h1>
                 </div>
+                <?php if ($this->session->userdata('role') == 'Admin') { ?>
                 <div class="col-sm-6 text-right">
                     <a class="btn btn-primary btn-sm" href="<?= base_url() ?>Admin/tambahKategori">Tambah Data</a>
                 </div>
+                <?php } ?>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -47,7 +49,7 @@
                                             <a class="btn btn-danger  btn-sm" href="#"
                                                 onclick="deleteConfirmation('<?= base_url(); ?>Admin/hapusKategori/<?= $kt['id_kategori']; ?>')"><i
                                                     class="fa fa-trash"></i></a>
-                                            </td>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
