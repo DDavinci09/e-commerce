@@ -14,52 +14,57 @@
     <section class="content">
         <div class="container">
             <div class="card">
-                <div class="card-body">
-                    <!-- Carousel -->
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo1.png"
-                                    alt="First slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Produk Terbaru</h5>
-                                    <p>Temukan produk-produk terbaik di sini.</p>
+                <div class="row">
+                    <div class="col--4 mx-auto">
+                        <div class="card-body">
+                            <!-- Carousel -->
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                                style="heigth: 100px;">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo1.png"
+                                            alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Produk Terbaru</h5>
+                                            <p>Temukan produk-produk terbaik di sini.</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo2.png"
+                                            alt="Second slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Promo Spesial</h5>
+                                            <p>Dapatkan diskon menarik hanya di bulan ini!</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo3.jpg"
+                                            alt="Third slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Produk Unggulan</h5>
+                                            <p>Produk pilihan terbaik untuk Anda.</p>
+                                        </div>
+                                    </div>
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo2.png"
-                                    alt="Second slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Promo Spesial</h5>
-                                    <p>Dapatkan diskon menarik hanya di bulan ini!</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="<?= base_url(); ?>/assets/dist/img/photo3.jpg"
-                                    alt="Third slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Produk Unggulan</h5>
-                                    <p>Produk pilihan terbaik untuk Anda.</p>
-                                </div>
-                            </div>
+                            <!-- end carousel -->
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                            data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                            data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
-                    <!-- end carousel -->
                 </div>
             </div>
         </div>
@@ -68,153 +73,119 @@
     <!-- Section 2 Jenis Produk -->
     <section class="content mt-5">
         <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <h1>Jenis</h1>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1>Barang</h1>
+            <div class="card">
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="card">
+                            <h1>Jenis Produk</h1>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1>Jasa</h1>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-sm" href="#">
+                            <div class="card">
+                                <div class="card-header bg-warning">
+                                    <h3>BARANG</h3>
+                                </div>
+                                <div class="card-body text-justify">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique tenetur
+                                        expedita
+                                        dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam nam
+                                        inventore
+                                        repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-sm" href="#">
+                            <div class="card">
+                                <div class="card-header bg-success">
+                                    <h3>JASA</h3>
+                                </div>
+                                <div class="card-body text-justify">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique tenetur
+                                        expedita
+                                        dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam nam
+                                        inventore
+                                        repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+
     <!-- Section 2 Kategori -->
     <section class="content mt-5">
         <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <h1>Kategori</h1>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Kategori Produk</h1>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div id="cardCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#cardCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#cardCarousel" data-slide-to="1"></li>
-                            <li data-target="#cardCarousel" data-slide-to="2"></li>
-                        </ol>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div id="kategori-produk" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <?php foreach (array_chunk($kategori, 4) as $index => $kat_group): ?>
+                                    <li data-target="#kategori-produk" data-slide-to="<?= $index; ?>"
+                                        class="<?= $index == 0 ? 'active' : ''; ?>">
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ol>
 
-                        <!-- Carousel Items -->
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 1</h5>
-                                                <p class="card-text">This is some text within a card.</p>
+                                <!-- Carousel Items -->
+                                <div class="carousel-inner">
+                                    <?php foreach (array_chunk($kategori, 4) as $index => $kat_group): ?>
+                                    <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
+                                        <div class="row">
+                                            <?php foreach ($kat_group as $kat): ?>
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div class="card-header bg-info text-center">
+                                                        <a class="h5" href=""><?= $kat['nama_kategori'] ?></a>
+                                                    </div>
+                                                    <div class="card-body d-flex flex-column">
+                                                        <p class="text-justify">
+                                                            <?php
+                                                        // Memotong keterangan jika terlalu panjang
+                                                        $max_length = 150;
+                                                        echo strlen($kat['keterangan_kategori']) > $max_length ?
+                                                            substr($kat['keterangan_kategori'], 0, $max_length) . '... <a href="#">Selengkapnya</a>' :
+                                                            $kat['keterangan_kategori'];
+                                                        ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 2</h5>
-                                                <p class="card-text">This is some more text in a card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 3</h5>
-                                                <p class="card-text">Another text inside the card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 3</h5>
-                                                <p class="card-text">Another text inside the card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 1</h5>
-                                                <p class="card-text">This is some text within a card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 2</h5>
-                                                <p class="card-text">This is some more text in a card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 3</h5>
-                                                <p class="card-text">Another text inside the card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 1</h5>
-                                                <p class="card-text">This is some text within a card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 2</h5>
-                                                <p class="card-text">This is some more text in a card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card 3</h5>
-                                                <p class="card-text">Another text inside the card.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                <!-- Controls -->
+                                <div class="carousel-control">
+                                    <a class="carousel-control-prev" href="#kategori-produk" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#kategori-produk" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Controls -->
-                        <a class="carousel-control-prev" href="#cardCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#cardCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -260,50 +231,6 @@
         </div>
     </div>
     <!-- End Produk Unggulan -->
-
-    <!-- Kategori Produk -->
-    <div class="container mt-5">
-        <h2 class="text-center">Kategori Produk</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 1</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 2">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 2</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 3</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 4">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 4</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Kategori -->
 
     <!-- Produk Terlaris -->
     <div class="container mt-5">

@@ -1,436 +1,3 @@
-<!-- Modal Login -->
-
-<!-- Modal Login User -->
-<div class="modal fade" id="LoginUser">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class=" login-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <!-- /.login-logo -->
-                <p class="text-center">Login Sebagai User</p>
-                <div class="card">
-                    <div class="card-body login-card-body">
-
-                        <form action="" method="post">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Username">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Password">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">LogiIn</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.login-card-body -->
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- Modal Login Alumni -->
-<div class="modal fade" id="LoginAlumni">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="login-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <!-- /.login-logo -->
-                <p class="text-center">Login Sebagai Alumni</p>
-                <div class="card">
-                    <div class="card-body login-card-body">
-                        <form action="" method="post">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Username">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Password">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.login-card-body -->
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- Modal Login Admin -->
-<div class="modal fade" id="LoginAdmin">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="login-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <p class="text-center">Login Sebagai Admin</p>
-                <!-- /.login-logo -->
-                <div class="card">
-                    <?php if ($this->session->flashdata('error')): ?>
-                        <div class="alert alert-danger">
-                            <?php echo $this->session->flashdata('error'); ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="card-body login-card-body">
-                        <form action="<?= base_url('Auth/loginAdmin'); ?>" method="post">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Username" name="username">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Password" name="password">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.login-card-body -->
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- Modal Register -->
-
-<!--Modal Register User -->
-<div class="modal fade" id="RegisterUser">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="register-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <p class="text-center">Registrasi User</p>
-                <div class="card">
-                    <div class="card-body register-card-body">
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama User">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Email">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-envelope"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="number" class="form-control" placeholder="No Telp">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Username">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Ulang password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.form-box -->
-                </div><!-- /.card -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!--Modal Register Alumni -->
-<div class="modal fade" id="RegisterAlumni">
-    <div class="modal-dialog modal-lg  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="register-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <p class="text-center">Registrasi Alumni</p>
-                <div class="card">
-                    <div class="card-body register-card-body">
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama User">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Email">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-envelope"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="number" class="form-control" placeholder="No Telp">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-phone"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Username">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Ulang password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama Toko">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-store"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <textarea type="text-area" class="form-control"
-                                            placeholder="Deskripsi Toko"></textarea>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-sticky-note"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <textarea type="text-area" class="form-control"
-                                            placeholder="Alamat Toko"></textarea>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-map-marker"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.form-box -->
-                </div><!-- /.card -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!--Modal Register Admin -->
-<div class="modal fade" id="RegisterAdmin">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="register-logo">
-                    <h1><b>E-C</b>ommerce</h1>
-                </div>
-                <p class="text-center">Registrasi Admin</p>
-                <div class="card">
-                    <div class="card-body register-card-body">
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama Admin">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Username">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="Ulang password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.form-box -->
-                </div><!-- /.card -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
 <!-- Footer -->
 <footer class="main-footer bg-primary text-white mt-5 pt-5">
     <div class="container">
@@ -490,8 +57,44 @@
 <script src="<?= base_url('assets'); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets'); ?>/dist/js/adminlte.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?= base_url('assets'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/jszip/jszip.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script></script>
 <script>
-< /body>
+$(document).ready(function() {
+    // Initialize DataTables
+    var table = $('#productsTable').DataTable();
 
-<
-/html>
+    // Extract data from DataTables and inject into cards
+    var products = table.rows().data().toArray();
+    var $productCards = $('#productCards');
+
+    products.forEach(function(product) {
+        var cardHtml = `
+                    <div class="card product-card">
+                        <img src="${product[0]}" class="card-img-top product-img" alt="${product[1]}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product[1]}</h5>
+                            <p class="card-text">${product[2]}</p>
+                            <a href="#" class="btn btn-primary">${product[3]}</a>
+                        </div>
+                    </div>
+                `;
+        $productCards.append(cardHtml);
+    });
+});
+</script>
+</body>
+
+</html>

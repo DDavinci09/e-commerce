@@ -15,304 +15,61 @@
     <!-- Produk Unggulan -->
     <div class="container">
         <div class="row">
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
+            <!-- Kategori (Kolom Kiri) -->
+            <div class="col-lg-2 category-list">
                 <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                    <div class="card-header bg-info">
+                        <h5>Jenis Produk</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="nav flex-column text-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Barang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Jasa</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <h5>Kategori Produk</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="nav flex-column">
+                            <?php foreach ($kategori as $kt) : ?>
+                            <li class="nav-item text-dark">
+                                <a class="nav-link" href="#"><?= $kt['nama_kategori'] ?></a>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 1 -->
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 1</h5>
-                        <p class="card-text">Deskripsi singkat barang 1.</p>
-                        <p class="card-text"><strong>Rp 100,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 2 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 2</h5>
-                        <p class="card-text">Deskripsi singkat barang 2.</p>
-                        <p class="card-text"><strong>Rp 150,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Barang 3 -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Nama Barang 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Nama Barang 3</h5>
-                        <p class="card-text">Deskripsi singkat barang 3.</p>
-                        <p class="card-text"><strong>Rp 200,000</strong></p>
-                        <a href="#" class="btn btn-primary">Beli Sekarang</a>
+
+            <!-- Produk (Kolom Kanan) -->
+            <div class="col-lg-10">
+                <div class="card p-2">
+                    <div class="row">
+                        <?php foreach ($produk as $p): ?>
+                        <div class="col-md-3 product-item">
+                            <div class="card">
+                                <img src="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
+                                    class="card-img-top product-img" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title product-title"><?= $p['nama_produk'] ?></h5>
+                                    <p class="card-text">Rp.<?= $p['harga_produk'] ?></p>
+                                    <a href="#" class="btn btn-primary btn-sm">View Product</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Produk Unggulan -->
-
-    <!-- Kategori Produk -->
-    <div class="container mt-5">
-        <h2 class="text-center">Kategori Produk</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 1</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 2">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 2</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 3</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Kategori 4">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kategori 4</h5>
-                        <a href="#" class="btn btn-primary">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Kategori -->
-
-    <!-- Produk Terlaris -->
-    <div class="container mt-5">
-        <h2 class="text-center">Produk Terlaris</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Produk Terlaris 1</h5>
-                        <p class="card-text">Deskripsi singkat produk terlaris 1.</p>
-                        <a href="#" class="btn btn-success">Lihat Produk</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Produk Terlaris 2</h5>
-                        <p class="card-text">Deskripsi singkat produk terlaris 2.</p>
-                        <a href="#" class="btn btn-success">Lihat Produk</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Produk Terlaris 3</h5>
-                        <p class="card-text">Deskripsi singkat produk terlaris 3.</p>
-                        <a href="#" class="btn btn-success">Lihat Produk</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Prodk Terlaris -->
-
-    <!-- Promo Spesial -->
-    <div class="container mt-5">
-        <h2 class="text-center">Promo Spesial</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card bg-warning">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Diskon 50% untuk Produk Tertentu</h5>
-                        <p class="card-text">Dapatkan diskon besar-besaran untuk produk pilihan selama bulan ini.</p>
-                        <a href="#" class="btn btn-dark">Belanja Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card bg-info">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Beli 2 Gratis 1</h5>
-                        <p class="card-text">Promo spesial beli 2 produk dapat 1 produk gratis. Hanya hari ini!</p>
-                        <a href="#" class="btn btn-dark">Dapatkan Promo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Review Pelanggan -->
-    <div class="container mt-5">
-        <h2 class="text-center">Testimoni Pelanggan</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Produk ini sangat bagus dan berkualitas tinggi!"</p>
-                        <h5>- Pelanggan 1</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Layanan pelanggan yang sangat baik dan pengiriman cepat."</p>
-                        <h5>- Pelanggan 2</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Saya sangat puas dengan produk ini. Saya akan kembali membeli."</p>
-                        <h5>- Pelanggan 3</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Review -->
 
 </div>

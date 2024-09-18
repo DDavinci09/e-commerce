@@ -5,6 +5,7 @@ class modelKategori extends CI_Model
 {
   public function getAll()
   {
+    $this->db->order_by('id_kategori', 'DESC');
     return $this->db->get('kategori')->result_array();
   }
 

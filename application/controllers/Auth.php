@@ -212,63 +212,13 @@ class Auth extends CI_Controller
                 'username' => htmlspecialchars($this->input->post('username', true)),
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role' => "Alumni", // Misal 2 untuk alumni
-                'status' => "Tidak Aktif" // 1 untuk aktif, bisa sesuaikan jika ada aturan lain
+                'status' => "Decline" // 1 untuk aktif, bisa sesuaikan jika ada aturan lain
             ];
 
             // Insert data into the alumni table
-            if ($this->db->insert('alumni', $data)) {
-                // Set success message
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! Your account has been created. Please login.</div>');
-                redirect('auth');
-            } else {
-                // Handle database error
-                $error = $this->db->error();
-                echo 'Database Error: ' . $error['message'];
-            }
-        }
-    }
-
-    public function registerAlumni2()
-    {
-        //Form Validation
-        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        // $this->form_validation->set_rules('nama_toko', 'nama_toko', 'required|trim');
-        // $this->form_validation->set_rules('keterangan_toko', 'keterangan_toko', 'required|trim');
-        // $this->form_validation->set_rules('alamat_toko', 'alamat_toko', 'required|trim');
-        // $this->form_validation->set_rules('email', 'Email', 'required|trim');
-        // $this->form_validation->set_rules('no_telp', 'No Telp', 'required|trim');
-        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[alumni.username]', [
-            'is_unique' => 'This username has already registered!'
-        ]);
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password dont match!',
-            'min_length' => 'Password too short!'
-        ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('layoutHome/authheader');
-            $this->load->view('auth/registerAlumni');
-            $this->load->view('layoutHome/authfooter');
-        } else {
-            $data = [
-                'username' => htmlspecialchars($this->input->post('username', true)),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'nama' => $this->input->post('nama', true),
-                'no_telp' => $this->input->post('no_telp', true),
-                'email' => $this->input->post('email', true),
-                'nama_toko' => $this->input->post('nama_toko', true),
-                'keterangan_toko' => $this->input->post('keterangan_toko', true),
-                'alamat_toko' => $this->input->post('alamat_toko', true),
-                'role' => "Alumni",
-                'status' => "Tidak Aktif"
-            ];
-
             $this->db->insert('alumni', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Congratulation! Your account has been created. Please Login first
-            </div>');
+            // Set success message
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! Your account has been created. Please login.</div>');
             redirect('auth');
         }
     }
@@ -285,7 +235,6 @@ class Auth extends CI_Controller
             'min_length' => 'Password too short!'
         ]);
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-
 
         if ($this->form_validation->run() == false) {
             $this->load->view('layoutHome/authheader');
