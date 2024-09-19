@@ -19,21 +19,38 @@
                         <div class="card-body">
                             <!-- Carousel -->
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
                                 <div class="carousel-inner rounded">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100 rounded"
                                             src="<?= base_url(); ?>/assets/dist/img/home1.jpg" style="height: 400px;"
                                             alt="First slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Produk Terbaru</h5>
+                                            <p>Temukan produk-produk terbaik di sini.</p>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
                                         <img class="d-block w-100 rounded"
                                             src="<?= base_url(); ?>/assets/dist/img/home2.jpg" style="height: 400px;"
                                             alt="Second slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Promo Spesial</h5>
+                                            <p>Dapatkan diskon menarik hanya di bulan ini!</p>
+                                        </div>
                                     </div>
                                     <div class="carousel-item">
                                         <img class="d-block w-100 rounded"
                                             src="<?= base_url(); ?>/assets/dist/img/home3.jpg" style="height: 400px;"
                                             alt="Third slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Produk Unggulan</h5>
+                                            <p>Produk pilihan terbaik untuk Anda.</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -223,7 +240,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <i class="fas fa-star fa-sm" style="color: orange;">
+                                        <i class="fas fa-star" style="color: orange;">
                                             <?= $tb['rating_produk'] ?></i>
                                     </div>
                                     <div class="col text-right">
@@ -302,7 +319,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <i class="fas fa-star fa-sm" style="color: orange;">
+                                        <i class="fas fa-star" style="color: orange;">
                                             <?= $dk['rating_produk'] ?></i>
                                     </div>
                                     <div class="col text-right">
@@ -336,6 +353,44 @@
         </div>
     </div>
     <!-- End Produk Unggulan -->
+
+    <!-- Produk Terlaris -->
+    <div class="container mt-5">
+        <h2 class="text-center">Produk Terlaris</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Produk Terlaris 1</h5>
+                        <p class="card-text">Deskripsi singkat produk terlaris 1.</p>
+                        <a href="#" class="btn btn-success">Lihat Produk</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Produk Terlaris 2</h5>
+                        <p class="card-text">Deskripsi singkat produk terlaris 2.</p>
+                        <a href="#" class="btn btn-success">Lihat Produk</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Produk Terlaris 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Produk Terlaris 3</h5>
+                        <p class="card-text">Deskripsi singkat produk terlaris 3.</p>
+                        <a href="#" class="btn btn-success">Lihat Produk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Prodk Terlaris -->
 
     <!-- Promo Spesial -->
     <div class="container mt-5">

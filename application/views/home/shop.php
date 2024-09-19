@@ -50,17 +50,64 @@
 
             <!-- Produk (Kolom Kanan) -->
             <div class="col-lg-10">
-                <div class="card p-2">
-                    <div class="row">
+                <div class="card p-1">
+                    <div class="row m-1">
                         <?php foreach ($produk as $p): ?>
-                        <div class="col-md-3 product-item">
-                            <div class="card">
-                                <img src="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
-                                    class="card-img-top product-img" alt="Product 1">
-                                <div class="card-body">
-                                    <h5 class="card-title product-title"><?= $p['nama_produk'] ?></h5>
-                                    <p class="card-text">Rp.<?= $p['harga_produk'] ?></p>
-                                    <a href="#" class="btn btn-primary btn-sm">View Product</a>
+                        <div class="col-md-3 p-0">
+                            <div class="card m-1">
+                                <div class="card-body p-1">
+                                    <?php if ($p['diskon_produk'] > 0 ) { ?>
+                                    <span class="discount-badge position-absolute">
+                                        <?= $p['diskon_produk'] ?>%
+                                    </span>
+                                    <?php } ?>
+                                    <img src="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
+                                        class="img-fluid rounded" alt="Gambar Kosong">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <b><?= word_limiter($p['nama_produk'], 3); ?></b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <?php if ($p['diskon_produk'] > 0 ) { ?>
+                                            <span class="text-danger">
+                                                Rp. <?= number_format($p['harga_diskon'], 0, ',', '.'); ?>
+                                            </span> |
+                                            <span class="text-muted text-decoration-line-through">
+                                                <s>
+                                                    <?= number_format($p['harga_produk'], 0, ',', '.'); ?>
+                                                </s>
+                                            </span>
+                                            <?php } else { ?>
+                                            <span>
+                                                Rp. <?= number_format($p['harga_produk'], 0, ',', '.'); ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <i class="fas fa-star fa-sm" style="color: orange;">
+                                                <?= $p['rating_produk'] ?></i>
+                                        </div>
+                                        <div class="col text-right">
+                                            <?= $p['jenis_produk'] ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <span>
+                                                <i class="fas fa-map-marker fa-sm" style="color: black;">
+                                                </i> Nama Kota
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="btn btn-success btn-sm btn-block" href="#">Detail Produk</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

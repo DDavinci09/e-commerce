@@ -1,3 +1,24 @@
+<div
+    class="flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg snap-x overflow-hidden !overflow-x-hidden [overflow:-moz-scrollbars-none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:[-webkit-appearance:none !important] [&amp;::-webkit-scrollbar]:!hidden [&amp;::-webkit-scrollbar]:!h-0 [&amp;::-webkit-scrollbar]:!w-0 [&amp;::-webkit-scrollbar]:!bg-transparent">
+
+    <div class="w-full flex-shrink-0 transform cursor-grab snap-center" data-active="true" data-testid="carousel-item">
+
+        <img alt="Carousel Image" loading="lazy" width="1000" height="1000" decoding="async" data-nimg="1"
+            class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2" style="color:transparent"
+            srcset="/_next/image?url=%2Fimg%2Fcarousel-1.jpg&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fimg%2Fcarousel-1.jpg&amp;w=2048&amp;q=75 2x"
+            src="/_next/image?url=%2Fimg%2Fcarousel-1.jpg&amp;w=2048&amp;q=75">
+    </div>
+
+    <div class="w-full flex-shrink-0 transform cursor-grab snap-center" data-active="false" data-testid="carousel-item">
+
+        <img alt="Carousel Image" loading="lazy" width="1000" height="1000" decoding="async" data-nimg="1"
+            class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2" style="color:transparent"
+            srcset="/_next/image?url=%2Fimg%2Fcarousel-2.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fimg%2Fcarousel-2.png&amp;w=2048&amp;q=75 2x"
+            src="/_next/image?url=%2Fimg%2Fcarousel-2.png&amp;w=2048&amp;q=75">
+    </div>
+</div>
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

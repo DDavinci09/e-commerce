@@ -22,7 +22,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet"
         href="<?= base_url('assets'); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Diskon -->
+    <style>
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        /* Jarak dari atas */
+        right: 10px;
+        /* Jarak dari kanan */
+        background-color: red;
+        /* Ubah sesuai dengan desain kamu */
+        color: white;
+        /* Warna teks logo diskon */
+        padding: 5px;
+        /* Kurangi padding untuk ukuran badge yang lebih kecil */
+        border-radius: 50%;
+        /* Membuat badge menjadi bulat */
+        text-align: center;
+        font-size: 10px;
+        /* Kecilkan ukuran font */
+        font-weight: bold;
+        width: 30px;
+        /* Sesuaikan lebar badge */
+        height: 30px;
+        /* Sesuaikan tinggi badge */
+        line-height: 30px;
+        /* Atur tinggi badge agar teks berada di tengah */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    </style>
 </head>
 
-<body class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed">
+<body class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed"
+    style="font-family: 'Times New Roman', serif;">
     <div class="wrapper">
