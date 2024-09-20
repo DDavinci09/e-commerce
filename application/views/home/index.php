@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col text-center">
                     <h1 class="m-0 text-center">HOME</h1>
                 </div>

@@ -13,6 +13,7 @@
         </button>
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <?php if ($this->session->userdata('role') !== 'User') { ?>
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -89,7 +90,6 @@
                 </div>
             </form>
         </div>
-
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
             <!-- Messages Dropdown Menu -->
@@ -106,27 +106,7 @@
                     <span class="badge badge-danger navbar-badge">5</span>
                 </a>
             </li>
-            <?php if ($this->session->userdata('username')): ?>
-            <!-- User Dropdown User -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fas fa-user fa-fw"></i>
-                    <span class="ml-2"><?= $user['nama_user']; ?></span> <!-- Nama pengguna -->
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-cogs mr-2"></i> Settings
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-calendar-check mr-2"></i> Activity Log
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="<?= base_url() ?>Auth/logout" class="dropdown-item">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                    </a>
-                </div>
-            </li>
-            <?php else: ?>
+
             <!-- User Dropdown Login -->
             <li class="nav-item dropdown">
                 <a class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Login
@@ -159,8 +139,120 @@
                     </a>
                 </div>
             </li>
-            <?php endif; ?>
-        </ul>
+            <?php } else { ?>
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>User" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>User/shop" class="nav-link">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle">Dropdown</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="#" class="dropdown-item">Some action </a></li>
+                        <li><a href="#" class="dropdown-item">Some other action</a></li>
+
+                        <li class="dropdown-divider"></li>
+
+                        <!-- Level two dropdown-->
+                        <li class="dropdown-submenu dropdown-hover">
+                            <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
+                            <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                <li>
+                                    <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+                                </li>
+
+                                <!-- Level three dropdown-->
+                                <li class="dropdown-submenu">
+                                    <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"
+                                        class="dropdown-item dropdown-toggle">level 2</a>
+                                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                    </ul>
+                                </li>
+                                <!-- End Level three -->
+
+                                <li><a href="#" class="dropdown-item">level 2</a></li>
+                                <li><a href="#" class="dropdown-item">level 2</a></li>
+                            </ul>
+                        </li>
+                        <!-- End Level two -->
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-0 ml-md-3">
+                <div class="input-group input-group-sm">
+                    <!-- Dropdown for Categories -->
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-tags"></i> Kategori
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Category 1</a>
+                            <a class="dropdown-item" href="#">Category 2</a>
+                            <a class="dropdown-item" href="#">Category 3</a>
+                            <a class="dropdown-item" href="#">Category 4</a>
+                        </div>
+                    </div>
+                    <!-- Search Input -->
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+    </div>
+    <!-- Right navbar links -->
+    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fas fa-comments"></i>
+                <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-danger navbar-badge">5</span>
+            </a>
+        </li>
+        <!-- User Dropdown User -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fas fa-user fa-fw"></i>
+                <span class="ml-2"><?= $user['nama_user']; ?></span> <!-- Nama pengguna -->
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-cogs mr-2"></i> Settings
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-calendar-check mr-2"></i> Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="<?= base_url() ?>Auth/logout" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
+            </div>
+        </li>
+        <?php } ?>
+    </ul>
     </div>
 </nav>
 <!-- /.navbar -->

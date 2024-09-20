@@ -3,9 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class modelProduk extends CI_Model
 {
-  private function hitungDiskon($harga_asli, $diskon) {
-        return $harga_asli - ($harga_asli * ($diskon / 100));
-    }
+  private function hitungDiskon($harga_asli, $diskon) 
+  {
+    return $harga_asli - ($harga_asli * ($diskon / 100));
+  }
     
   public function getAll()
   {
@@ -67,7 +68,18 @@ class modelProduk extends CI_Model
 
   public function getidProduk($id_produk)
   {
-    return $this->db->get_where('produk', ['id_produk' => $id_produk])->row_array();
+    // Join tabel dan ambil data produk
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->group_by('produk.id_produk');
+    $produk = $this->db->get_where('produk', ['id_produk' => $id_produk])->row_array();
+    
+    // Jika produk ditemukan, hitung harga diskon
+    if (!empty($produk)) {
+        $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+    }
+    
+    return $produk;
   }
 
   public function tambah()
@@ -142,6 +154,12 @@ class modelProduk extends CI_Model
 
     $this->db->where('id_produk', $this->input->post('id_produk'));
     $this->db->update('produk', $data);
+  }
+  
+  public function editStok($stok_baru)
+  {
+    $this->db->where('id_produk', $this->input->post('id_produk'));
+    return $this->db->update('produk', ["stok_produk" => $stok_baru]);
   }
 
   public function hapus($id_produk)

@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container">
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col text-center">
                     <h1 class="m-0 text-center">SHOP</h1>
                 </div><!-- /.col -->
@@ -22,7 +22,7 @@
                         <h5>Jenis Produk</h5>
                     </div>
                     <div class="card-body p-0">
-                        <ul class="nav flex-column text-center">
+                        <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Barang</a>
                             </li>
@@ -105,7 +105,15 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <a class="btn btn-success btn-sm btn-block" href="#">Detail Produk</a>
+                                            <?php if ($this->session->userdata('role') == 'User') { ?>
+                                            <a class="btn btn-success btn-sm btn-block"
+                                                href="<?= base_url() ?>User/Detail/<?= $p['id_produk'] ?>">Detail
+                                                Produk</a>
+                                            <?php } else { ?>
+                                            <a class="btn btn-success btn-sm btn-block"
+                                                href="<?= base_url() ?>Home/Detail/<?= $p['id_produk'] ?>">Detail
+                                                Produk</a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
