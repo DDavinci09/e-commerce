@@ -24,8 +24,37 @@ class Home extends CI_Controller
     
     public function shop()
     {
+        $data['title'] = "Semua Produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getAll();
+        $data['totalproduk'] = count($data['produk']);
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+    
+    public function getJenisProduk($jenis_produk)
+    {
+        $data['totalproduk'] = "100";
+        $data['title'] = "Jenis : $jenis_produk";
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['produk'] = $this->modelProduk->getJenisProduk($jenis_produk);
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+    
+    public function getKategoriProduk($id_kategori)
+    {
+        $data['totalproduk'] = "100";
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
+        $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
+        $data['title'] = "Ketegori : " . $data['nama_kategori']['nama_kategori'];
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -35,7 +64,8 @@ class Home extends CI_Controller
     
     public function detail($id_produk)
     {
-        $data['produk'] = $this->modelProduk->getidProduk($id_produk);
+        $data['produk'] = $this->modelProduk->getidProduk($id_produk);        
+        $data['review'] =$this->modelReview->getProdukReview($id_produk);
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);

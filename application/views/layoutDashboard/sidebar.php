@@ -49,6 +49,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url(); ?>Admin/DataPesanan" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>Data Pesanan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url(); ?>Admin/DataReview" class="nav-link">
                         <i class="nav-icon fas fa-star"></i>
                         <p>Data Review</p>
@@ -86,6 +92,12 @@
                     <a href="<?= base_url(); ?>Alumni/DataProduk" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>Data Produk</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Alumni/DataPesanan" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>Data Pesanan</p>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -167,4 +167,47 @@ class modelProduk extends CI_Model
     $this->db->delete('produk', ['id_produk' => $id_produk]);
   }
 
+  public function editProdukRating($id_produk)
+  {
+    // Menghitung rata-rata rating dari review
+    $this->db->select_avg('rating_review', 'average_rating'); // Alias sebagai 'average_rating'
+    $this->db->where('id_produk', $id_produk);
+    $result = $this->db->get('review')->row();
+
+    // Jika ada hasil rating, update produk
+    if ($result) {
+        $average_rating = $result->average_rating; // Mengambil alias 'average_rating'
+
+        // Update kolom rating pada tabel produk
+        $this->db->set('rating_produk', $average_rating);
+        $this->db->where('id_produk', $id_produk);
+        $this->db->update('produk');
+    }
+  }
+
+  public function getJenisProduk($jenis_produk)
+  {
+    $this->db->where('jenis_produk', $jenis_produk); // Ganti 'jenis_produk' dengan nama kolom yang sesuai di database
+    $query = $this->db->get('produk'); // Ganti 'produk' dengan nama tabel produk yang sesuai
+    $produkAll = $query->result_array();
+
+      foreach ($produkAll as &$produk) {
+          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+      }
+
+      return $produkAll;
+  }
+
+  public function getKategoriProduk($id_kategori)
+  {
+    $this->db->where('id_kategori', $id_kategori);
+    $query = $this->db->get('produk');
+    $produkAll = $query->result_array();
+
+      foreach ($produkAll as &$produk) {
+          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+      }
+
+      return $produkAll;
+  }
 }

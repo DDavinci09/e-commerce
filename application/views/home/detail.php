@@ -76,20 +76,23 @@
                         <div class="col">
                             <form action="<?= base_url('User/detail/'.$produk['id_produk']); ?>" method="post">
                                 <?php if ($produk['diskon_produk'] > 0 ) { ?>
-                                <input type="text" name="harga_pesanan" value="<?= $produk['harga_diskon'] ?>">
+                                <input type="hidden" name="harga_pesanan" value="<?= $produk['harga_diskon'] ?>">
                                 <?php } else { ?>
-                                <input type="text" name="harga_pesanan" value="<?= $produk['harga_produk'] ?>">
+                                <input type="hidden" name="harga_pesanan" value="<?= $produk['harga_produk'] ?>">
                                 <?php } ?>
-                                <input type="text" name="id_produk" value="<?= $produk['id_produk'] ?>">
-                                <input type="text" name="id_alumni" value="<?= $produk['id_alumni'] ?>">
-                                <input type="text" name="id_user" value="<?= $user['id_user'] ?>">
+                                <input type="hidden" name="id_produk" value="<?= $produk['id_produk'] ?>">
+                                <input type="hidden" name="id_alumni" value="<?= $produk['id_alumni'] ?>">
+                                <?php if (empty($this->session->userdata('role') !== 'User')) { ?>
+                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="pembayaran">Metode Pembayaran</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group">
                                                 <select type="text" class="form-control" id="pembayaran"
                                                     name="pembayaran">
+                                                    <option value="">~ Pilih Metode Pemabayaran ~</option>
                                                     <option value="Transfer Bank">Transfer Bank</option>
                                                     <option value="COD">COD</option>
                                                 </select>
@@ -99,13 +102,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
                                         </div>
-                                        <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="jml_pesanan">Jumlah Pesanan</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group">
                                                 <input type="number" class="form-control" placeholder="Jumlah Pesanan"
                                                     id="jml_pesanan" name="jml_pesanan">
                                                 <div class="input-group-append">
@@ -114,8 +117,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
                                         </div>
-                                        <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -276,35 +279,97 @@
         </div>
     </div>
 
-    <!-- Review Pelanggan -->
-    <div class="container mt-5">
-        <h2 class="text-center">Testimoni Pelanggan</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Produk ini sangat bagus dan berkualitas tinggi!"</p>
-                        <h5>- Pelanggan 1</h5>
+    <div class="container" id="review">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3>Review Produk</h3>
+                    </div>
+                    <div class="col text-right">
+                        <?php if ($this->session->userdata('role') == 'User') { ?>
+                        <?php if ($reviewuser['id_user'] !== $user['id_user']) { ?>
+                        <a class="btn btn-sm btn-secondary" data-toggle="modal"
+                            data-target="#status-bayar<?= $produk['id_produk'] ?>">
+                            <i class="fas fa-sticky-note"></i> Tambah Review
+                        </a>
+                        <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Layanan pelanggan yang sangat baik dan pengiriman cepat."</p>
-                        <h5>- Pelanggan 2</h5>
+                <?php if ($this->session->flashdata('message')): ?>
+                <div class="row">
+                    <div class="col text-center">
+                        <h5><?= $this->session->flashdata('message'); ?></h5>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Saya sangat puas dengan produk ini. Saya akan kembali membeli."</p>
-                        <h5>- Pelanggan 3</h5>
+                <?php endif; ?>
+                <div class="card-body">
+                    <div class="row">
+                        <?php foreach ($review as $r) : ?>
+                        <div class="col col-6">
+                            <div class="card">
+                                <h5><?= $r['nama_user'] ?></h5>
+                                <p>
+                                    Tanggal : <?= date("d-m-Y", strtotime($r['tgl_review'])) ?><br>
+                                    Rating : ★ <?= $r['rating_review'] ?><br>
+                                    Review : "<?= $r['isi_review'] ?>"
+                                </p>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Review -->
+
+    <!-- Modal Status Pemabayaran -->
+    <div class="modal fade" id="status-bayar<?= $produk['id_produk'] ?>">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header  bg-primary">
+                    <h4 class="modal-title">Status Pembayaran</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo form_open('User/TambahReview'); ?>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="hidden" name="id_produk" value="<?= $produk['id_produk'] ?>">
+                                <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                                <div class="form-group">
+                                    <label for="rating_review">Rating:</label>
+                                    <select name="rating_review" id="rating_review" class="form-control">
+                                        <option value="5">5 - Sangat Puas</option>
+                                        <option value="4">4 - Puas</option>
+                                        <option value="3">3 - Cukup</option>
+                                        <option value="2">2 - Kurang Puas</option>
+                                        <option value="1">1 - Sangat Tidak Puas</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="isireview">Tulis Review:</label>
+                                    <textarea name="isi_review" id="isi_review" class="form-control" rows="3"
+                                        required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
 </div>

@@ -48,6 +48,9 @@ class Admin extends CI_Controller
         // Melakukan update pada status alumni berdasarkan ID
         $this->db->update('alumni', $statusData, ['id_alumni' => $id_alumni]);
 
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Alumni Berhasil Diperbaharui!
+        </div>');
         // Redirect kembali ke halaman alumni
         redirect('Admin/DataAlumni');
     }
@@ -87,6 +90,18 @@ class Admin extends CI_Controller
         $this->load->view('produk/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    public function DataPesanan()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getPesananAdmin();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
 
     public function tambahKategori()
     {
@@ -103,6 +118,9 @@ class Admin extends CI_Controller
             $this->load->view('layoutDashboard/footer', $data);
         } else {
             $this->modelKategori->tambah();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Kategori Berhasil Ditambahkan!
+            </div>');
             redirect('Admin/DataKategori');
         }
 
@@ -124,6 +142,9 @@ class Admin extends CI_Controller
             $this->load->view('layoutDashboard/footer', $data);
         } else {
             $this->modelKategori->edit($id_kategori);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Kategori Berhasil Diubah!
+            </div>');
             redirect('Admin/DataKategori');
         }
     }
@@ -133,6 +154,18 @@ class Admin extends CI_Controller
         $data['kt'] = $this->modelKategori->getidKategori($id_kategori);
 
         $this->modelKategori->hapus($id_kategori);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        Data Kategori Berhasil Dihapus!
+        </div>');
         redirect('Admin/DataKategori');
+    }
+
+    public function editStatusPembayaran()
+    {
+        $this->modelPesanan->editStatusPembayaran();
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Pembayaran Berhasil Diperbaharui!
+        </div>');
+        redirect('Admin/DataPesanan');
     }
 }

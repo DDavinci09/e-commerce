@@ -8,83 +8,128 @@
             <form action="<?= base_url('auth/registerAlumni'); ?>" method="post">
                 <div class="row">
                     <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Nama User">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nama" id="nama"
+                                    value="<?= set_value('nama'); ?>" placeholder="Nama Alumni">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="email" id="email"
+                                    value="<?= set_value('email'); ?>" placeholder="Email">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" placeholder="No Telp">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="no_telp" id="no_telp"
+                                    value="<?= set_value('no_telp'); ?>" placeholder="No Telp">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('no_telp', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="username" id="username"
+                                    value="<?= set_value('username'); ?>" placeholder="Username">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password1" id="password1"
+                                    value="<?= set_value('password1'); ?>" placeholder="Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('password1', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Ulang password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password2" id="password2"
+                                    value="<?= set_value('password2'); ?>" placeholder="Ulang password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('password2', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Nama Toko">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-store"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nama_toko" id="nama_toko"
+                                    value="<?= set_value('nama_toko'); ?>" placeholder="Nama Toko">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-store"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('nama_toko', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <textarea type="text-area" class="form-control" placeholder="Deskripsi Toko"></textarea>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-sticky-note"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <textarea type="text-area" class="form-control" name="keterangan_toko"
+                                    id="keterangan_toko"
+                                    placeholder="Deskripsi Toko"><?= set_value('keterangan_toko'); ?></textarea>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-sticky-note"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('keterangan_toko', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <textarea type="text-area" class="form-control" placeholder="Alamat Toko"></textarea>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-map-marker"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <textarea type="text-area" class="form-control" name="alamat_toko" id="alamat_toko"
+                                    placeholder="Alamat Toko"><?= set_value('alamat_toko'); ?></textarea>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-map-marker"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('alamat_toko', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                 </div>

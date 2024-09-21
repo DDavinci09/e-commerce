@@ -8,6 +8,7 @@ class User extends CI_Controller
         parent::__construct();
         // Panggil fungsi check login
         loginUser();
+        $this->load->helper('text');
     }
 
     public function index()
@@ -26,8 +27,39 @@ class User extends CI_Controller
     public function shop()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['totalproduk'] = "100";
+        $data['title'] = "Semua Produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getAll();
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+
+    public function getJenisProduk($jenis_produk)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['totalproduk'] = "100";
+        $data['title'] = "Jenis : $jenis_produk";
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['produk'] = $this->modelProduk->getJenisProduk($jenis_produk);
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+    
+    public function getKategoriProduk($id_kategori)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['totalproduk'] = "100";
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
+        $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
+        $data['title'] = "Ketegori : " . $data['nama_kategori']['nama_kategori'];
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -39,6 +71,8 @@ class User extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);
+        $data['review'] =$this->modelReview->getProdukReview($id_produk);
+        $data['reviewuser'] =$this->modelReview->getReviewUser($id_produk);
 
         $this->form_validation->set_rules('jml_pesanan', 'Jumlah Pesanan', 'required');
         $this->form_validation->set_rules('pembayaran', 'Metode Pembayaran', 'required');
@@ -78,7 +112,7 @@ class User extends CI_Controller
             $this->db->trans_start();
 
             // Simpan pesanan
-            $this->db->insert('pesanan', $dataPesanan);
+            $this->modelPesanan->tambah($dataPesanan);
             if ($this->db->trans_status() === FALSE) {
                 log_message('error', 'Gagal menyimpan pesanan: ' . json_encode($dataPesanan));
             }
@@ -94,10 +128,12 @@ class User extends CI_Controller
             $this->db->trans_complete();
 
             if ($this->db->trans_status() === FALSE) {
-                $this->session->set_flashdata('message', 'Pembelian gagal. Kesalahan: ' . $this->db->last_query());
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Pebelian Gagal!
+                </div>');
                 redirect('User/detail/'.$id_produk);
             } else {
-                $this->session->set_flashdata('message', 'Pembelian berhasil! Total pembayaran: Rp' . number_format($total_harga, 2));
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pembelian berhasil! Total pembayaran: Rp ' . number_format($total_harga, 2) .'</div>');
                 redirect('User/DataPesanan');
             }
         }
@@ -106,12 +142,25 @@ class User extends CI_Controller
     public function DataPesanan()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['pesanan'] = $this->modelPesanan->getAll();
+        $data['pesanan'] = $this->modelPesanan->getPesananUser();
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
         $this->load->view('home/pesanan', $data);
         $this->load->view('layoutHome/footer', $data);
+    }
+
+    public function TambahReview()
+    {
+        $id_produk = $this->input->post('id_produk');
+        
+        $this->modelReview->tambah($id_produk);
+        // Update rating produk setelah review ditambahkan
+        $this->modelProduk->editProdukRating($id_produk);
+        $this->session->set_flashdata('message', '<div class="alert alert-secondary" role="alert">
+        Review Anda Berhasil Ditambahkan!
+        </div>');
+        redirect('User/detail/'.$id_produk.'#review');
     }
   
 }

@@ -3,11 +3,18 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row">
                 <div class="col-sm-6">
                     <h1>Data Alumni</h1>
                 </div>
             </div>
+            <?php if ($this->session->flashdata('message')): ?>
+            <div class="row">
+                <div class="col text-center">
+                    <h5><?= $this->session->flashdata('message'); ?></h5>
+                </div>
+            </div>
+            <?php endif; ?>
         </div><!-- /.container-fluid -->
     </section>
 
@@ -44,15 +51,16 @@
                                         <td><?= $alm['no_telp'] ?></td>
                                         <td>
                                             <?php if ($alm['status'] == "Approve") { ?>
-                                                <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Decline"
-                                                    class="btn btn-sm btn-success m-1">Approved</a>
+                                            <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Decline"
+                                                class="btn btn-sm btn-success m-1">Approved</a>
                                             <?php } else { ?>
-                                                <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Approve"
-                                                    class="btn btn-sm btn-danger m-1">Declined</a>
+                                            <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Approve"
+                                                class="btn btn-sm btn-danger m-1">Declined</a>
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal" data-bs-target=""><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal"
+                                                data-bs-target=""><i class="fa fa-edit"></i></a>
 
                                             <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
                                         </td>

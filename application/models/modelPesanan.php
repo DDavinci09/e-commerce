@@ -9,20 +9,70 @@ class modelPesanan extends CI_Model
     return $this->db->get('pesanan')->result_array();
   }
   
-  public function getidProduk($id_produk)
+  public function getPesananAdmin()
   {
-    // Join tabel dan ambil data produk
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
-    $this->db->group_by('produk.id_produk');
-    $produk = $this->db->get_where('produk', ['id_produk' => $id_produk])->row_array();
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
+
+    return $this->db->get('pesanan')->result_array();
+  }
+
+  public function getPesananAlumni()
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    $this->db->group_by('pesanan.id_pesanan');
+
+    return $this->db->get('pesanan')->result_array();
+  }
+  
+  public function getPesananUser()
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->where(['pesanan.id_user' => $this->session->userdata('id_user')]);
+    $this->db->group_by('pesanan.id_pesanan');
+
+    return $this->db->get('pesanan')->result_array();
+  }
+  
+  public function getidPesananAdmin($id_pesanan)
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
     
-    // Jika produk ditemukan, hitung harga diskon
-    if (!empty($produk)) {
-        $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
-    }
-    
-    return $produk;
+    return $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
+  }
+
+  public function editStatusPembayaran()
+  {
+    $data = [
+      "status_bayar" => $this->input->post('status_bayar', true)
+    ];
+
+    $this->db->where('id_pesanan', $this->input->post('id_pesanan'));
+    $this->db->update('pesanan', $data);
+  }
+  
+  public function editStatusPesanan()
+  {
+    $data = [
+      "status_pesanan" => $this->input->post('status_pesanan', true)
+    ];
+
+    $this->db->where('id_pesanan', $this->input->post('id_pesanan'));
+    $this->db->update('pesanan', $data);
   }
 
   public function tambah($dataPesanan)

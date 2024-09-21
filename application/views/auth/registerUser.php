@@ -8,59 +8,79 @@
             <form action="<?= base_url() ?>Auth/registerUser" method="post">
                 <div class="row">
                     <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="nama_user" name="nama_user"
-                                placeholder="Nama User">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nama_user" id="nama_user"
+                                    value="<?= set_value('nama_user'); ?>" placeholder="Nama User">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('nama_user', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="email" id="email"
+                                    value="<?= set_value('email'); ?>" placeholder="Email">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" id="no_telp" name="no_telp" placeholder="No Telp">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="no_telp" id="no_telp"
+                                    value="<?= set_value('no_telp'); ?>" placeholder="No Telp">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('no_telp', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Username">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="username" id="username"
+                                    value="<?= set_value('username'); ?>" placeholder="Username">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" id="password1" name="password1"
-                                placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password1" id="password1"
+                                    value="<?= set_value('password1'); ?>" placeholder="Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('password1', '<small class="text-danger">', '</small>'); ?>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" id="password2" name="password2"
-                                placeholder="Ulang password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password2" id="password2"
+                                    value="<?= set_value('password2'); ?>" placeholder="Ulang password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <?= form_error('password2', '<small class="text-danger">', '</small>'); ?>
                         </div>
                     </div>
                 </div>
@@ -71,11 +91,7 @@
                 </div>
             </form>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer text-center">
-            <a href="">Login</a>
-        </div>
+        <!-- /.card -->
     </div>
-    <!-- /.card -->
+    <!-- /.login-box -->
 </div>
-<!-- /.login-box -->

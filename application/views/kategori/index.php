@@ -13,6 +13,13 @@
                 </div>
                 <?php } ?>
             </div>
+            <?php if ($this->session->flashdata('message')): ?>
+            <div class="row">
+                <div class="col text-center">
+                    <h5><?= $this->session->flashdata('message'); ?></h5>
+                </div>
+            </div>
+            <?php endif; ?>
         </div><!-- /.container-fluid -->
     </section>
 

@@ -1,11 +1,22 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="m-0 text-center">HOME</h1>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col text-center">
+                        <h1 class="text-center">HOME</h1>
+                    </div>
                 </div>
+                <?php if ($this->session->flashdata('message')): ?>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h5><?= $this->session->flashdata('message'); ?></h5>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -66,9 +77,13 @@
                         </div>
                     </div>
                 </div>
+                <?php 
+                    // Tentukan controller berdasarkan peran
+                    $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
+                ?>
                 <div class="row">
                     <div class="col">
-                        <a class="btn btn-sm" href="#">
+                        <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
                             <div class="card">
                                 <div class="card-header bg-warning">
                                     <h3>BARANG</h3>
@@ -84,7 +99,7 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a class="btn btn-sm" href="#">
+                        <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
                             <div class="card">
                                 <div class="card-header bg-success">
                                     <h3>JASA</h3>
@@ -131,11 +146,16 @@
                                     <?php foreach (array_chunk($kategori, 4) as $index => $kat_group): ?>
                                     <div class="carousel-item <?= $index == 0 ? 'active' : ''; ?>">
                                         <div class="row">
+                                            <?php 
+                                                // Tentukan controller berdasarkan peran
+                                                $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
+                                            ?>
                                             <?php foreach ($kat_group as $kat): ?>
                                             <div class="col-md-3 mb-3">
                                                 <div class="card h-130">
                                                     <div class="card-header bg-info text-center">
-                                                        <a class="h5" href=""><?= $kat['nama_kategori'] ?></a>
+                                                        <a class="h5"
+                                                            href="<?= base_url($controller . '/getKategoriProduk/' . urlencode($kat['id_kategori'])) ?>"><?= $kat['nama_kategori'] ?></a>
                                                     </div>
                                                     <div class="card-body d-flex flex-column">
                                                         <p class="text-justify">
@@ -226,6 +246,9 @@
                                         <i class="fas fa-star fa-sm" style="color: orange;">
                                             <?= $tb['rating_produk'] ?></i>
                                     </div>
+                                    <div class="col text-center">
+                                        | <?= $tb['stok_produk'] ?> |
+                                    </div>
                                     <div class="col text-right">
                                         <?= $tb['jenis_produk'] ?>
                                     </div>
@@ -240,7 +263,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <a class="btn btn-success btn-sm btn-block" href="#">Detail Produk</a>
+                                        <?php if ($this->session->userdata('role') == 'User') { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>User/Detail/<?= $tb['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } else { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>Home/Detail/<?= $tb['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -305,6 +336,9 @@
                                         <i class="fas fa-star fa-sm" style="color: orange;">
                                             <?= $dk['rating_produk'] ?></i>
                                     </div>
+                                    <div class="col text-center">
+                                        | <?= $dk['stok_produk'] ?> |
+                                    </div>
                                     <div class="col text-right">
                                         <?= $dk['jenis_produk'] ?>
                                     </div>
@@ -319,7 +353,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <a class="btn btn-success btn-sm btn-block" href="#">Detail Produk</a>
+                                        <?php if ($this->session->userdata('role') == 'User') { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>User/Detail/<?= $dk['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } else { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>Home/Detail/<?= $dk['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

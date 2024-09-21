@@ -149,6 +149,9 @@
                     <a href="<?= base_url(); ?>User/shop" class="nav-link">Shop</a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= base_url(); ?>User/DataPesanan" class="nav-link">Pesanan</a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item dropdown">

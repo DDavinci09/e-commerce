@@ -30,20 +30,22 @@ class Auth extends CI_Controller
                         'role' => $user['role']
                     ];
                     $this->session->set_userdata($data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                    Login berhasil, Selamat Datang User!
+                    </div>');
                     redirect('User');
                 } else {
                     // password salah
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                    Wrong password!
+                    Password salah!
                     </div>');
                     redirect('auth/loginUser');
                 }
             } else {
                 // username tidak terdatar terdaftar
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            username is not registered!
-            </div>');
-                echo "tidak terdaftar";
+                Username tidak terdaftar!
+                </div>');
                 redirect('auth/loginUser');
             }
         }
@@ -80,27 +82,29 @@ class Auth extends CI_Controller
                             'status' => $user['status']
                         ];
                         $this->session->set_userdata($data);
+                        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                        Login berhasil, Selamat Datang Alumni!
+                        </div>');
                         redirect('Alumni');
                     } else {
                         // password salah
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                    Wrong password!
-                    </div>');
+                        Password salah!
+                        </div>');
                         redirect('auth/loginAlumni');
                     }
                 } else {
                     // username tidak aktif
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                This username is not been activated!
-                </div>');
+                    Username belum aktif!
+                    </div>');
                     redirect('auth/loginAlumni');
                 }
             } else {
                 // username tidak terdatar terdaftar
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            username is not registered!
-            </div>');
-                echo "tidak terdaftar";
+                Username tidak terdaftar!
+                </div>');
                 redirect('auth/loginAlumni');
             }
         }
@@ -123,17 +127,31 @@ class Auth extends CI_Controller
             $user = $this->db->get_where('admin', ['username' => $username])->row_array();
             // jika usernya ada
             if ($user) {
-                // berhasil login
-                $data = [
-                    'username' => $user['username'],
-                    'nama' => $user['nama'],
-                    'role' => $user['role']
-                ];
-                $this->session->set_userdata($data);
-                redirect('Admin');
+                if (password_verify($password, $user['password'])) {
+                    // berhasil login
+                    $data = [
+                        'username' => $user['username'],
+                        'nama' => $user['nama'],
+                        'role' => $user['role']
+                    ];
+                    $this->session->set_userdata($data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                    Login berhasil, Selamat Datang Admin!
+                    </div>');
+                    redirect('Admin');
+                } else {
+                    // password salah
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Password salah!
+                    </div>');
+                    redirect('auth/loginAdmin');
+                }
             } else {
-                // password salah
-                echo "password salah";
+                // username tidak terdatar terdaftar
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Username tidak terdaftar!
+                </div>');
+                redirect('auth/loginAdmin');
             }
         }
     }
@@ -142,7 +160,7 @@ class Auth extends CI_Controller
     {
         //Form Validation
         $this->form_validation->set_rules('nama_user', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('no_telp', 'No Telp', 'required|trim');
         $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
             'is_unique' => 'This username has already registered!'
@@ -169,10 +187,8 @@ class Auth extends CI_Controller
             ];
 
             $this->db->insert('user', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Congratulation! Your account has been created. Please Login first
-            </div>');
-            redirect('auth');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun Anda Berhasil Dibuat!</div>');
+            redirect('auth/loginUser');
         }
 
     }
@@ -218,8 +234,8 @@ class Auth extends CI_Controller
             // Insert data into the alumni table
             $this->db->insert('alumni', $data);
             // Set success message
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! Your account has been created. Please login.</div>');
-            redirect('auth');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun Anda Berhasil Dibuat!</div>');
+            redirect('auth/loginAlumni');
         }
     }
 
@@ -249,9 +265,7 @@ class Auth extends CI_Controller
             ];
 
             $this->db->insert('admin', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Congratulation! Your account has been created. Please Login first
-            </div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun Anda Berhasil Dibuat!</div>');
             redirect('auth');
         }
     }
@@ -259,9 +273,11 @@ class Auth extends CI_Controller
     public function logout()
     {
         session_destroy();
+        // Hapus data sesi tanpa menghancurkan seluruh sesi
+        // $this->session->unset_userdata($data);
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        You have been logged out!
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+        Anda telah Logout!
         </div>');
         redirect('Home');
     }

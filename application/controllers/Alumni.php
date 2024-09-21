@@ -46,6 +46,18 @@ class Alumni extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
+    public function DataPesanan()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getPesananAlumni();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
     public function tambahProduk()
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
@@ -78,9 +90,19 @@ class Alumni extends CI_Controller
 
             if ($this->upload->do_upload('image')) {
                 $this->modelProduk->tambahfile($this->upload->data());
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Data Produk Berhasil Ditambahkan!
+                </div>');
                 redirect('Alumni/DataProduk');
             } else {
+                // Jika upload file gagal
+                $error = $this->upload->display_errors(); // Ambil pesan error dari upload
+                
                 $this->modelProduk->tambah();
+                // Flash message error upload dan sukses tambah produk
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Data Produk Berhasil Ditambahkan, tetapi file gagal diupload: '.$error.'
+                </div>');
                 redirect('Alumni/DataProduk');
             }
         }
@@ -118,19 +140,62 @@ class Alumni extends CI_Controller
             //Initiaze config upload
             $this->upload->initialize($config);
 
-            if ($this->upload->do_upload('image')) {
-                $file = './assets/upload/produk/' . $data['produk']['image'];
+            // Data Lama
 
-                // Try to delete the existing file
+            // if ($this->upload->do_upload('image')) {
+            //     $file = './assets/upload/produk/' . $data['produk']['image'];
+
+            //     // Try to delete the existing file
+            //     if (is_readable($file) && unlink($file)) {
+            //         $this->modelProduk->editfile($this->upload->data());
+            //         redirect('Alumni/DataProduk');
+            //     } else {
+            //         $this->modelProduk->editfile($this->upload->data());
+            //         redirect('Alumni/DataProduk');
+            //     }
+            // } else {
+            //     $this->modelProduk->edit();
+            //     redirect('Alumni/DataProduk');
+            // }
+
+            if ($this->upload->do_upload('image')) {
+            // Jika upload file berhasil
+            $file = './assets/upload/produk/' . $data['produk']['image'];
+
+                // Coba hapus file lama
                 if (is_readable($file) && unlink($file)) {
+                    // Jika file lama berhasil dihapus
                     $this->modelProduk->editfile($this->upload->data());
+
+                    // Flash message untuk sukses edit dengan penghapusan file lama
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                        Data Produk Berhasil Diperbaharui dan File Lama Dihapus!
+                    </div>');
+
                     redirect('Alumni/DataProduk');
                 } else {
+                    // Jika file lama tidak bisa dihapus
                     $this->modelProduk->editfile($this->upload->data());
+
+                    // Flash message untuk sukses edit tanpa menghapus file lama
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                        Data Produk Berhasil Diperbaharui!
+                    </div>');
+
                     redirect('Alumni/DataProduk');
                 }
             } else {
+                // Jika upload file gagal
+                $error = $this->upload->display_errors(); // Ambil error dari upload
+
+                // Tetap edit data produk tanpa file baru
                 $this->modelProduk->edit();
+
+                // Flash message untuk sukses edit tanpa upload file
+                $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                    Data Produk Berhasil Diperbaharui, tetapi file gagal diupload: '.$error.'
+                </div>');
+
                 redirect('Alumni/DataProduk');
             }
         }
@@ -144,11 +209,25 @@ class Alumni extends CI_Controller
 
         if (is_readable($file) && unlink($file)) {
             $this->modelProduk->hapus($id_produk);
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Data Produk Berhasil Dihapus dan File Lama Dihapus!
+            </div>');
             redirect('Alumni/DataProduk');
         } else {
             $this->modelProduk->hapus($id_produk);
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Data Produk Berhasil Dihapus!
+            </div>');
             redirect('Alumni/DataProduk');
         }
     }
 
+    public function editStatusPesanan()
+    {
+        $this->modelPesanan->editStatusPesanan();
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Pesanan Berhasil Diperbaharui!
+        </div>');
+        redirect('Alumni/DataPesanan');
+    }
 }
