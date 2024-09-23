@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/dist/css/adminlte.min.css">
+    <style>
+    /* Atur background image */
+    body {
+        background-image: url('<?= base_url("assets/dist/img/bg2.jpg"); ?>');
+        background-size: cover;
+        /* Membuat background memenuhi layar */
+    }
+    </style>
 </head>
 
-<body class="hold-transition login-page"></body>
+<body class="hold-transition login-page" style="font-family: 'Times New Roman', serif;">

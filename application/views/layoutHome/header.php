@@ -60,6 +60,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         justify-content: center;
     }
     </style>
+    <!-- BG Image -->
+    <style>
+    /* Atur background image */
+    .content-wrapper {
+        background-image: url('<?= base_url("assets/dist/img/bg2.jpg"); ?>');
+        background-size: cover;
+        /* Membuat background memenuhi layar */
+    }
+    </style>
 </head>
 
 <body class="hold-transition layout-top-nav layout-navbar-fixed layout-fixed"

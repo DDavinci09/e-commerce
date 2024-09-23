@@ -1,12 +1,12 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-success elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-        <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+    <a href="#" class="brand-link bg-primary text-light">
+        <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.jpg" alt="E-Commerce"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">E-Commerce</span>
     </a><!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar bg-primary text-light">
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -50,7 +50,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>Admin/DataPesanan" class="nav-link">
-                        <i class="nav-icon fas fa-box"></i>
+                        <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Data Pesanan</p>
                     </a>
                 </li>
@@ -96,7 +96,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>Alumni/DataPesanan" class="nav-link">
-                        <i class="nav-icon fas fa-box"></i>
+                        <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Data Pesanan</p>
                     </a>
                 </li>

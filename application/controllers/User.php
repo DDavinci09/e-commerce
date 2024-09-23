@@ -27,10 +27,10 @@ class User extends CI_Controller
     public function shop()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['totalproduk'] = "100";
         $data['title'] = "Semua Produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getAll();
+        $data['totalproduk'] = count($data['produk']);
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -41,10 +41,10 @@ class User extends CI_Controller
     public function getJenisProduk($jenis_produk)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['totalproduk'] = "100";
-        $data['title'] = "Jenis : $jenis_produk";
+        $data['title'] = "Jenis Produk : $jenis_produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getJenisProduk($jenis_produk);
+        $data['totalproduk'] = count($data['produk']);
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -55,11 +55,11 @@ class User extends CI_Controller
     public function getKategoriProduk($id_kategori)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['totalproduk'] = "100";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
         $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
         $data['title'] = "Ketegori : " . $data['nama_kategori']['nama_kategori'];
+        $data['totalproduk'] = count($data['produk']);
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -161,6 +161,28 @@ class User extends CI_Controller
         Review Anda Berhasil Ditambahkan!
         </div>');
         redirect('User/detail/'.$id_produk.'#review');
+    }
+
+    public function contact()
+    {   
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['contact'] = "Kontak";
+        
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/contact', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+    
+    public function aboutUs()
+    {   
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['aboutUs'] = "About us";
+        
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/aboutUs', $data);
+        $this->load->view('layoutHome/footer', $data);
     }
   
 }

@@ -3,12 +3,13 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="m-0 text-center">Detail Produk</h1>
-                    <?= $this->session->flashdata('message'); ?>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="col text-center">
+                        <h1 class="text-center">DETAIL PRODUK</h1>
+                    </div>
+                </div>
+            </div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -25,13 +26,29 @@
                         </span>
                         <?php } ?>
                         <img src="<?= base_url('./assets/upload/produk/') . $produk['image']; ?>"
-                            class="img-fluid rounded" alt="Gambar Kosong">
+                            class="img-fluid rounded" alt="Gambar Kosong" style="height: 350px;">
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col">
                             <h2><?= $produk['nama_produk'] ?></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5>Kategori</h5>
+                        </div>
+                        <div class="col-10">
+                            <h5>: <?= $produk['nama_kategori'] ?></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5>Jenis</h5>
+                        </div>
+                        <div class="col-10">
+                            <h5>: <?= $produk['jenis_produk'] ?></h5>
                         </div>
                     </div>
                     <div class="row">

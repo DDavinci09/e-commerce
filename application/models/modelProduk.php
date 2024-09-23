@@ -10,6 +10,7 @@ class modelProduk extends CI_Model
     
   public function getAll()
   {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $query = $this->db->get('produk');
     $produkAll = $query->result_array();
 
@@ -19,7 +20,7 @@ class modelProduk extends CI_Model
 
       return $produkAll;
   }
-  
+    
   public function getProdukterbaru($limit = 6)
   {
     $this->db->order_by('create_at', 'DESC');

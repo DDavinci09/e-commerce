@@ -14,6 +14,19 @@ class Admin extends CI_Controller
     {
         $data['dashboard'] = "Selamat Datang";
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['totalUser'] = count($this->modelUser->getAll());
+        $data['totalAlumni'] = count($this->modelAlumni->getAll());
+        $data['totalApprove'] = count($this->modelAlumni->getApprove());
+        $data['totalDecline'] = count($this->modelAlumni->getDecline());
+        $data['totalKategori'] = count($this->modelKategori->getAll());
+        $data['totalProduk'] = count($this->modelProduk->getAll());
+        $data['totalPesanan'] = count($this->modelPesanan->getAll());
+        $data['totalBelumBayar'] = count($this->modelPesanan->getAdminBelumBayar());
+        $data['totalLunas'] = count($this->modelPesanan->getAdminLunas());
+        $data['totalDiproses'] = count($this->modelPesanan->getAdminDiproses());
+        $data['totalSelesai'] = count($this->modelPesanan->getAdminSelesai());
+        $data['totalDibatalkan'] = count($this->modelPesanan->getAdminDibatalkan());
+        $data['totalReview'] = count($this->modelReview->getAll());
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
@@ -88,6 +101,19 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/sidebar', $data);
         $this->load->view('layoutDashboard/navbar', $data);
         $this->load->view('produk/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function DetailProduk($id_produk)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getidProduk($id_produk);
+        $data['review'] =$this->modelReview->getProdukReview($id_produk);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/detail', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
     

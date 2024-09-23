@@ -21,39 +21,128 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Default box -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-body">
-                                        <h2>Tentang Kami</h2>
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime,
-                                            hic nemo magni
-                                            voluptate id doloremque obcaecati corrupti laudantium sequi
-                                            suscipit, repellendus vitae
-                                            voluptates eligendi adipisci quisquam quas tenetur quis
-                                            cupiditate.</p>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                                            sunt explicabo asperiores
-                                            minima nesciunt, quia voluptatibus, alias, consectetur deleniti
-                                            ipsam expedita nisi
-                                            commodi quod! Omnis eius ab ipsam placeat repellat.</p>
-                                    </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <?php if ($this->session->userdata('role') == 'Admin') { ?>
+                        <!-- Data User -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><?= $totalUser; ?></h3>
+                                    <p>Total Users</p>
                                 </div>
-                                <div class="col">
-                                    <div class="card-body">
-                                        <img class="border border-1 border-dark rounded-5" src="../assets/img/image.png"
-                                            alt="Gambar Kosong" style="width: 100;">
-                                    </div>
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
                                 </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <!-- /.card-body -->
+                        <!-- ./col -->
+
+                        <!-- Total Data Alumni -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3><?= $totalAlumni; ?></h3>
+                                    <p>Total Alumni</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <a href="#" class="small-box-footer nav-link dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    More info <i class="fas fa-arrow-circle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow w-100">
+                                    <li><a href="#" class="dropdown-item">Aktif (<?= $totalApprove; ?>)</a></li>
+                                    <li><a href="#" class="dropdown-item">Belum Aktif (<?= $totalDecline; ?>)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ./col -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.row -->
+                    <div class="row">
+                        <!-- Data Kategori -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><?= $totalKategori; ?></h3>
+                                    <p>Total Kategori</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+
+                        <?php } ?>
+
+                        <!-- Data Produk -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3><?= $totalProduk; ?></h3>
+                                    <p>Total Produk</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+
+
+                        <!-- Data Total Pesanan -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3><?= $totalPesanan; ?></h3>
+                                    <p>Total Pesanan</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-truck-loading"></i>
+                                </div>
+                                <a href="#" class="small-box-footer nav-link dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    More info <i class="fas fa-arrow-circle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow w-100">
+                                    <li><a href="#" class="dropdown-item">Belum Dibayar (<?= $totalBelumBayar; ?>)</a>
+                                    </li>
+                                    <li><a href="#" class="dropdown-item">Lunas (<?= $totalLunas; ?>)</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li><a href="#" class="dropdown-item">Diproses (<?= $totalDiproses; ?>)</a></li>
+                                    <li><a href="#" class="dropdown-item">Selesai (<?= $totalSelesai; ?>)</a></li>
+                                    <li><a href="#" class="dropdown-item">Dibatalkan (<?= $totalDibatalkan; ?>)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+
+                        <!-- Data Review -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-secondary">
+                                <div class="inner">
+                                    <h3><?= $totalReview; ?></h3>
+                                    <p>Total Review</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                    </div>
                 </div>
             </div>
         </div>

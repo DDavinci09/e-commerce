@@ -7,6 +7,16 @@ class modelAlumni extends CI_Model
   {
 		return $this->db->get('alumni')->result_array();
   }
+  
+  public function getApprove()
+  {
+    return $this->db->where('status', 'Approve')->get('alumni')->result_array();
+  }
+
+  public function getDecline()
+  {
+    return $this->db->where('status', 'Decline')->get('alumni')->result_array();
+  }
 
   public function getidAlumni($id_alumni)
   {

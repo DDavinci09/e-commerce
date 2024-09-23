@@ -77,14 +77,20 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="#"><i class="fa fa-eye"></i></a>
                                             <?php if ($this->session->userdata('role') !== 'Admin') { ?>
+                                            <a class="btn btn-info btn-sm"
+                                                href="<?= base_url() ?>Alumni/DetailProduk/<?= $p['id_produk'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
                                             <a class="btn btn-primary  btn-sm"
                                                 href="<?= base_url() ?>Alumni/editProduk/<?= $p['id_produk'] ?>"><i
                                                     class="fa fa-edit"></i></a>
                                             <a class="btn btn-danger  btn-sm" href="#"
                                                 onclick="deleteConfirmation('<?= base_url(); ?>Alumni/hapusProduk/<?= $p['id_produk']; ?>')"><i
                                                     class="fa fa-trash"></i></a>
+                                            <?php } else { ?>
+                                            <a class="btn btn-info btn-sm"
+                                                href="<?= base_url() ?>Admin/DetailProduk/<?= $p['id_produk'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
                                             <?php } ?>
                                         </td>
                                     </tr>

@@ -1,8 +1,8 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand-md navbar-light navbar-white sidebar-collapse">
+<nav class="main-header navbar navbar-expand-md navbar-primary navbar-dark sidebar-collapse">
     <div class="container">
-        <a href="<?= base_url('assets'); ?>/index3.html" class="navbar-brand">
-            <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+        <a href="#" class="navbar-brand">
+            <img src="<?= base_url('assets'); ?>/dist/img/AdminLTELogo.jpg" alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">E-Commerce</span>
         </a>
@@ -23,44 +23,10 @@
                     <a href="<?= base_url(); ?>Home/shop" class="nav-link">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="<?= base_url(); ?>Home/Contact" class="nav-link">Contact</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        class="nav-link dropdown-toggle">Dropdown</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">Some action </a></li>
-                        <li><a href="#" class="dropdown-item">Some other action</a></li>
-
-                        <li class="dropdown-divider"></li>
-
-                        <!-- Level two dropdown-->
-                        <li class="dropdown-submenu dropdown-hover">
-                            <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                            <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                <li>
-                                    <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                </li>
-
-                                <!-- Level three dropdown-->
-                                <li class="dropdown-submenu">
-                                    <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">level 2</a>
-                                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                    </ul>
-                                </li>
-                                <!-- End Level three -->
-
-                                <li><a href="#" class="dropdown-item">level 2</a></li>
-                                <li><a href="#" class="dropdown-item">level 2</a></li>
-                            </ul>
-                        </li>
-                        <!-- End Level two -->
-                    </ul>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>Home/AboutUs" class="nav-link">About Us</a>
                 </li>
             </ul>
 
@@ -108,7 +74,7 @@
             </li>
 
             <!-- User Dropdown Login -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown mt-1">
                 <a class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Login
                 </a>
                 <div class="dropdown-menu">
@@ -124,7 +90,7 @@
                 </div>
             </li>
             <!-- User Dropdown Register -->
-            <li class="nav-item dropdown ml-2">
+            <li class="nav-item dropdown ml-2 mt-1">
                 <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Register
                 </a>
                 <div class="dropdown-menu">
@@ -152,44 +118,10 @@
                     <a href="<?= base_url(); ?>User/DataPesanan" class="nav-link">Pesanan</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="<?= base_url(); ?>User/Contact" class="nav-link">Contact</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        class="nav-link dropdown-toggle">Dropdown</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">Some action </a></li>
-                        <li><a href="#" class="dropdown-item">Some other action</a></li>
-
-                        <li class="dropdown-divider"></li>
-
-                        <!-- Level two dropdown-->
-                        <li class="dropdown-submenu dropdown-hover">
-                            <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                            <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                <li>
-                                    <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                </li>
-
-                                <!-- Level three dropdown-->
-                                <li class="dropdown-submenu">
-                                    <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-item dropdown-toggle">level 2</a>
-                                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                        <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                    </ul>
-                                </li>
-                                <!-- End Level three -->
-
-                                <li><a href="#" class="dropdown-item">level 2</a></li>
-                                <li><a href="#" class="dropdown-item">level 2</a></li>
-                            </ul>
-                        </li>
-                        <!-- End Level two -->
-                    </ul>
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>User/AboutUs" class="nav-link">About Us</a>
                 </li>
             </ul>
 

@@ -8,6 +8,65 @@ class modelPesanan extends CI_Model
     $this->db->order_by('id_pesanan', 'DESC');
     return $this->db->get('pesanan')->result_array();
   }
+
+  // Data Pesanan Admin
+  public function getAdminBelumBayar()
+  {
+    return $this->db->where('status_bayar', 'Belum Bayar')->get('pesanan')->result_array();
+  }
+  
+  public function getAdminLunas()
+  {
+    return $this->db->where('status_bayar', 'Lunas')->get('pesanan')->result_array();
+  }
+  
+  public function getAdminDiproses()
+  {
+    return $this->db->where('status_pesanan', 'Diproses')->get('pesanan')->result_array();
+  }
+  
+  public function getAdminSelesai()
+  {
+    return $this->db->where('status_pesanan', 'Selesai')->get('pesanan')->result_array();
+  }
+  
+  public function getAdminDibatalkan()
+  {
+    return $this->db->where('status_pesanan', 'Dibatalkan')->get('pesanan')->result_array();
+  }
+  // End Data Pesanan Admin
+  
+  // Data Pesanan Alumni
+  public function getAlumniBelumBayar()
+  {
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    return $this->db->where('status_bayar', 'Belum Bayar')->get('pesanan')->result_array();
+  }
+  
+  public function getAlumniLunas()
+  {
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    return $this->db->where('status_bayar', 'Lunas')->get('pesanan')->result_array();
+  }
+  
+  public function getAlumniDiproses()
+  {
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    return $this->db->where('status_pesanan', 'Diproses')->get('pesanan')->result_array();
+  }
+  
+  public function getAlumniSelesai()
+  {
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    return $this->db->where('status_pesanan', 'Selesai')->get('pesanan')->result_array();
+  }
+  
+  public function getAlumniDibatalkan()
+  {
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+    return $this->db->where('status_pesanan', 'Dibatalkan')->get('pesanan')->result_array();
+  }
+  // End Data Pesanan Alumni
   
   public function getPesananAdmin()
   {
@@ -16,6 +75,7 @@ class modelPesanan extends CI_Model
     $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
     $this->db->join('user', 'pesanan.id_user = user.id_user');
     $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
 
     return $this->db->get('pesanan')->result_array();
   }
@@ -28,6 +88,7 @@ class modelPesanan extends CI_Model
     $this->db->join('user', 'pesanan.id_user = user.id_user');
     $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
     $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
 
     return $this->db->get('pesanan')->result_array();
   }
@@ -40,6 +101,7 @@ class modelPesanan extends CI_Model
     $this->db->join('user', 'pesanan.id_user = user.id_user');
     $this->db->where(['pesanan.id_user' => $this->session->userdata('id_user')]);
     $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
 
     return $this->db->get('pesanan')->result_array();
   }

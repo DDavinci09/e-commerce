@@ -3,11 +3,13 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="m-0 text-center">SHOP</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="col text-center">
+                        <h1 class="text-center">SHOP</h1>
+                    </div>
+                </div>
+            </div>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -65,13 +67,13 @@
             <!-- Produk (Kolom Kanan) -->
             <div class="col-lg-10">
                 <div class="card p-1">
-                    <div class="card-header">
+                    <div class="card-header bg-primary text-light">
                         <div class="row">
                             <div class="col">
-                                <?= $title; ?>
+                                <h5><?= $title; ?></h5>
                             </div>
-                            <div class="col">
-                                <?= $totalproduk; ?>
+                            <div class="col text-right">
+                                <h5>Total Produk : <?= $totalproduk; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                         <div class="row m-1">
                             <?php foreach ($produk as $p): ?>
                             <div class="col-md-3 p-0">
-                                <div class="card m-1">
+                                <div class="card m-1 card-outline card-success">
                                     <div class="card-body p-1">
                                         <?php if ($p['diskon_produk'] > 0 ) { ?>
                                         <span class="discount-badge position-absolute">
@@ -91,6 +93,11 @@
                                         <div class="row">
                                             <div class="col text-left">
                                                 <b><?= word_limiter($p['nama_produk'], 3); ?></b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-left">
+                                                <?= word_limiter($p['nama_kategori'], 3); ?>
                                             </div>
                                         </div>
                                         <div class="row">

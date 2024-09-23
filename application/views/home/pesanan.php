@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col text-center">
-                        <h1 class="text-center">Data Pesanan</h1>
+                        <h1 class="text-center">PESANAN</h1>
                     </div>
                 </div>
                 <?php if ($this->session->flashdata('message')): ?>
@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; foreach ($pesanan as $ps): ?>
-                        <tr>
+                        <tr class="highlight">
                             <td><?= $i++; ?></td>
                             <td>
                                 <div class="card m-1" style="width: 200px;">

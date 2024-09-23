@@ -14,6 +14,14 @@ class Alumni extends CI_Controller
     {
         $data['dashboard'] = "Selamat Datang";
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['totalProduk'] = count($this->modelProduk->getProdukAlumni());
+        $data['totalPesanan'] = count($this->modelPesanan->getPesananAlumni());
+        $data['totalBelumBayar'] = count($this->modelPesanan->getAlumniBelumBayar());
+        $data['totalLunas'] = count($this->modelPesanan->getAlumniLunas());
+        $data['totalDiproses'] = count($this->modelPesanan->getAlumniDiproses());
+        $data['totalSelesai'] = count($this->modelPesanan->getAlumniSelesai());
+        $data['totalDibatalkan'] = count($this->modelPesanan->getAlumniDibatalkan());
+        $data['totalReview'] = count($this->modelReview->getAlumniReview());
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
