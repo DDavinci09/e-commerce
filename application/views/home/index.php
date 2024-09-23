@@ -70,49 +70,51 @@
     <section class="content mt-5">
         <div class="container">
             <div class="card">
-                <div class="row text-center">
-                    <div class="col">
-                        <div class="card">
-                            <h1>Jenis Produk</h1>
-                        </div>
-                    </div>
+                <div class="card-header bg-info text-center">
+                    <h2>Jenis Produk</h2>
                 </div>
-                <?php 
+                <div class="card-body">
+                    <?php 
                     // Tentukan controller berdasarkan peran
                     $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
-                ?>
-                <div class="row">
-                    <div class="col">
-                        <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
-                            <div class="card">
-                                <div class="card-header bg-warning">
-                                    <h3>BARANG</h3>
+                    ?>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
+                                <div class="card">
+                                    <div class="card-header bg-warning">
+                                        <h4>BARANG</h4>
+                                    </div>
+                                    <div class="card-body text-justify">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique
+                                            tenetur
+                                            expedita
+                                            dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam
+                                            nam
+                                            inventore
+                                            repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                    </div>
                                 </div>
-                                <div class="card-body text-justify">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique tenetur
-                                        expedita
-                                        dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam nam
-                                        inventore
-                                        repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
+                                <div class="card">
+                                    <div class="card-header bg-success">
+                                        <h4>JASA</h4>
+                                    </div>
+                                    <div class="card-body text-justify">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique
+                                            tenetur
+                                            expedita
+                                            dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam
+                                            nam
+                                            inventore
+                                            repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a class="btn btn-sm" href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">
-                            <div class="card">
-                                <div class="card-header bg-success">
-                                    <h3>JASA</h3>
-                                </div>
-                                <div class="card-body text-justify">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique tenetur
-                                        expedita
-                                        dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam nam
-                                        inventore
-                                        repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,12 +123,12 @@
 
 
 
-    <!-- Section 2 Kategori -->
+    <!-- Kategori -->
     <section class="content mt-5">
         <div class="container">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h1>Kategori Produk</h1>
+            <div class="card" style="height: 350px;">
+                <div class="card-header text-center bg-primary">
+                    <h2>Kategori Produk</h2>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -136,8 +138,7 @@
                                 <ol class="carousel-indicators">
                                     <?php foreach (array_chunk($kategori, 4) as $index => $kat_group): ?>
                                     <li data-target="#kategori-produk" data-slide-to="<?= $index; ?>"
-                                        class="<?= $index == 0 ? 'active' : ''; ?>">
-                                    </li>
+                                        class="<?= $index == 0 ? 'active' : ''; ?>"></li>
                                     <?php endforeach; ?>
                                 </ol>
 
@@ -152,7 +153,7 @@
                                             ?>
                                             <?php foreach ($kat_group as $kat): ?>
                                             <div class="col-md-3 mb-3">
-                                                <div class="card h-130">
+                                                <div class="card h-100">
                                                     <div class="card-header bg-info text-center">
                                                         <a class="h5"
                                                             href="<?= base_url($controller . '/getKategoriProduk/' . urlencode($kat['id_kategori'])) ?>"><?= $kat['nama_kategori'] ?></a>
@@ -160,12 +161,12 @@
                                                     <div class="card-body d-flex flex-column">
                                                         <p class="text-justify">
                                                             <?php
-                                                        // Memotong keterangan jika terlalu panjang
-                                                        $max_length = 150;
-                                                        echo strlen($kat['keterangan_kategori']) > $max_length ?
-                                                            substr($kat['keterangan_kategori'], 0, $max_length) . '... <a href="#">Selengkapnya</a>' :
-                                                            $kat['keterangan_kategori'];
-                                                        ?>
+                                                                    // Memotong keterangan jika terlalu panjang
+                                                                    $max_length = 150;
+                                                                    echo strlen($kat['keterangan_kategori']) > $max_length ?
+                                                                        substr($kat['keterangan_kategori'], 0, $max_length) . '... <a href="#">Selengkapnya</a>' :
+                                                                        $kat['keterangan_kategori'];
+                                                                ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -177,18 +178,16 @@
                                 </div>
 
                                 <!-- Controls -->
-                                <div class="carousel-control">
-                                    <a class="carousel-control-prev" href="#kategori-produk" role="button"
-                                        data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#kategori-produk" role="button"
-                                        data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </div>
+                                <a class="carousel-control-prev" href="#kategori-produk" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#kategori-produk" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -196,20 +195,21 @@
             </div>
         </div>
     </section>
+    <!-- End Kategori -->
 
 
 
     <!-- Produk Unggulan -->
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header text-center bg-success">
                 <h2 class="text-center">Produk Terbaru</h2>
             </div>
             <div class="card-cody">
                 <div class="row m-1">
                     <?php foreach ($terbaru as $tb) : ?>
                     <div class="col-md-2 p-0">
-                        <div class="card m-1">
+                        <div class="card m-1 card-outline card-success">
                             <div class="card-body p-1">
                                 <?php if ($tb['diskon_produk'] > 0 ) { ?>
                                 <span class="discount-badge position-absolute">
@@ -221,6 +221,11 @@
                                 <div class="row">
                                     <div class="col text-left">
                                         <b><?= word_limiter($tb['nama_produk'], 3); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?= word_limiter($tb['nama_kategori'], 3); ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -292,14 +297,14 @@
     <!-- Produk Diskon -->
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header text-center">
-                <h2 class="text-center">Produk Promo Diskon</h2>
+            <div class="card-header text-center bg-danger">
+                <h2 class="text-center">Produk Diskon</h2>
             </div>
             <div class="card-cody">
                 <div class="row m-1">
                     <?php foreach ($diskon as $dk) : ?>
                     <div class="col-md-2 p-0">
-                        <div class="card m-1">
+                        <div class="card m-1 card-outline card-success">
                             <div class="card-body p-1">
                                 <?php if ($dk['diskon_produk'] > 0 ) { ?>
                                 <span class="discount-badge position-absolute">
@@ -371,7 +376,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col text-right">
-                        <a href="#" class="h1 btn-sm">List Produk Promo Diskon . . .</a>
+                        <a href="#" class="h1 btn-sm">List Produk Diskon . . .</a>
                     </div>
                 </div>
             </div>
@@ -379,25 +384,216 @@
     </div>
     <!-- End Produk Unggulan -->
 
-    <!-- Promo Spesial -->
+    <!-- Produk Teratas -->
     <div class="container mt-5">
-        <h2 class="text-center">Promo Spesial</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card bg-warning">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Diskon 50% untuk Produk Tertentu</h5>
-                        <p class="card-text">Dapatkan diskon besar-besaran untuk produk pilihan selama bulan ini.</p>
-                        <a href="#" class="btn btn-dark">Belanja Sekarang</a>
+        <div class="card">
+            <div class="card-header text-center bg-warning">
+                <h2 class="text-center">Produk Teratas</h2>
+            </div>
+            <div class="card-cody">
+                <div class="row m-1">
+                    <?php foreach ($teratas as $tr) : ?>
+                    <div class="col-md-2 p-0">
+                        <div class="card m-1 card-outline card-success">
+                            <div class="card-body p-1">
+                                <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                <span class="discount-badge position-absolute">
+                                    <?= $tr['diskon_produk'] ?>%
+                                </span>
+                                <?php } ?>
+                                <img src="<?= base_url('./assets/upload/produk/') . $tr['image']; ?>"
+                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <b><?= word_limiter($tr['nama_produk'], 3); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                        <span class="text-danger">
+                                            Rp. <?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
+                                        </span> |
+                                        <span class="text-muted text-decoration-line-through">
+                                            <s>
+                                                <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                            </s>
+                                        </span>
+                                        <?php } else { ?>
+                                        <span>
+                                            Rp. <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                        </span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <i class="fas fa-star fa-sm" style="color: orange;">
+                                            <?= $tr['rating_produk'] ?></i>
+                                    </div>
+                                    <div class="col text-center">
+                                        | <?= $tr['stok_produk'] ?> |
+                                    </div>
+                                    <div class="col text-right">
+                                        <?= $tr['jenis_produk'] ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span>
+                                            <i class="fas fa-map-marker fa-sm" style="color: black;">
+                                            </i> Nama Kota
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php if ($this->session->userdata('role') == 'User') { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>User/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } else { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>Home/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="row mb-2">
+                    <div class="col text-right">
+                        <a href="#" class="h1 btn-sm">List Produk Teratas . . .</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card bg-info">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Beli 2 Gratis 1</h5>
-                        <p class="card-text">Promo spesial beli 2 produk dapat 1 produk gratis. Hanya hari ini!</p>
-                        <a href="#" class="btn btn-dark">Dapatkan Promo</a>
+        </div>
+    </div>
+    <!-- End Produk Unggulan -->
+
+    <?php if ($this->session->userdata('role') == 'User') { ?>
+    <!-- Produk Baru dibeli -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center bg-secondary">
+                <h2 class="text-center">Produk Baru Dibeli</h2>
+            </div>
+            <div class="card-cody">
+                <div class="row m-1">
+                    <?php foreach ($barudibeli as $tr) : ?>
+                    <div class="col-md-2 p-0">
+                        <div class="card m-1 card-outline card-success">
+                            <div class="card-body p-1">
+                                <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                <span class="discount-badge position-absolute">
+                                    <?= $tr['diskon_produk'] ?>%
+                                </span>
+                                <?php } ?>
+                                <img src="<?= base_url('./assets/upload/produk/') . $tr['image']; ?>"
+                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <b><?= word_limiter($tr['nama_produk'], 3); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                        <span class="text-danger">
+                                            Rp. <?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
+                                        </span> |
+                                        <span class="text-muted text-decoration-line-through">
+                                            <s>
+                                                <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                            </s>
+                                        </span>
+                                        <?php } else { ?>
+                                        <span>
+                                            Rp. <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                        </span>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <i class="fas fa-star fa-sm" style="color: orange;">
+                                            <?= $tr['rating_produk'] ?></i>
+                                    </div>
+                                    <div class="col text-center">
+                                        | <?= $tr['stok_produk'] ?> |
+                                    </div>
+                                    <div class="col text-right">
+                                        <?= $tr['jenis_produk'] ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span>
+                                            <i class="fas fa-map-marker fa-sm" style="color: black;">
+                                            </i> Nama Kota
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php if ($this->session->userdata('role') == 'User') { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>User/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } else { ?>
+                                        <a class="btn btn-success btn-sm btn-block"
+                                            href="<?= base_url() ?>Home/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            Produk</a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="row mb-2">
+                    <div class="col text-right">
+                        <a href="#" class="h1 btn-sm">List Produk Baru Dibeli . . .</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Produk Baru Dibeli -->
+    <?php } ?>
+
+    <!-- Promo Spesial -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h2 class="text-center">Promo Spesial</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-warning">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Diskon 50% untuk Produk Tertentu</h5>
+                                <p class="card-text">Dapatkan diskon besar-besaran untuk produk pilihan selama bulan
+                                    ini.
+                                </p>
+                                <a href="#" class="btn btn-dark">Belanja Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-info">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Beli 2 Gratis 1</h5>
+                                <p class="card-text">Promo spesial beli 2 produk dapat 1 produk gratis. Hanya hari ini!
+                                </p>
+                                <a href="#" class="btn btn-dark">Dapatkan Promo</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -406,35 +602,78 @@
 
 
     <!-- Review Pelanggan -->
-    <div class="container mt-5">
-        <h2 class="text-center">Testimoni Pelanggan</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Produk ini sangat bagus dan berkualitas tinggi!"</p>
-                        <h5>- Pelanggan 1</h5>
+    <div class="container mt-5 p-1">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h2 class="text-center">Review User</h2>
+            </div>
+            <div class="card-body">
+                <div id="carouselTestimoni" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php 
+                    $active = true; 
+                    $counter = 0; 
+                    foreach ($reviews as $review) : 
+                        if ($counter % 3 == 0): // Setiap tiga item baru, buat carousel-item baru
+                    ?>
+                        <div class="carousel-item <?php if ($active) { echo 'active'; $active = false; } ?>">
+                            <div class="row justify-content-center">
+                                <?php endif; ?>
+
+                                <div class="col-md-4">
+                                    <div class="card card-success card-outline">
+                                        <div class="card-body text-center">
+                                            <!-- Isi Testimoni -->
+                                            <div class="row">
+                                                <div class="col">
+                                                    <?php if ($this->session->userdata('role') == 'User') { ?>
+                                                    <a class="btn btn-success btn-sm btn-block"
+                                                        href="<?= base_url() ?>User/Detail/<?= $review['id_produk'] ?>"><?= $review['nama_produk'] ?></a>
+                                                    <?php } else { ?>
+                                                    <a class="btn btn-success btn-sm btn-block"
+                                                        href="<?= base_url() ?>Home/Detail/<?= $review['id_produk'] ?>"><?= $review['nama_produk'] ?></a>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <p style="font-size: 1.1rem;">
+                                                "<?= $review['isi_review']; ?>"<br>
+                                                <i class="fas fa-star fa-sm" style="color: orange;">
+                                                    <?= $review['rating_review'] ?></i>
+                                            </p>
+                                            <h6 class="font-weight-bold">
+                                                ~ <?= $review['nama_user']; ?></h6>
+                                            <!-- Nama Pelanggan -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php 
+                        $counter++;
+                        if ($counter % 3 == 0): // Menutup div carousel-item setelah tiga testimonial
+                    ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        <!-- Jika jumlah item tidak kelipatan 3, tutup carousel-item terakhir -->
+                        <?php if ($counter % 3 != 0): ?>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Layanan pelanggan yang sangat baik dan pengiriman cepat."</p>
-                        <h5>- Pelanggan 2</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <p>"Saya sangat puas dengan produk ini. Saya akan kembali membeli."</p>
-                        <h5>- Pelanggan 3</h5>
-                    </div>
-                </div>
-            </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#carouselTestimoni" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselTestimoni" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
     <!-- End Review -->
+</div>
 </div>
 <!-- End Content Wrapper -->

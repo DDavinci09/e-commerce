@@ -68,6 +68,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         background-size: cover;
         /* Membuat background memenuhi layar */
     }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        top: 70%;
+        /* Mengubah posisi vertikal tombol */
+        transform: translateY(-50%);
+        /* Memastikan tombol tetap terpusat secara vertikal */
+    }
     </style>
 </head>
 

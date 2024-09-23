@@ -91,6 +91,18 @@ class Admin extends CI_Controller
         $this->load->view('kategori/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    public function DetailKategori($id_kategori)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['kategori'] = $this->modelKategori->getidKategori($id_kategori);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('kategori/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
 
     public function DataProduk()
     {
@@ -126,6 +138,30 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/sidebar', $data);
         $this->load->view('layoutDashboard/navbar', $data);
         $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function DetailPesanan($id_pesanan)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getidPesanan($id_pesanan);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function DataReview()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['review'] = $this->modelReview->getAll();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('review/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
 

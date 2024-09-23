@@ -85,7 +85,15 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            aksi
+                                            <?php if ($this->session->userdata('role') !== 'Admin') { ?>
+                                            <a class="btn btn-info btn-sm"
+                                                href="<?= base_url() ?>Alumni/DetailPesanan/<?= $ps['id_pesanan'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <?php } else { ?>
+                                            <a class="btn btn-info btn-sm"
+                                                href="<?= base_url() ?>Admin/DetailPesanan/<?= $ps['id_pesanan'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

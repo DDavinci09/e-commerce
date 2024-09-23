@@ -15,6 +15,8 @@ class Home extends CI_Controller
         $data['kategori'] = $this->modelKategori->getAll();
         $data['terbaru'] = $this->modelProduk->getProdukterbaru();
         $data['diskon'] = $this->modelProduk->getProdukdiskon();
+        $data['teratas'] = $this->modelProduk->getProdukteratas();
+        $data['reviews'] = $this->modelReview->getAll();
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);

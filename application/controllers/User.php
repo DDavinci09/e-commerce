@@ -16,7 +16,10 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['kategori'] = $this->modelKategori->getAll();
         $data['terbaru'] = $this->modelProduk->getProdukterbaru();
-        $data['diskon'] = $this->modelProduk->getProdukdiskon();
+        $data['diskon'] = $this->modelProduk->getProdukdiskon();        
+        $data['teratas'] = $this->modelProduk->getProdukteratas();
+        $data['barudibeli'] = $this->modelProduk->getProdukbarudibeli();
+        $data['reviews'] = $this->modelReview->getAll();
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);

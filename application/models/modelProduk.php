@@ -23,6 +23,7 @@ class modelProduk extends CI_Model
     
   public function getProdukterbaru($limit = 6)
   {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->order_by('create_at', 'DESC');
     $query = $this->db->get('produk', $limit);
     $produkTerbaru = $query->result_array();
@@ -36,6 +37,7 @@ class modelProduk extends CI_Model
   
   public function getProdukdiskon($limit = 6)
   {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->where('diskon_produk >', 0);
     $this->db->order_by('diskon_produk', 'DESC');
     $query = $this->db->get('produk', $limit);
@@ -47,6 +49,54 @@ class modelProduk extends CI_Model
 
       return $produkDiskon;
   }
+
+  public function getProdukteratas($limit = 6)
+  {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->order_by('rating_produk', 'DESC');
+    $query = $this->db->get('produk', $limit);
+    $produkTerbaru = $query->result_array();
+
+      foreach ($produkTerbaru as &$produk) {
+          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+      }
+
+      return $produkTerbaru;
+  }
+  
+  public function getProdukbarudibeli($limit = 6)
+{
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    
+    $this->db->where(['pesanan.id_user' => $this->session->userdata('id_user')]);
+    $this->db->group_by('produk.id_produk');
+    $this->db->order_by('produk.id_produk', 'DESC');
+    
+    $query = $this->db->get('pesanan', $limit);
+
+    // Cek apakah query gagal
+    if (!$query) {
+        // Menampilkan error jika query gagal
+        $error = $this->db->error();
+        log_message('error', 'Query Error: ' . $error['message']);
+        return false;
+    }
+
+    $produkTerbaru = $query->result_array();
+
+    if (!empty($produkTerbaru)) {
+        foreach ($produkTerbaru as &$produk) {
+            $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+        }
+    } else {
+        return [];
+    }
+
+    return $produkTerbaru;
+}
 
   public function getProdukAdmin()
   {
@@ -188,6 +238,7 @@ class modelProduk extends CI_Model
 
   public function getJenisProduk($jenis_produk)
   {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->where('jenis_produk', $jenis_produk); // Ganti 'jenis_produk' dengan nama kolom yang sesuai di database
     $query = $this->db->get('produk'); // Ganti 'produk' dengan nama tabel produk yang sesuai
     $produkAll = $query->result_array();
@@ -201,7 +252,8 @@ class modelProduk extends CI_Model
 
   public function getKategoriProduk($id_kategori)
   {
-    $this->db->where('id_kategori', $id_kategori);
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->where('produk.id_kategori', $id_kategori);
     $query = $this->db->get('produk');
     $produkAll = $query->result_array();
 

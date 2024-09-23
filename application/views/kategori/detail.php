@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Tambah Data Kategori</h1>
+                    <h1>Detail Kategori</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -18,24 +18,20 @@
                 <div class="col">
                     <!-- Form untuk tambah data kategori -->
                     <div class="card card-primary">
-                        <form action="<?= base_url('Admin/tambahKategori'); ?>" method="post">
+                        <form action="#" method="post">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nama_kategori">Nama Kategori :</label>
                                     <input type="text" name="nama_kategori" class="form-control" id="nama_kategori"
-                                        value="<?= set_value('nama_kategori'); ?>" placeholder="Masukkan nama kategori">
-                                    <?= form_error('nama_kategori', '<small class="text-danger">', '</small>'); ?>
+                                        value="<?= $kategori['nama_kategori'] ?>" placeholder="Masukkan nama kategori"
+                                        readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan_kategori">Keterangan :</label>
                                     <textarea name="keterangan_kategori" class="form-control" id="keterangan_kategori"
-                                        rows="3"
-                                        placeholder="Masukkan keterangan kategori"><?= set_value('keterangan_kategori'); ?></textarea>
-                                    <?= form_error('keterangan_kategori', '<small class="text-danger">', '</small>'); ?>
+                                        rows="3" placeholder="Masukkan keterangan kategori"
+                                        readonly><?= $kategori['keterangan_kategori'] ?></textarea>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Tambah Data</button>
                             </div>
                         </form>
                     </div>

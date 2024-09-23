@@ -42,6 +42,18 @@ class Alumni extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
+    public function DetailKategori($id_kategori)
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['kategori'] = $this->modelKategori->getidKategori($id_kategori);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('kategori/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
     public function DataProduk()
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
@@ -54,6 +66,19 @@ class Alumni extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
+    public function DetailProduk($id_produk)
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getidProduk($id_produk);
+        $data['review'] =$this->modelReview->getProdukReview($id_produk);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
     public function DataPesanan()
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
@@ -63,6 +88,30 @@ class Alumni extends CI_Controller
         $this->load->view('layoutDashboard/sidebar', $data);
         $this->load->view('layoutDashboard/navbar', $data);
         $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function DetailPesanan($id_pesanan)
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getidPesanan($id_pesanan);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function DataReview()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['review'] = $this->modelReview->getAlumniReview();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('review/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
 

@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class modelPesanan extends CI_Model
 {    
+  private function hitungDiskon($harga_asli, $diskon) 
+  {
+    return $harga_asli - ($harga_asli * ($diskon / 100));
+  }
+  
   public function getAll()
   {
     $this->db->order_by('id_pesanan', 'DESC');
@@ -104,6 +109,24 @@ class modelPesanan extends CI_Model
     $this->db->order_by('id_pesanan', 'DESC');
 
     return $this->db->get('pesanan')->result_array();
+  }
+  
+  public function getidPesanan($id_pesanan)
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
+    
+    $pesanan = $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
+
+    // Jika produk ditemukan, hitung harga diskon
+    if (!empty($pesanan)) {
+        $pesanan['harga_diskon'] = $this->hitungDiskon($pesanan['harga_produk'], $pesanan['diskon_produk']);
+    }
+
+      return $pesanan;
   }
   
   public function getidPesananAdmin($id_pesanan)

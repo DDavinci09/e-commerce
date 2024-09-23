@@ -5,6 +5,9 @@ class modelReview extends CI_Model
 {    
   public function getAll()
   {
+    $this->db->join('produk', 'review.id_produk = produk.id_produk');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'review.id_user = user.id_user');   
     $this->db->order_by('id_review', 'DESC');
     return $this->db->get('review')->result_array();
   }
@@ -12,6 +15,8 @@ class modelReview extends CI_Model
   public function getAlumniReview()
   {
     $this->db->join('produk', 'review.id_produk = produk.id_produk');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'review.id_user = user.id_user');   
     $this->db->where(['produk.id_alumni' => $this->session->userdata('id_alumni')]);
     $this->db->order_by('id_review', 'DESC');
     return $this->db->get('review')->result_array();
