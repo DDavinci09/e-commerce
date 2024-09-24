@@ -57,9 +57,4 @@ class modelReview extends CI_Model
     $this->db->insert('review', $data);
   }
 
-  public function hapus($id_produk)
-  {
-    $this->db->delete('produk', ['id_produk' => $id_produk]);
-  }
-
 }

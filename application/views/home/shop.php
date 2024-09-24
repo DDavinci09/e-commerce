@@ -113,7 +113,7 @@
                                             <div class="col text-left">
                                                 <?php if ($p['diskon_produk'] > 0 ) { ?>
                                                 <span class="text-danger">
-                                                    Rp. <?= number_format($p['harga_diskon'], 0, ',', '.'); ?>
+                                                    Rp.<?= number_format($p['harga_diskon'], 0, ',', '.'); ?>
                                                 </span> |
                                                 <span class="text-muted text-decoration-line-through">
                                                     <s>
@@ -122,7 +122,7 @@
                                                 </span>
                                                 <?php } else { ?>
                                                 <span>
-                                                    Rp. <?= number_format($p['harga_produk'], 0, ',', '.'); ?>
+                                                    Rp.<?= number_format($p['harga_produk'], 0, ',', '.'); ?>
                                                 </span>
                                                 <?php } ?>
                                             </div>

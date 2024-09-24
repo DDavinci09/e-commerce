@@ -11,6 +11,8 @@ class modelProduk extends CI_Model
   public function getAll()
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $query = $this->db->get('produk');
     $produkAll = $query->result_array();
 
@@ -24,6 +26,8 @@ class modelProduk extends CI_Model
   public function getProdukterbaru($limit = 6)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $this->db->order_by('create_at', 'DESC');
     $query = $this->db->get('produk', $limit);
     $produkTerbaru = $query->result_array();
@@ -38,6 +42,8 @@ class modelProduk extends CI_Model
   public function getProdukdiskon($limit = 6)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $this->db->where('diskon_produk >', 0);
     $this->db->order_by('diskon_produk', 'DESC');
     $query = $this->db->get('produk', $limit);
@@ -53,6 +59,8 @@ class modelProduk extends CI_Model
   public function getProdukteratas($limit = 6)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $this->db->order_by('rating_produk', 'DESC');
     $query = $this->db->get('produk', $limit);
     $produkTerbaru = $query->result_array();
@@ -70,6 +78,7 @@ class modelProduk extends CI_Model
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
     $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->where('alumni.status', 'Approve');
     
     $this->db->where(['pesanan.id_user' => $this->session->userdata('id_user')]);
     $this->db->group_by('produk.id_produk');
@@ -102,6 +111,7 @@ class modelProduk extends CI_Model
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $this->db->group_by('produk.id_produk');
 
     return $this->db->get('produk')->result_array();
@@ -122,6 +132,7 @@ class modelProduk extends CI_Model
     // Join tabel dan ambil data produk
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
     $this->db->group_by('produk.id_produk');
     $produk = $this->db->get_where('produk', ['id_produk' => $id_produk])->row_array();
     
@@ -132,7 +143,40 @@ class modelProduk extends CI_Model
     
     return $produk;
   }
+  
+  public function getJenisProduk($jenis_produk)
+  {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
+    $this->db->where('jenis_produk', $jenis_produk); // Ganti 'jenis_produk' dengan nama kolom yang sesuai di database
+    $query = $this->db->get('produk'); // Ganti 'produk' dengan nama tabel produk yang sesuai
+    $produkAll = $query->result_array();
 
+      foreach ($produkAll as &$produk) {
+          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+      }
+
+      return $produkAll;
+  }
+
+  public function getKategoriProduk($id_kategori)
+  {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where('alumni.status', 'Approve');
+    $this->db->where('produk.id_kategori', $id_kategori);
+    $query = $this->db->get('produk');
+    $produkAll = $query->result_array();
+
+      foreach ($produkAll as &$produk) {
+          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+      }
+
+      return $produkAll;
+  }
+
+  // Proses
   public function tambah()
   {
     $data = [
@@ -212,6 +256,12 @@ class modelProduk extends CI_Model
     $this->db->where('id_produk', $this->input->post('id_produk'));
     return $this->db->update('produk', ["stok_produk" => $stok_baru]);
   }
+  
+  public function editStok2($id_produk, $stok_baru)
+  {
+    $this->db->where('id_produk', $id_produk);
+    return $this->db->update('produk', ["stok_produk" => $stok_baru]);
+  }
 
   public function hapus($id_produk)
   {
@@ -236,31 +286,4 @@ class modelProduk extends CI_Model
     }
   }
 
-  public function getJenisProduk($jenis_produk)
-  {
-    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->where('jenis_produk', $jenis_produk); // Ganti 'jenis_produk' dengan nama kolom yang sesuai di database
-    $query = $this->db->get('produk'); // Ganti 'produk' dengan nama tabel produk yang sesuai
-    $produkAll = $query->result_array();
-
-      foreach ($produkAll as &$produk) {
-          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
-      }
-
-      return $produkAll;
-  }
-
-  public function getKategoriProduk($id_kategori)
-  {
-    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->where('produk.id_kategori', $id_kategori);
-    $query = $this->db->get('produk');
-    $produkAll = $query->result_array();
-
-      foreach ($produkAll as &$produk) {
-          $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
-      }
-
-      return $produkAll;
-  }
 }

@@ -24,6 +24,25 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <?php if ($this->session->userdata('role') == 'Alumni') { ?>
+                        <!-- Data Total Pesanan -->
+                        <div class="col-lg-6 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>Rp.<?= number_format($totalPendapatan, 0, ',', '.'); ?></h3>
+                                    <p>Total Pendapatan</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-money-check"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <?php } ?>
+                    </div>
+                    <div class="row">
                         <?php if ($this->session->userdata('role') == 'Admin') { ?>
                         <!-- Data User -->
                         <div class="col-lg-3 col-6">
@@ -142,24 +161,8 @@
                             </div>
                         </div>
                         <!-- ./col -->
-                        <?php if ($this->session->userdata('role') == 'Alumni') { ?>
-                        <!-- Data Total Pesanan -->
-                        <div class="col-lg-3 col-6">
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3>Rp.<?= $totalPendapatan; ?></h3>
-                                    <p>Total Pendapatan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-money-check"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <?php } ?>
                     </div>
+
                 </div>
             </div>
         </div>

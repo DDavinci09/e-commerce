@@ -10,6 +10,7 @@ class Home extends CI_Controller
         $this->load->helper('text');
     }
     
+    // Halaman home
     public function index()
     {
         $data['kategori'] = $this->modelKategori->getAll();
@@ -24,6 +25,7 @@ class Home extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // halaman shop
     public function shop()
     {
         $data['title'] = "Semua Produk";
@@ -64,6 +66,7 @@ class Home extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // Halaman detail
     public function detail($id_produk)
     {
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);        
@@ -75,6 +78,7 @@ class Home extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // halaman contact
     public function Contact()
     {   
         $data['contact'] = "Kontak";
@@ -85,6 +89,7 @@ class Home extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // halaman about us
     public function AboutUs()
     {   
         $data['aboutUs'] = "About us";

@@ -100,6 +100,7 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col">
+                                                            <strong>Pembeli:</strong> <?= $ps['nama_user'] ?><br>
                                                             <strong>Pembayaran:</strong> <?= $ps['pembayaran'] ?><br>
                                                             <strong>Tanggal:</strong>
                                                             <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?><br>

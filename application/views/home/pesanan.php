@@ -146,11 +146,11 @@
                             <td style="width: 80px;">
                                 <?php if($ps['status_pesanan'] !== 'Selesai' ) { ?>
                                 <a class="btn btn-sm btn-info" data-toggle="modal"
-                                    data-target="#status-bayar<?= $ps['id_pesanan'] ?>">
+                                    data-target="#edit-pesanan<?= $ps['id_pesanan'] ?>">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a class="btn btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#status-bayar<?= $ps['id_pesanan'] ?>">
+                                <a class="btn btn-sm btn-danger"
+                                    onclick="deleteConfirmation('<?= base_url(); ?>User/hapusPesanan/<?= $ps['id_pesanan']; ?>')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <?php } else { ?>
@@ -170,7 +170,7 @@
 
 </div>
 
-<?php $i = 1; foreach ($pesanan as $ps): ?>
+<?php foreach ($pesanan as $ps): ?>
 <!-- Modal Upload Bukti Bayar -->
 <div class="modal fade" id="upload-bukti<?= $ps['id_pesanan'] ?>">
     <div class="modal-dialog modal-dialog-centered">
@@ -202,6 +202,81 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal Edit Pesanan -->
+<div class="modal fade" id="edit-pesanan<?= $ps['id_pesanan'] ?>">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header  bg-warning">
+                <h4 class="modal-title">Upload Bukti Pembayaran</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('User/editPesanan'); ?>" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" name="harga_pesanan" value="<?= $ps['harga_pesanan'] ?>">
+                            <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
+                            <input type="hidden" name="id_produk" value="<?= $ps['id_produk'] ?>">
+                            <label for="stok_produk">Stok Produk</label>
+                            <input class="form-control" name="stok_produk" id="stok_produk" type="text"
+                                value="<?= $ps['stok_produk'] ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="pembayaran">Metode Pembayaran</label>
+                                <div class="input-group">
+                                    <select type="text" class="form-control" id="pembayaran" name="pembayaran">
+                                        <option value="">~ Pilih Metode Pembayaran ~</option>
+                                        <option value="Transfer Bank"
+                                            <?= $ps['pembayaran'] == 'Transfer Bank' ? 'selected' : ''; ?>>Transfer Bank
+                                        </option>
+                                        <option value="COD" <?= $ps['pembayaran'] == 'COD' ? 'selected' : ''; ?>>COD
+                                        </option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-money-check"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="jml_pesanan">Jumlah Pesanan</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Jumlah Pesanan"
+                                        id="jml_pesanan" name="jml_pesanan" value="<?= $ps['jml_pesanan'] ?>">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-boxes"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Edit Data</button>
                 </div>
             </form>
         </div>

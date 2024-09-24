@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+    // Proses Login
     public function loginUser()
     {
         $username = $this->input->post('username');
@@ -156,6 +157,7 @@ class Auth extends CI_Controller
         }
     }
 
+    // Proses Register
     public function registerUser()
     {
         //Form Validation
@@ -170,7 +172,6 @@ class Auth extends CI_Controller
             'min_length' => 'Password too short!'
         ]);
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-
 
         if ($this->form_validation->run() == false) {
             $this->load->view('layoutHome/authheader');
@@ -190,7 +191,6 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun Anda Berhasil Dibuat!</div>');
             redirect('auth/loginUser');
         }
-
     }
 
     public function registerAlumni()
@@ -271,6 +271,7 @@ class Auth extends CI_Controller
         }
     }
 
+    // Proses Logout
     public function logout()
     {
         session_destroy();

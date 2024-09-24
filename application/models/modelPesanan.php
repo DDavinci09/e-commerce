@@ -14,6 +14,35 @@ class modelPesanan extends CI_Model
     return $this->db->get('pesanan')->result_array();
   }
 
+  public function getidPesanan($id_pesanan)
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
+    
+    $pesanan = $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
+
+    // Jika produk ditemukan, hitung harga diskon
+    if (!empty($pesanan)) {
+        $pesanan['harga_diskon'] = $this->hitungDiskon($pesanan['harga_produk'], $pesanan['diskon_produk']);
+    }
+
+      return $pesanan;
+  }
+  
+  public function getidPesananAdmin($id_pesanan)
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
+    
+    return $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
+  }
+
   // Data Pesanan Admin
   public function getAdminBelumBayar()
   {
@@ -39,7 +68,18 @@ class modelPesanan extends CI_Model
   {
     return $this->db->where('status_pesanan', 'Dibatalkan')->get('pesanan')->result_array();
   }
-  // End Data Pesanan Admin
+  
+  public function getPesananAdmin()
+  {
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
+
+    return $this->db->get('pesanan')->result_array();
+  }
   
   // Data Pesanan Alumni
   public function getAlumniBelumBayar()
@@ -70,20 +110,7 @@ class modelPesanan extends CI_Model
   {
     $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
     return $this->db->where('status_pesanan', 'Dibatalkan')->get('pesanan')->result_array();
-  }
-  // End Data Pesanan Alumni
-  
-  public function getPesananAdmin()
-  {
-    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
-    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
-    $this->db->join('user', 'pesanan.id_user = user.id_user');
-    $this->db->group_by('pesanan.id_pesanan');
-    $this->db->order_by('id_pesanan', 'DESC');
-
-    return $this->db->get('pesanan')->result_array();
-  }
+  }  
 
   public function getPesananAlumni()
   {
@@ -97,7 +124,33 @@ class modelPesanan extends CI_Model
 
     return $this->db->get('pesanan')->result_array();
   }
+
+  public function totalPendapatanAlumni()
+  {
+    // Bergabung dengan tabel terkait
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+
+    // Menyaring berdasarkan ID alumni dari sesi
+    $this->db->where('alumni.id_alumni', $this->session->userdata('id_alumni'));
+    $this->db->where('pesanan.status_bayar', 'Lunas');
+    $this->db->where('pesanan.status_pesanan', 'Selesai');
+
+    // Menjumlahkan total pembayaran
+    $this->db->select_sum('pesanan.total_pembayaran', 'total_pembayaran');
+
+    // Mengambil data dari tabel pesanan
+    $query = $this->db->get('pesanan')->row_array();
+
+    // Memastikan hasil tidak null
+    if ($query && isset($query['total_pembayaran'])) {
+        return $query['total_pembayaran']; // Mengembalikan total pendapatan
+    } else {
+        return 0; // Jika tidak ada data, kembalikan 0
+    }
+  }
   
+  // Data Pesanan User
   public function getPesananUser()
   {
     $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
@@ -110,34 +163,12 @@ class modelPesanan extends CI_Model
 
     return $this->db->get('pesanan')->result_array();
   }
-  
-  public function getidPesanan($id_pesanan)
-  {
-    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
-    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
-    $this->db->join('user', 'pesanan.id_user = user.id_user');
-    $this->db->group_by('pesanan.id_pesanan');
     
-    $pesanan = $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
-
-    // Jika produk ditemukan, hitung harga diskon
-    if (!empty($pesanan)) {
-        $pesanan['harga_diskon'] = $this->hitungDiskon($pesanan['harga_produk'], $pesanan['diskon_produk']);
-    }
-
-      return $pesanan;
-  }
-  
-  public function getidPesananAdmin($id_pesanan)
+  // Proses
+  public function edit($id_pesanan, $dataPesanan)
   {
-    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
-    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
-    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
-    $this->db->join('user', 'pesanan.id_user = user.id_user');
-    $this->db->group_by('pesanan.id_pesanan');
-    
-    return $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
+    $this->db->where('id_pesanan', $id_pesanan);
+    $this->db->update('pesanan', $dataPesanan);
   }
 
   public function editStatusPembayaran()
@@ -175,33 +206,9 @@ class modelPesanan extends CI_Model
     $this->db->insert('pesanan', $dataPesanan);
   }
 
-  public function hapus($id_produk)
+  public function hapus($id_pesanan)
   {
-    $this->db->delete('produk', ['id_produk' => $id_produk]);
-  }
-
-  public function totalPendapatanAlumni()
-  {
-    // Bergabung dengan tabel terkait
-    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
-    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
-
-    // Menyaring berdasarkan ID alumni dari sesi
-    $this->db->where('alumni.id_alumni', $this->session->userdata('id_alumni'));
-
-    // Mengelompokkan berdasarkan ID pesanan
-    // $this->db->group_by('pesanan.id_pesanan');
-
-    // Menjumlahkan total pembayaran
-    $this->db->select_sum('pesanan.total_pembayaran');
-
-    // Mengambil data dari tabel pesanan
-    $query = $this->db->get('pesanan');
-
-    // Mengambil total pendapatan
-    $total_pendapatan = $query->row() ? $query->row()->total_pembayaran : 0;
-
-    return $total_pendapatan; // Mengembalikan total pendapatan
-  }
+    $this->db->delete('pesanan', ['id_pesanan' => $id_pesanan]);
+  }  
 
 }

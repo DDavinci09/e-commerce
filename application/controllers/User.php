@@ -11,6 +11,7 @@ class User extends CI_Controller
         $this->load->helper('text');
     }
 
+    // Halaman Landing Page/Home User
     public function index()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -27,6 +28,7 @@ class User extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // Halaman pembelian produk user
     public function shop()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -41,6 +43,7 @@ class User extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
 
+    // Halaman pembelian produk user berdasarkan jenis produk
     public function getJenisProduk($jenis_produk)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -55,6 +58,7 @@ class User extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // Halaman pembelian produk user berdasarkan kategori produk
     public function getKategoriProduk($id_kategori)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -70,6 +74,7 @@ class User extends CI_Controller
         $this->load->view('layoutHome/footer', $data);
     }
     
+    // Halaman detail produk user
     public function detail($id_produk)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -141,7 +146,8 @@ class User extends CI_Controller
             }
         }
     }
-        
+    
+    // Halaman Data Pesanan Produk yang dibeli oleh User
     public function DataPesanan()
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -151,43 +157,9 @@ class User extends CI_Controller
         $this->load->view('layoutHome/navbar', $data);
         $this->load->view('home/pesanan', $data);
         $this->load->view('layoutHome/footer', $data);
-    }
+    }  
 
-    public function TambahReview()
-    {
-        $id_produk = $this->input->post('id_produk');
-        
-        $this->modelReview->tambah($id_produk);
-        // Update rating produk setelah review ditambahkan
-        $this->modelProduk->editProdukRating($id_produk);
-        $this->session->set_flashdata('message', '<div class="alert alert-secondary" role="alert">
-        Review Anda Berhasil Ditambahkan!
-        </div>');
-        redirect('User/detail/'.$id_produk.'#review');
-    }
-
-    public function contact()
-    {   
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['contact'] = "Kontak";
-        
-        $this->load->view('layoutHome/header', $data);
-        $this->load->view('layoutHome/navbar', $data);
-        $this->load->view('home/contact', $data);
-        $this->load->view('layoutHome/footer', $data);
-    }
-    
-    public function aboutUs()
-    {   
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['aboutUs'] = "About us";
-        
-        $this->load->view('layoutHome/header', $data);
-        $this->load->view('layoutHome/navbar', $data);
-        $this->load->view('home/aboutUs', $data);
-        $this->load->view('layoutHome/footer', $data);
-    }
-
+    // Upload bukti pembayaran oleh user
     public function uploadBuktiBayar()
     {
         //konfigurasi upload file
@@ -215,5 +187,146 @@ class User extends CI_Controller
             redirect('User/DataPesanan');
         }
     }
-  
+
+    // Edit Data Pesanan oleh user
+    public function editPesanan()
+    {
+        // Validasi form input
+        $this->form_validation->set_rules('jml_pesanan', 'Jumlah Pesanan', 'required|numeric');
+        $this->form_validation->set_rules('pembayaran', 'Metode Pembayaran', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Kesalahan input data!</div>');
+            redirect('User/DataPesanan');  // Redirect kembali jika gagal
+        } else {
+            // Ambil data dari form modal
+            $id_pesanan = $this->input->post('id_pesanan', true);
+            $harga_pesanan = $this->input->post('harga_pesanan', true);
+            $jumlah_pesanan_baru = $this->input->post('jml_pesanan', true);
+            $pembayaran = $this->input->post('pembayaran', true);
+
+            // Ambil data pesanan lama
+            $pesanan_lama = $this->modelPesanan->getidPesanan($id_pesanan);
+            $jumlah_pesanan_lama = $pesanan_lama['jml_pesanan'];
+            
+            // Hitung total pembayaran baru
+            $total_harga = $jumlah_pesanan_baru * $harga_pesanan;
+
+            // Update data pesanan
+            $dataPesanan = [
+                'pembayaran' => $pembayaran,
+                'jml_pesanan' => $jumlah_pesanan_baru,
+                'total_pembayaran' => $total_harga
+            ];
+
+            // Mulai transaksi database
+            $this->db->trans_start();
+
+            // Update pesanan
+            $this->modelPesanan->edit($id_pesanan, $dataPesanan);
+
+            // Ambil data produk untuk update stok
+            $produk = $this->modelProduk->getidProduk($pesanan_lama['id_produk']);
+            $stok_sekarang = $produk['stok_produk'];
+
+            // Jika jumlah pesanan baru lebih kecil, tambahkan ke stok
+            if ($jumlah_pesanan_baru < $jumlah_pesanan_lama) {
+                $selisih = $jumlah_pesanan_lama - $jumlah_pesanan_baru;
+                $stok_baru = $stok_sekarang + $selisih;
+            } else {
+                // Jika lebih besar, kurangi stok
+                $selisih = $jumlah_pesanan_baru - $jumlah_pesanan_lama;
+                $stok_baru = $stok_sekarang - $selisih;
+            }
+
+            // Update stok produk
+            $this->modelProduk->editStok($stok_baru);
+
+            // Selesaikan transaksi
+            $this->db->trans_complete();
+
+            // Cek transaksi
+            if ($this->db->trans_status() === FALSE) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Pesanan Gagal Diperbarui!</div>');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-success">Data Pesanan Berhasil diperbarui!</div>');
+            }
+
+            // Redirect ke halaman data pesanan
+            redirect('User/DataPesanan');
+        }
+    }
+
+    // Hapus data pesanan oleh user
+    public function hapusPesanan($id_pesanan)
+    {
+        // Ambil data pesanan berdasarkan id_pesanan
+        $pesanan = $this->modelPesanan->getidPesanan($id_pesanan);
+
+        // Cek apakah data pesanan ditemukan
+        if ($pesanan) {
+            // Ambil data produk berdasarkan id_produk dari pesanan
+            $produk = $this->modelProduk->getidProduk($pesanan['id_produk']);
+
+            // Tambah stok produk sesuai jumlah pesanan yang dihapus
+            $stok_baru = $produk['stok_produk'] + $pesanan['jml_pesanan'];
+
+            // Update stok produk di database
+            $this->modelProduk->editStok2($produk['id_produk'], $stok_baru);
+
+            // Hapus data pesanan
+            $this->modelPesanan->hapus($id_pesanan);
+
+            // Set pesan flash jika berhasil dihapus
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Data Pesanan Berhasil Dihapus dan Stok Produk Ditambah!
+            </div>');
+        } else {
+            // Jika pesanan tidak ditemukan, tampilkan pesan error
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Pesanan tidak ditemukan!
+            </div>');
+        }
+
+        // Redirect ke halaman DataPesanan
+        redirect('User/DataPesanan');
+    }  
+
+    // Menambahkan data review oleh user
+    public function TambahReview()
+    {
+        $id_produk = $this->input->post('id_produk');
+        
+        $this->modelReview->tambah($id_produk);
+        // Update rating produk setelah review ditambahkan
+        $this->modelProduk->editProdukRating($id_produk);
+        $this->session->set_flashdata('message', '<div class="alert alert-secondary" role="alert">
+        Review Anda Berhasil Ditambahkan!
+        </div>');
+        redirect('User/detail/'.$id_produk.'#review');
+    }
+
+    // Halaman Contact
+    public function contact()
+    {   
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['contact'] = "Kontak";
+        
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/contact', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+    
+    // Halaman About Us
+    public function aboutUs()
+    {   
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['aboutUs'] = "About us";
+        
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/aboutUs', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
 }

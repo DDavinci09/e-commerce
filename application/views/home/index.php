@@ -521,7 +521,7 @@
                     <?php if(!$barudibeli) { ?>
                     <div class="col col-6 text-center mx-auto">
                         <div class="card">
-                            <h5>Belum Ada Produk yang dibeli!</h5>
+                            <h3>Belum Ada Produk yang dibeli!</h3>
                         </div>
                     </div>
                     <?php } ?>

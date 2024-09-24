@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         loginAdmin();
     }
     
+    // Halaman Dashboard Admin
     public function index()
     {
         $data['dashboard'] = "Selamat Datang";
@@ -35,6 +36,7 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
+    // Halaman Dat Alumni
     public function DataAlumni()
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
@@ -68,6 +70,7 @@ class Admin extends CI_Controller
         redirect('Admin/DataAlumni');
     }
 
+    // Halaman Data User
     public function DataUser()
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
@@ -80,6 +83,7 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
+    // Halaman Data Kategori
     public function DataKategori()
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
@@ -104,67 +108,6 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
 
-    public function DataProduk()
-    {
-        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
-        $data['produk'] = $this->modelProduk->getProdukAdmin();
-
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('produk/index', $data);
-        $this->load->view('layoutDashboard/footer', $data);
-    }
-    
-    public function DetailProduk($id_produk)
-    {
-        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
-        $data['produk'] = $this->modelProduk->getidProduk($id_produk);
-        $data['review'] =$this->modelReview->getProdukReview($id_produk);
-
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('produk/detail', $data);
-        $this->load->view('layoutDashboard/footer', $data);
-    }
-    
-    public function DataPesanan()
-    {
-        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
-        $data['pesanan'] = $this->modelPesanan->getPesananAdmin();
-
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('pesanan/index', $data);
-        $this->load->view('layoutDashboard/footer', $data);
-    }
-
-    public function DetailPesanan($id_pesanan)
-    {
-        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
-        $data['pesanan'] = $this->modelPesanan->getidPesanan($id_pesanan);
-
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('pesanan/detail', $data);
-        $this->load->view('layoutDashboard/footer', $data);
-    }
-
-    public function DataReview()
-    {
-        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
-        $data['review'] = $this->modelReview->getAll();
-
-        $this->load->view('layoutDashboard/header', $data);
-        $this->load->view('layoutDashboard/sidebar', $data);
-        $this->load->view('layoutDashboard/navbar', $data);
-        $this->load->view('review/index', $data);
-        $this->load->view('layoutDashboard/footer', $data);
-    }
-
     public function tambahKategori()
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
@@ -185,7 +128,6 @@ class Admin extends CI_Controller
             </div>');
             redirect('Admin/DataKategori');
         }
-
     }
 
     public function editKategori($id_kategori)
@@ -222,6 +164,57 @@ class Admin extends CI_Controller
         redirect('Admin/DataKategori');
     }
 
+    // Halaman Data Produk
+    public function DataProduk()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getProdukAdmin();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function DetailProduk($id_produk)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getidProduk($id_produk);
+        $data['review'] =$this->modelReview->getProdukReview($id_produk);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    // Halaman Data Pesanan
+    public function DataPesanan()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getPesananAdmin();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function DetailPesanan($id_pesanan)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->getidPesanan($id_pesanan);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
     public function editStatusPembayaran()
     {
         $this->modelPesanan->editStatusPembayaran();
@@ -229,5 +222,18 @@ class Admin extends CI_Controller
         Status Pembayaran Berhasil Diperbaharui!
         </div>');
         redirect('Admin/DataPesanan');
+    }
+
+    // Halaman Data Review
+    public function DataReview()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['review'] = $this->modelReview->getAll();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('review/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
     }
 }
