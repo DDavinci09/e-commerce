@@ -24,8 +24,17 @@
                                     <?= $produk['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
+                                <?php if (!$produk['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 450px; height: 350px;">
+                                <?php } else { ?>
                                 <img src="<?= base_url('./assets/upload/produk/') . $produk['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong" style="height: 300px;">
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $produk['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 450px; height: 350px;">
+                                <?php } ?>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -175,6 +184,14 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col col-3">
+                                                                        <h5>No Rekening</h5>
+                                                                    </div>
+                                                                    <div class="col col-9">
+                                                                        <h5>: <?= $produk['no_rekening'] ?></h5>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col col-3">
                                                                         <h5>Nama Toko</h5>
                                                                     </div>
                                                                     <div class="col">
@@ -235,6 +252,13 @@
                             </div>
                         </div>
                         <?php endforeach; ?>
+                        <?php if(!$review) { ?>
+                        <div class="col col-6 text-center mx-auto">
+                            <div class="card">
+                                <h5>Belum Ada Review yang dapat ditampilkan!</h5>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -88,6 +88,22 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="input-group">
+                                <input type="text" class="form-control" name="no_rekening" id="no_rekening"
+                                    value="<?= set_value('no_rekening'); ?>" placeholder="Nomor Rekening">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-credit-card"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?= form_error('no_rekening', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="input-group">
                                 <input type="text" class="form-control" name="nama_toko" id="nama_toko"
                                     value="<?= set_value('nama_toko'); ?>" placeholder="Nama Toko">
                                 <div class="input-group-append">

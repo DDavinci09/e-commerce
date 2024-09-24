@@ -26,6 +26,7 @@ class modelReview extends CI_Model
   {
     // Bergabung dengan tabel review, produk, dan user
     $this->db->join('produk', 'review.id_produk = produk.id_produk');
+    $this->db->join('pesanan', 'pesanan.id_produk = produk.id_produk');
     $this->db->join('user', 'review.id_user = user.id_user');    
     $this->db->where(['review.id_produk' => $id_produk]);
     $this->db->where(['review.id_user' => $this->session->userdata('id_user')]);

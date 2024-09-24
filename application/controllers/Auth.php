@@ -224,6 +224,7 @@ class Auth extends CI_Controller
                 'keterangan_toko' => $this->input->post('keterangan_toko', true),
                 'alamat_toko' => $this->input->post('alamat_toko', true),
                 'no_telp' => $this->input->post('no_telp', true),
+                'no_rekening' => $this->input->post('no_rekening', true),
                 'email' => $this->input->post('email', true),
                 'username' => htmlspecialchars($this->input->post('username', true)),
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
@@ -266,7 +267,7 @@ class Auth extends CI_Controller
 
             $this->db->insert('admin', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun Anda Berhasil Dibuat!</div>');
-            redirect('auth');
+            redirect('auth/loginAdmin');
         }
     }
 

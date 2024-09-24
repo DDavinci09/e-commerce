@@ -55,7 +55,7 @@
                                                 class="btn btn-sm btn-success m-1">Approved</a>
                                             <?php } else { ?>
                                             <a href="<?= base_url(); ?>Admin/editStatus/<?= $alm['id_alumni']; ?>/Approve"
-                                                class="btn btn-sm btn-danger m-1">Declined</a>
+                                                class="btn btn-sm btn-warning m-1">Pending</a>
                                             <?php } ?>
                                         </td>
                                         <td>

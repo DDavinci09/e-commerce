@@ -62,17 +62,18 @@
                                         <td><?= $p['nama_kategori'] ?></td>
                                         <td><?= $p['jenis_produk'] ?></td>
                                         <td><?= $p['stok_produk'] ?></td>
-                                        <td><?= $p['harga_produk'] ?></td>
-                                        <td><?= $p['diskon_produk'] ?></td>
+                                        <td>Rp.<?= number_format($p['harga_produk'], 0, ',', '.'); ?></td>
+                                        <td><?= $p['diskon_produk'] ?>%</td>
                                         <td>
-                                            <a href="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
-                                                data-toggle="lightbox">
+                                            <a>
                                                 <?php if (!$p['image']) { ?>
                                                 <img src="<?= base_url('assets/upload/produk/') ?>no_image.jpg"
-                                                    alt="Gambar Kosong" style="width: 100px;">
+                                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                                    alt="Gambar Kosong" style="width: 100px;" data-toggle="lightbox">
                                                 <?php } else { ?>
                                                 <img src="<?= base_url('assets/upload/produk/') ?><?= $p['image'] ?>"
-                                                    alt="Gambar Kosong" style="width: 100px;">
+                                                    href="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
+                                                    alt="Gambar Kosong" style="width: 100px;" data-toggle="lightbox">
                                                 <?php } ?>
                                             </a>
                                         </td>
@@ -80,10 +81,10 @@
                                             <?php if ($this->session->userdata('role') !== 'Admin') { ?>
                                             <a class="btn btn-info btn-sm"
                                                 href="<?= base_url() ?>Alumni/DetailProduk/<?= $p['id_produk'] ?>"><i
-                                                    class="fa fa-eye"></i></a>
+                                                    class="fa fa-eye"></i></a><br>
                                             <a class="btn btn-primary  btn-sm"
                                                 href="<?= base_url() ?>Alumni/editProduk/<?= $p['id_produk'] ?>"><i
-                                                    class="fa fa-edit"></i></a>
+                                                    class="fa fa-edit"></i></a><br>
                                             <a class="btn btn-danger  btn-sm" href="#"
                                                 onclick="deleteConfirmation('<?= base_url(); ?>Alumni/hapusProduk/<?= $p['id_produk']; ?>')"><i
                                                     class="fa fa-trash"></i></a>

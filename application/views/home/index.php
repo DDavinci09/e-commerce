@@ -67,7 +67,7 @@
     </section>
 
     <!-- Section 2 Jenis Produk -->
-    <section class="content mt-5">
+    <section class="content mt-4">
         <div class="container">
             <div class="card">
                 <div class="card-header bg-info text-center">
@@ -86,13 +86,12 @@
                                         <h4>BARANG</h4>
                                     </div>
                                     <div class="card-body text-justify">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique
-                                            tenetur
-                                            expedita
-                                            dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam
-                                            nam
-                                            inventore
-                                            repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                        <p>
+                                            Jenis Produk yang berupa jasa yang ditawarkan oleh Alumni seperti
+                                            Jasa
+                                            pembuatan aplikasi Website, Android, Desain Grafis serta jenis Jasa lainnya
+                                            yang ditawarkan oleh Alumni.
+                                        </p>
                                     </div>
                                 </div>
                             </a>
@@ -104,13 +103,12 @@
                                         <h4>JASA</h4>
                                     </div>
                                     <div class="card-body text-justify">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique
-                                            tenetur
-                                            expedita
-                                            dolores repellat voluptates rerum voluptatum dicta maiores adipisci, totam
-                                            nam
-                                            inventore
-                                            repellendus architecto tempora reiciendis voluptas omnis. Fugiat.</p>
+                                        <p>
+                                            Jenis Produk yang berupa barang fisik yang dijual oleh Alumni seperti
+                                            Hardware dan Software PC, Laptop dan Notebook, Smartphone dan HP serta jenis
+                                            Barang lainnya
+                                            yang dijual oleh Alumni.
+                                        </p>
                                     </div>
                                 </div>
                             </a>
@@ -124,7 +122,7 @@
 
 
     <!-- Kategori -->
-    <section class="content mt-5">
+    <section class="content mt-4">
         <div class="container">
             <div class="card" style="height: 350px;">
                 <div class="card-header text-center bg-primary">
@@ -152,7 +150,7 @@
                                                 $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
                                             ?>
                                             <?php foreach ($kat_group as $kat): ?>
-                                            <div class="col-md-3 mb-3">
+                                            <div class="col-md-3">
                                                 <div class="card h-100">
                                                     <div class="card-header bg-info text-center">
                                                         <a class="h5"
@@ -200,7 +198,7 @@
 
 
     <!-- Produk Unggulan -->
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header text-center bg-success">
                 <h2 class="text-center">Produk Terbaru</h2>
@@ -216,23 +214,32 @@
                                     <?= $tb['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
+                                <?php if (!$tb['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } else { ?>
                                 <img src="<?= base_url('./assets/upload/produk/') . $tb['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $tb['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <b><?= word_limiter($tb['nama_produk'], 3); ?></b>
+                                        <b><?= word_limiter($tb['nama_produk'], 2); ?></b>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <?= word_limiter($tb['nama_kategori'], 3); ?>
+                                        <?= word_limiter($tb['nama_kategori'], 2); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
                                         <?php if ($tb['diskon_produk'] > 0 ) { ?>
                                         <span class="text-danger">
-                                            Rp. <?= number_format($tb['harga_diskon'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($tb['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
                                         <span class="text-muted text-decoration-line-through">
                                             <s>
@@ -241,7 +248,7 @@
                                         </span>
                                         <?php } else { ?>
                                         <span>
-                                            Rp. <?= number_format($tb['harga_produk'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($tb['harga_produk'], 0, ',', '.'); ?>
                                         </span>
                                         <?php } ?>
                                     </div>
@@ -295,7 +302,7 @@
     <!-- End Produk Unggulan -->
 
     <!-- Produk Diskon -->
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header text-center bg-danger">
                 <h2 class="text-center">Produk Diskon</h2>
@@ -311,18 +318,32 @@
                                     <?= $dk['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
+                                <?php if (!$dk['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } else { ?>
                                 <img src="<?= base_url('./assets/upload/produk/') . $dk['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $dk['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <b><?= word_limiter($dk['nama_produk'], 3); ?></b>
+                                        <b><?= word_limiter($dk['nama_produk'], 2); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?= word_limiter($dk['nama_kategori'], 2); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
                                         <?php if ($dk['diskon_produk'] > 0 ) { ?>
                                         <span class="text-danger">
-                                            Rp. <?= number_format($dk['harga_diskon'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($dk['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
                                         <span class="text-muted text-decoration-line-through">
                                             <s>
@@ -331,7 +352,7 @@
                                         </span>
                                         <?php } else { ?>
                                         <span>
-                                            Rp. <?= number_format($dk['harga_produk'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($dk['harga_produk'], 0, ',', '.'); ?>
                                         </span>
                                         <?php } ?>
                                     </div>
@@ -385,7 +406,7 @@
     <!-- End Produk Unggulan -->
 
     <!-- Produk Teratas -->
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header text-center bg-warning">
                 <h2 class="text-center">Produk Teratas</h2>
@@ -401,18 +422,32 @@
                                     <?= $tr['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
+                                <?php if (!$tr['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } else { ?>
                                 <img src="<?= base_url('./assets/upload/produk/') . $tr['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $tr['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <b><?= word_limiter($tr['nama_produk'], 3); ?></b>
+                                        <b><?= word_limiter($tr['nama_produk'], 2); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?= word_limiter($tr['nama_kategori'], 2); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
                                         <?php if ($tr['diskon_produk'] > 0 ) { ?>
                                         <span class="text-danger">
-                                            Rp. <?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
                                         <span class="text-muted text-decoration-line-through">
                                             <s>
@@ -421,7 +456,7 @@
                                         </span>
                                         <?php } else { ?>
                                         <span>
-                                            Rp. <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
                                         </span>
                                         <?php } ?>
                                     </div>
@@ -476,43 +511,64 @@
 
     <?php if ($this->session->userdata('role') == 'User') { ?>
     <!-- Produk Baru dibeli -->
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header text-center bg-secondary">
                 <h2 class="text-center">Produk Baru Dibeli</h2>
             </div>
             <div class="card-cody">
                 <div class="row m-1">
-                    <?php foreach ($barudibeli as $tr) : ?>
+                    <?php if(!$barudibeli) { ?>
+                    <div class="col col-6 text-center mx-auto">
+                        <div class="card">
+                            <h5>Belum Ada Produk yang dibeli!</h5>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <?php foreach ($barudibeli as $db) : ?>
                     <div class="col-md-2 p-0">
                         <div class="card m-1 card-outline card-success">
                             <div class="card-body p-1">
-                                <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                <?php if ($db['diskon_produk'] > 0 ) { ?>
                                 <span class="discount-badge position-absolute">
-                                    <?= $tr['diskon_produk'] ?>%
+                                    <?= $db['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
-                                <img src="<?= base_url('./assets/upload/produk/') . $tr['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong">
+                                <?php if (!$db['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } else { ?>
+                                <img src="<?= base_url('./assets/upload/produk/') . $db['image']; ?>"
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $db['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 300px; height: 130px;">
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <b><?= word_limiter($tr['nama_produk'], 3); ?></b>
+                                        <b><?= word_limiter($db['nama_produk'], 2); ?></b>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-left">
-                                        <?php if ($tr['diskon_produk'] > 0 ) { ?>
+                                        <b><?= word_limiter($db['nama_kategori'], 2); ?></b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <?php if ($db['diskon_produk'] > 0 ) { ?>
                                         <span class="text-danger">
-                                            Rp. <?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($db['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
                                         <span class="text-muted text-decoration-line-through">
                                             <s>
-                                                <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                                <?= number_format($db['harga_produk'], 0, ',', '.'); ?>
                                             </s>
                                         </span>
                                         <?php } else { ?>
                                         <span>
-                                            Rp. <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
+                                            Rp.<?= number_format($db['harga_produk'], 0, ',', '.'); ?>
                                         </span>
                                         <?php } ?>
                                     </div>
@@ -520,13 +576,13 @@
                                 <div class="row">
                                     <div class="col text-left">
                                         <i class="fas fa-star fa-sm" style="color: orange;">
-                                            <?= $tr['rating_produk'] ?></i>
+                                            <?= $db['rating_produk'] ?></i>
                                     </div>
                                     <div class="col text-center">
-                                        | <?= $tr['stok_produk'] ?> |
+                                        | <?= $db['stok_produk'] ?> |
                                     </div>
                                     <div class="col text-right">
-                                        <?= $tr['jenis_produk'] ?>
+                                        <?= $db['jenis_produk'] ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -541,11 +597,11 @@
                                     <div class="col">
                                         <?php if ($this->session->userdata('role') == 'User') { ?>
                                         <a class="btn btn-success btn-sm btn-block"
-                                            href="<?= base_url() ?>User/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            href="<?= base_url() ?>User/Detail/<?= $db['id_produk'] ?>">Detail
                                             Produk</a>
                                         <?php } else { ?>
                                         <a class="btn btn-success btn-sm btn-block"
-                                            href="<?= base_url() ?>Home/Detail/<?= $tr['id_produk'] ?>">Detail
+                                            href="<?= base_url() ?>Home/Detail/<?= $db['id_produk'] ?>">Detail
                                             Produk</a>
                                         <?php } ?>
                                     </div>
@@ -567,7 +623,7 @@
     <?php } ?>
 
     <!-- Promo Spesial -->
-    <div class="container mt-5">
+    <div class="container mt-4">
         <div class="card">
             <div class="card-header bg-success">
                 <h2 class="text-center">Promo Spesial</h2>
@@ -602,7 +658,7 @@
 
 
     <!-- Review Pelanggan -->
-    <div class="container mt-5 p-1">
+    <div class="container mt-4 py-1">
         <div class="card">
             <div class="card-header bg-primary">
                 <h2 class="text-center">Review User</h2>
@@ -610,6 +666,13 @@
             <div class="card-body">
                 <div id="carouselTestimoni" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+                        <?php if(!$reviews) { ?>
+                        <div class="col col-6 text-center mx-auto">
+                            <div class="card">
+                                <h5>Belum Ada Review yang dapat ditampilkan!</h5>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <?php 
                     $active = true; 
                     $counter = 0; 

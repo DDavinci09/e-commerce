@@ -24,8 +24,17 @@
                                     <?= $pesanan['diskon_produk'] ?>%
                                 </span>
                                 <?php } ?>
+                                <?php if (!$pesanan['image']) { ?>
+                                <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 450px; height: 350px;">
+                                <?php } else { ?>
                                 <img src="<?= base_url('./assets/upload/produk/') . $pesanan['image']; ?>"
-                                    class="img-fluid rounded" alt="Gambar Kosong" style="height: 300px;">
+                                    href="<?= base_url('./assets/upload/produk/') ?><?= $pesanan['image']; ?>"
+                                    class="img-fluid rounded" data-toggle="lightbox"
+                                    style="width: 450px; height: 350px;">
+                                <?php } ?>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -248,6 +257,14 @@
                                                                     </div>
                                                                     <div class="col col-9">
                                                                         <h6>: <?= $pesanan['no_telp'] ?></h6>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col col-3">
+                                                                        <h6>No Rekening</h6>
+                                                                    </div>
+                                                                    <div class="col col-9">
+                                                                        <h6>: <?= $pesanan['no_rekening'] ?></h6>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">

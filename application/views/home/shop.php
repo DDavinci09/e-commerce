@@ -88,11 +88,20 @@
                                             <?= $p['diskon_produk'] ?>%
                                         </span>
                                         <?php } ?>
+                                        <?php if (!$p['image']) { ?>
+                                        <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                            href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                            class="img-fluid rounded" data-toggle="lightbox"
+                                            style="width: 300px; height: 130px;">
+                                        <?php } else { ?>
                                         <img src="<?= base_url('./assets/upload/produk/') . $p['image']; ?>"
-                                            class="img-fluid rounded" alt="Gambar Kosong">
+                                            href="<?= base_url('./assets/upload/produk/') ?><?= $p['image']; ?>"
+                                            class="img-fluid rounded" data-toggle="lightbox"
+                                            style="width: 300px; height: 130px;">
+                                        <?php } ?>
                                         <div class="row">
                                             <div class="col text-left">
-                                                <b><?= word_limiter($p['nama_produk'], 3); ?></b>
+                                                <b><?= word_limiter($p['nama_produk'], 2); ?></b>
                                             </div>
                                         </div>
                                         <div class="row">

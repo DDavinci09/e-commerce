@@ -24,7 +24,7 @@
     <!-- /.content-header -->
 
     <!-- Produk Unggulan -->
-    <div class="container">
+    <div class="container py-1">
         <div class="card">
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped" style="width:100%">
@@ -33,7 +33,8 @@
                             <th>No</th>
                             <th>Data Produk</th>
                             <th>Data Pesanan</th>
-                            <th>Status Pembayaran</th>
+                            <th>Bukti Bayar</th>
+                            <th>Status Bayar</th>
                             <th>Status Pesanan</th>
                             <th>Aski</th>
                         </tr>
@@ -50,8 +51,17 @@
                                             <?= $ps['diskon_produk'] ?>%
                                         </span>
                                         <?php } ?>
+                                        <?php if (!$ps['image']) { ?>
+                                        <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                            href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                            class="img-fluid rounded" data-toggle="lightbox"
+                                            style="width: 300px; height: 130px;">
+                                        <?php } else { ?>
                                         <img src="<?= base_url('./assets/upload/produk/') . $ps['image']; ?>"
-                                            class="img-fluid rounded" alt="Gambar Kosong">
+                                            href="<?= base_url('./assets/upload/produk/') ?><?= $ps['image']; ?>"
+                                            class="img-fluid rounded" data-toggle="lightbox"
+                                            style="width: 300px; height: 130px;">
+                                        <?php } ?>
                                         <div class="row">
                                             <div class="col text-left">
                                                 <b><?= word_limiter($ps['nama_produk'], 3); ?></b>
@@ -103,6 +113,20 @@
                                     </div>
                                 </div>
                             </td>
+                            <td style="width: 80px;">
+                                <?php if(!$ps['bukti_bayar']) { ?>
+                                <a class="btn btn-sm btn-info" data-toggle="modal"
+                                    data-target="#upload-bukti<?= $ps['id_pesanan'] ?>">
+                                    <i class="fas fa-upload"></i> Upload
+                                </a>
+                                <?php } else { ?>
+                                <a class="btn btn-sm btn-success"
+                                    href="<?= base_url('./assets/upload/bukti/') ?><?= $ps['bukti_bayar'] ?>"
+                                    target="_blank">
+                                    <i class="fas fa-sticky-note"></i> Bukti
+                                </a>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <a
                                     class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>">
@@ -119,7 +143,7 @@
                                     <?= $ps['status_pesanan'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <td style="width: 80px;">
                                 <?php if($ps['status_pesanan'] !== 'Selesai' ) { ?>
                                 <a class="btn btn-sm btn-info" data-toggle="modal"
                                     data-target="#status-bayar<?= $ps['id_pesanan'] ?>">
@@ -145,3 +169,46 @@
     </div>
 
 </div>
+
+<?php $i = 1; foreach ($pesanan as $ps): ?>
+<!-- Modal Upload Bukti Bayar -->
+<div class="modal fade" id="upload-bukti<?= $ps['id_pesanan'] ?>">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header  bg-info">
+                <h4 class="modal-title">Upload Bukti Pembayaran</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('User/uploadBuktiBayar'); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
+                                <div class="form-group">
+                                    <label for="bukti_bayar">Upload Bukti Pembayaran</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="bukti_bayar" name="bukti_bayar"
+                                            value="<?= set_value('bukti_bayar'); ?>" required>
+                                        <label class="custom-file-label" for="bukti_bayar">Pilih gambar produk</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<?php endforeach; ?>

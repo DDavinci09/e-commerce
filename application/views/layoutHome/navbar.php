@@ -33,18 +33,6 @@
             <!-- SEARCH FORM -->
             <form class="form-inline ml-0 ml-md-3">
                 <div class="input-group input-group-sm">
-                    <!-- Dropdown for Categories -->
-                    <div class="input-group-prepend">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-tags"></i> Kategori
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Category 1</a>
-                            <a class="dropdown-item" href="#">Category 2</a>
-                            <a class="dropdown-item" href="#">Category 3</a>
-                            <a class="dropdown-item" href="#">Category 4</a>
-                        </div>
-                    </div>
                     <!-- Search Input -->
                     <input class="form-control form-control-navbar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -128,18 +116,6 @@
             <!-- SEARCH FORM -->
             <form class="form-inline ml-0 ml-md-3">
                 <div class="input-group input-group-sm">
-                    <!-- Dropdown for Categories -->
-                    <div class="input-group-prepend">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-tags"></i> Kategori
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Category 1</a>
-                            <a class="dropdown-item" href="#">Category 2</a>
-                            <a class="dropdown-item" href="#">Category 3</a>
-                            <a class="dropdown-item" href="#">Category 4</a>
-                        </div>
-                    </div>
                     <!-- Search Input -->
                     <input class="form-control form-control-navbar" type="search" placeholder="Search"
                         aria-label="Search">

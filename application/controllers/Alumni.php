@@ -22,11 +22,23 @@ class Alumni extends CI_Controller
         $data['totalSelesai'] = count($this->modelPesanan->getAlumniSelesai());
         $data['totalDibatalkan'] = count($this->modelPesanan->getAlumniDibatalkan());
         $data['totalReview'] = count($this->modelReview->getAlumniReview());
+        $data['totalPendapatan'] = count($this->modelPesanan->totalPendapatanAlumni());
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
         $this->load->view('layoutDashboard/navbar', $data);
         $this->load->view('dashboard/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function MyProfile()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('dashboard/myprofile', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
 
@@ -197,24 +209,6 @@ class Alumni extends CI_Controller
             //Initiaze config upload
             $this->upload->initialize($config);
 
-            // Data Lama
-
-            // if ($this->upload->do_upload('image')) {
-            //     $file = './assets/upload/produk/' . $data['produk']['image'];
-
-            //     // Try to delete the existing file
-            //     if (is_readable($file) && unlink($file)) {
-            //         $this->modelProduk->editfile($this->upload->data());
-            //         redirect('Alumni/DataProduk');
-            //     } else {
-            //         $this->modelProduk->editfile($this->upload->data());
-            //         redirect('Alumni/DataProduk');
-            //     }
-            // } else {
-            //     $this->modelProduk->edit();
-            //     redirect('Alumni/DataProduk');
-            // }
-
             if ($this->upload->do_upload('image')) {
             // Jika upload file berhasil
             $file = './assets/upload/produk/' . $data['produk']['image'];
@@ -250,7 +244,7 @@ class Alumni extends CI_Controller
 
                 // Flash message untuk sukses edit tanpa upload file
                 $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
-                    Data Produk Berhasil Diperbaharui, tetapi file gagal diupload: '.$error.'
+                    Data Produk Berhasil Diperbaharui, tetapi file tidak ada!
                 </div>');
 
                 redirect('Alumni/DataProduk');

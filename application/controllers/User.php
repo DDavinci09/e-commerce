@@ -187,5 +187,33 @@ class User extends CI_Controller
         $this->load->view('home/aboutUs', $data);
         $this->load->view('layoutHome/footer', $data);
     }
+
+    public function uploadBuktiBayar()
+    {
+        //konfigurasi upload file
+        $config['upload_path'] = './assets/upload/bukti';
+        $config['allowed_types'] = 'jpg|jpeg|png|PNG|pdf';
+        $config['max_size'] = '10000';
+
+        $this->load->library('upload', $config);
+
+        //Initiaze config upload
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('bukti_bayar')) {
+            $this->modelPesanan->uploadBuktiBayar($this->upload->data());
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Upload Bukti Pembayaran Berhasil Ditambahkan!
+            </div>');
+            redirect('User/DataPesanan');
+        } else {
+            // Jika upload file gagal
+            $error = $this->upload->display_errors(); // Ambil pesan error dari upload
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Upload Bukti Pembayaran Gagal Ditambahkan!
+            </div>');
+            redirect('User/DataPesanan');
+        }
+    }
   
 }

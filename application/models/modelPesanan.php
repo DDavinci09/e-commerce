@@ -160,6 +160,16 @@ class modelPesanan extends CI_Model
     $this->db->update('pesanan', $data);
   }
 
+  public function uploadBuktibayar($file)
+  {
+    $data = [
+      "bukti_bayar" => $file['file_name']
+    ];
+
+    $this->db->where('id_pesanan', $this->input->post('id_pesanan'));
+    $this->db->update('pesanan', $data);
+  }
+
   public function tambah($dataPesanan)
   {
     $this->db->insert('pesanan', $dataPesanan);
@@ -168,6 +178,30 @@ class modelPesanan extends CI_Model
   public function hapus($id_produk)
   {
     $this->db->delete('produk', ['id_produk' => $id_produk]);
+  }
+
+  public function totalPendapatanAlumni()
+  {
+    // Bergabung dengan tabel terkait
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+
+    // Menyaring berdasarkan ID alumni dari sesi
+    $this->db->where('alumni.id_alumni', $this->session->userdata('id_alumni'));
+
+    // Mengelompokkan berdasarkan ID pesanan
+    // $this->db->group_by('pesanan.id_pesanan');
+
+    // Menjumlahkan total pembayaran
+    $this->db->select_sum('pesanan.total_pembayaran');
+
+    // Mengambil data dari tabel pesanan
+    $query = $this->db->get('pesanan');
+
+    // Mengambil total pendapatan
+    $total_pendapatan = $query->row() ? $query->row()->total_pembayaran : 0;
+
+    return $total_pendapatan; // Mengembalikan total pendapatan
   }
 
 }

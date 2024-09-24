@@ -48,7 +48,7 @@
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $kt['nama_kategori'] ?></td>
-                                        <td style="width: 650px;"><?= $kt['keterangan_kategori'] ?></td>
+                                        <td style="width: 550px;"><?= $kt['keterangan_kategori'] ?></td>
                                         <td>
                                             <?php if ($this->session->userdata('role') == 'Admin') { ?>
                                             <a class="btn btn-info btn-sm"

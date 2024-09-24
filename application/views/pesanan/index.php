@@ -30,11 +30,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Metode Pembayaran</th>
-                                        <th>Tanggal Pesanan</th>
-                                        <th>Harga Pesanan</th>
-                                        <th>Jumlah Pesanan</th>
-                                        <th>Total Pembayaran</th>
+                                        <th>Data Produk</th>
+                                        <th>Data Pesanan</th>
+                                        <th>Bukti Pembayaran</th>
                                         <th>Status Pembayaran</th>
                                         <th>Status Pesanan</th>
                                         <th>Aski</th>
@@ -44,11 +42,88 @@
                                     <?php $i = 1; foreach ($pesanan as $ps): ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
-                                        <td><?= $ps['pembayaran'] ?></td>
-                                        <td><?= $ps['tgl_pesanan'] ?></td>
-                                        <td><?= $ps['harga_pesanan'] ?></td>
-                                        <td><?= $ps['jml_pesanan'] ?></td>
-                                        <td><?= $ps['total_pembayaran'] ?></td>
+                                        <td>
+                                            <div class="card m-1" style="width: 200px;">
+                                                <div class="card-body p-1">
+                                                    <?php if ($ps['diskon_produk'] > 0 ) { ?>
+                                                    <span class="discount-badge position-absolute">
+                                                        <?= $ps['diskon_produk'] ?>%
+                                                    </span>
+                                                    <?php } ?>
+                                                    <?php if (!$ps['image']) { ?>
+                                                    <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                                        href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
+                                                        class="img-fluid rounded" data-toggle="lightbox"
+                                                        style="width: 300px; height: 130px;">
+                                                    <?php } else { ?>
+                                                    <img src="<?= base_url('./assets/upload/produk/') . $ps['image']; ?>"
+                                                        href="<?= base_url('./assets/upload/produk/') ?><?= $ps['image']; ?>"
+                                                        class="img-fluid rounded" data-toggle="lightbox"
+                                                        style="width: 300px; height: 130px;">
+                                                    <?php } ?>
+                                                    <div class="row">
+                                                        <div class="col text-left">
+                                                            <b><?= word_limiter($ps['nama_produk'], 3); ?></b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col text-left">
+                                                            <?= word_limiter($ps['nama_kategori'], 3); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col text-left">
+                                                            <i class="fas fa-star fa-sm" style="color: orange;">
+                                                                <?= $ps['rating_produk'] ?></i>
+                                                        </div>
+                                                        <div class="col text-center">
+                                                            | <?= $ps['stok_produk'] ?> |
+                                                        </div>
+                                                        <div class="col text-right">
+                                                            <?= $ps['jenis_produk'] ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <span>
+                                                                <i class="fas fa-map-marker fa-sm"
+                                                                    style="color: black;">
+                                                                </i> Nama Kota
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="card" style="width: 250px;">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <strong>Pembayaran:</strong> <?= $ps['pembayaran'] ?><br>
+                                                            <strong>Tanggal:</strong>
+                                                            <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?><br>
+                                                            <strong>Jumlah:</strong> <?= $ps['jml_pesanan'] ?><br>
+                                                            <strong>Harga:</strong> Rp.
+                                                            <?= number_format($ps['harga_pesanan'], 0, ',', '.'); ?><br>
+                                                            <strong>Total:</strong> Rp.
+                                                            <?= number_format($ps['total_pembayaran'], 0, ',', '.'); ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 80px;">
+                                            <?php if(!$ps['bukti_bayar']) { ?>
+                                            Belum Diupload
+                                            <?php } else { ?>
+                                            <a class="btn btn-sm btn-success"
+                                                href="<?= base_url('./assets/upload/bukti/') ?><?= $ps['bukti_bayar'] ?>"
+                                                target="_blank">
+                                                <i class="fas fa-sticky-note"></i> Bukti
+                                            </a>
+                                            <?php } ?>
+                                        </td>
                                         <td>
                                             <?php if ($user['role'] == 'Admin') { ?>
                                             <a class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>"

@@ -41,7 +41,7 @@
                                         <td><?= $rv['nama_user'] ?></td>
                                         <td><?= $rv['nama_produk'] ?></td>
                                         <td><?= $rv['nama_toko'] ?></td>
-                                        <td><?= $rv['isi_review'] ?></td>
+                                        <td>"<?= $rv['isi_review'] ?>"</td>
                                         <td>
                                             <i class="fas fa-star fa-md" style="color: orange;"></i>
                                             <?= $rv['rating_review'] ?>
