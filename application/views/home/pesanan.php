@@ -101,6 +101,9 @@
                                         <div class="row">
                                             <div class="col">
                                                 <strong>Pembayaran:</strong> <?= $ps['pembayaran'] ?><br>
+                                                <?php if($ps['pembayaran'] !== "COD") { ?>
+                                                <strong>No Rekening:</strong> <?= $ps['no_rekening'] ?><br>
+                                                <?php } ?>
                                                 <strong>Tanggal:</strong>
                                                 <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?><br>
                                                 <strong>Jumlah:</strong> <?= $ps['jml_pesanan'] ?><br>

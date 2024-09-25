@@ -86,10 +86,22 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <button type="submit" class="btn btn-success btn-block">Register</button>
                     </div>
                 </div>
             </form>
+            <div class="row mt-2">
+                <div class="col">
+                    <a class="btn btn-sm btn-primary btn-block" href="<?= base_url() ?>Home"><i class="fas fa-home"></i>
+                        Home</a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-info btn-sm btn-block" href="<?= base_url(); ?>Auth"><i
+                            class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+                </div>
+            </div>
         </div>
         <!-- /.card -->
     </div>

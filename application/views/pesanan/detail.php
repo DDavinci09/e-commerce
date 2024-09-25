@@ -12,7 +12,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content py-1">
         <div class="container-fluid">
             <div class="card">
                 <div class="row m-1">

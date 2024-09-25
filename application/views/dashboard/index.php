@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Dashboard <?= $user['nama']; ?></h1>
+                    <h1>Dashboard <?= $user['role']; ?></h1>
                 </div>
             </div>
             <?php if ($this->session->flashdata('message')): ?>

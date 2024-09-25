@@ -62,24 +62,15 @@
             </li>
 
             <!-- User Dropdown Login -->
-            <li class="nav-item dropdown mt-1">
-                <a class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Login
+            <li class="nav-item mx-1 mt-1">
+                <a class="btn btn-success btn-sm" href="<?= base_url(); ?>Auth"><i class="fas fa-sign-in-alt"></i> Login
                 </a>
-                <div class="dropdown-menu">
-                    <a href="<?= base_url() ?>Auth/loginUser" class="dropdown-item">
-                        <i class="fas fa-user mr-2"></i> Login User
-                    </a>
-                    <a href="<?= base_url() ?>Auth/loginAlumni" class="dropdown-item">
-                        <i class="fas fa-user mr-2"></i> Login Alumni
-                    </a>
-                    <a href="<?= base_url() ?>Auth/loginAdmin" class="dropdown-item">
-                        <i class="fas fa-user mr-2"></i> Login Admin
-                    </a>
-                </div>
             </li>
+
             <!-- User Dropdown Register -->
-            <li class="nav-item dropdown ml-2 mt-1">
-                <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#">Register
+            <li class="nav-item dropdown mx-2 mt-1">
+                <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#"><i
+                        class="fas fa-registered"></i> Register
                 </a>
                 <div class="dropdown-menu">
                     <a href="<?= base_url() ?>Auth/registerUser" class="dropdown-item">
@@ -88,9 +79,9 @@
                     <a href="<?= base_url() ?>Auth/registerAlumni" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i>Alumni
                     </a>
-                    <a href="<?= base_url() ?>Auth/registerAdmin" class="dropdown-item">
+                    <!-- <a href="<?= base_url() ?>Auth/registerAdmin" class="dropdown-item">
                         <i class="fas fa-user mr-2"></i>Admin
-                    </a>
+                    </a> -->
                 </div>
             </li>
             <?php } else { ?>

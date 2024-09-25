@@ -232,7 +232,7 @@
     <!-- /.content -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content py-1">
         <div class="container-fluid">
             <div class="card" id="review">
                 <div class="card-header bg-secondary">

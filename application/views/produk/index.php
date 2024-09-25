@@ -79,10 +79,10 @@
                                         </td>
                                         <td>
                                             <?php if ($this->session->userdata('role') !== 'Admin') { ?>
-                                            <a class="btn btn-info btn-sm"
+                                            <a class="btn btn-info btn-sm mb-1"
                                                 href="<?= base_url() ?>Alumni/DetailProduk/<?= $p['id_produk'] ?>"><i
                                                     class="fa fa-eye"></i></a><br>
-                                            <a class="btn btn-primary  btn-sm"
+                                            <a class="btn btn-primary  btn-sm mb-1"
                                                 href="<?= base_url() ?>Alumni/editProduk/<?= $p['id_produk'] ?>"><i
                                                     class="fa fa-edit"></i></a><br>
                                             <a class="btn btn-danger  btn-sm" href="#"
