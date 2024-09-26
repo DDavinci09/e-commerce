@@ -42,6 +42,24 @@ class User extends CI_Controller
         $this->load->view('home/shop', $data);
         $this->load->view('layoutHome/footer', $data);
     }
+    
+    // Halaman pembelian produk user
+    public function Pencarian()
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        // Ambil kata kunci dari input form (GET)
+        $keyword = $this->input->get('keyword');
+        
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['produk'] = $this->modelProduk->cariProduk($keyword);
+        $data['totalproduk'] = count($data['produk']);
+        $data['title'] = "Hasil Pencarian : ". $keyword;
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }    
 
     // Halaman pembelian produk user berdasarkan jenis produk
     public function getJenisProduk($jenis_produk)
@@ -80,6 +98,8 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);
         $data['review'] =$this->modelReview->getProdukReview($id_produk);
+         // Panggil fungsi di model untuk cek apakah user memiliki pesanan produk tersebut
+        $data['bisaReview'] = $this->modelPesanan->cekPesanan($id_produk);
         $data['reviewuser'] =$this->modelReview->getReviewUser($id_produk);
 
         $this->form_validation->set_rules('jml_pesanan', 'Jumlah Pesanan', 'required');

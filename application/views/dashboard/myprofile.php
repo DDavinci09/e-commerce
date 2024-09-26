@@ -13,7 +13,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="card card-primary">
                 <div class="card-body">
                     <div class="row">

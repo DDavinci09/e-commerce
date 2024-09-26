@@ -13,7 +13,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="card">
                 <div class="row m-1">
                     <div class="col-lg-5">
@@ -233,7 +233,7 @@
 
     <!-- Main content -->
     <section class="content py-1">
-        <div class="container-fluid">
+        <div class="container">
             <div class="card" id="review">
                 <div class="card-header bg-secondary">
                     <h3>Review Produk</h3>

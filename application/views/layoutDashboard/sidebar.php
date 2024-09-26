@@ -109,7 +109,7 @@
                 <?php } ?>
                 <li class="nav-header">Logout</li>
                 <li class="nav-item">
-                    <a href="<?= base_url(); ?>Auth/logout" class="nav-link">
+                    <a data-toggle="modal" data-target="#logoutModal" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>

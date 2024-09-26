@@ -20,7 +20,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <!-- Default box -->
@@ -79,6 +79,14 @@
                                                         </div>
                                                         <div class="col text-right">
                                                             <?= $ps['jenis_produk'] ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <span>
+                                                                <i class="fas fa-store fa-sm" style="color: brown;">
+                                                                </i> <?= $ps['nama_toko'] ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="row">

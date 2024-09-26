@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <h1>Dashboard <?= $user['role']; ?></h1>
@@ -73,7 +73,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="card">
                 <div class="card-body">
                     <div class="row">

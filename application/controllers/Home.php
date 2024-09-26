@@ -39,6 +39,22 @@ class Home extends CI_Controller
         $this->load->view('home/shop', $data);
         $this->load->view('layoutHome/footer', $data);
     }
+
+    public function Pencarian()
+    {
+        // Ambil kata kunci dari input form (GET)
+        $keyword = $this->input->get('keyword');
+        
+        $data['kategori'] = $this->modelKategori->getAll();
+        $data['produk'] = $this->modelProduk->cariProduk($keyword);
+        $data['totalproduk'] = count($data['produk']);
+        $data['title'] = "Hasil Pencarian : ". $keyword;
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/shop', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }    
     
     public function getJenisProduk($jenis_produk)
     {        

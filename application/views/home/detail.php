@@ -282,12 +282,14 @@
                         <h3>Review Produk</h3>
                     </div>
                     <div class="col text-right">
+                        <?php if ($bisaReview) { ?>
                         <?php if ($this->session->userdata('role') == 'User') { ?>
                         <?php if ($reviewuser['id_user'] !== $user['id_user']) { ?>
                         <a class="btn btn-sm btn-secondary" data-toggle="modal"
                             data-target="#status-bayar<?= $produk['id_produk'] ?>">
                             <i class="fas fa-sticky-note"></i> Tambah Review
                         </a>
+                        <?php } ?>
                         <?php } ?>
                         <?php } ?>
                     </div>

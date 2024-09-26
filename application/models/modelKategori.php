@@ -16,6 +16,7 @@ class modelKategori extends CI_Model
     $this->db->from('kategori');
     $this->db->join('produk', 'produk.id_kategori = kategori.id_kategori', 'left'); // Menggunakan LEFT JOIN
     $this->db->group_by('kategori.id_kategori'); // Mengelompokkan berdasarkan kategori
+    $this->db->order_by('id_kategori', 'DESC');
     $query = $this->db->get();
     return $query->result_array(); // Mengembalikan hasil sebagai array
   }
@@ -37,6 +38,7 @@ class modelKategori extends CI_Model
       
       // Mengelompokkan hasil berdasarkan id_kategori
       $this->db->group_by('kategori.id_kategori'); 
+      $this->db->order_by('id_kategori', 'DESC');
       
       // Menjalankan query
       $query = $this->db->get();

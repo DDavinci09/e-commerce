@@ -23,6 +23,37 @@ class modelProduk extends CI_Model
 
       return $produkAll;
   }
+  
+  public function cariProduk($keyword = null)
+  {
+    // Join dengan tabel kategori dan alumni
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    
+    // Filter hanya alumni dengan status 'Approve'
+    $this->db->where('alumni.status', 'Approve');
+    
+    // Jika ada keyword, lakukan pencarian dengan LIKE
+    if ($keyword) {
+        $this->db->like('produk.nama_produk', $keyword);
+        $this->db->or_like('produk.keterangan_produk', $keyword);
+        $this->db->or_like('kategori.nama_kategori', $keyword);
+    }
+
+    // Urutkan berdasarkan ID produk secara menurun
+    $this->db->order_by('produk.id_produk', 'DESC');
+    
+    // Ambil data produk dari database
+    $query = $this->db->get('produk');
+    $produkAll = $query->result_array();
+
+    // Hitung diskon untuk setiap produk
+    foreach ($produkAll as &$produk) {
+        $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
+    }
+
+    return $produkAll;
+  }
     
   public function getProdukterbaru($limit = 6)
   {

@@ -13,7 +13,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <!-- Form untuk tambah data kategori -->
@@ -38,9 +38,9 @@
                                                 placeholder="Masukkan kategori produk">
                                                 <option value="">-- Pilih kategori produk --</option>
                                                 <?php foreach ($kategori as $kt): ?>
-                                                    <option value="<?= $kt['id_kategori'] ?>">
-                                                        <?= $kt['nama_kategori'] ?>
-                                                    </option>
+                                                <option value="<?= $kt['id_kategori'] ?>">
+                                                    <?= $kt['nama_kategori'] ?>
+                                                </option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <?= form_error('id_kategori', '<small class="text-danger">', '</small>'); ?>

@@ -262,4 +262,14 @@ class modelPesanan extends CI_Model
     return $this->db->get('pesanan')->result_array();        
 }
 
+public function cekPesanan($id_produk)
+{
+    $this->db->where('id_user', $this->session->userdata('id_user'));
+    $this->db->where('id_produk', $id_produk);
+    $query = $this->db->get('pesanan');
+
+    // Jika ada data pesanan yang cocok, return true
+    return $query->num_rows() > 0;
+}
+
 }

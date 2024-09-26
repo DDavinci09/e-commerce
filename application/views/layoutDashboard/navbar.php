@@ -96,7 +96,7 @@
                     <i class="fas fa-calendar-check mr-2"></i> Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="<?= base_url(); ?>Auth/logout" class="dropdown-item">
+                <a data-toggle="modal" data-target="#logoutModal" class="dropdown-item">
                     <i class="fas fa-sign-out-alt mr-2"></i> Logout
                 </a>
             </div>
