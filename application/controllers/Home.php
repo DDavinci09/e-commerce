@@ -7,6 +7,7 @@ class Home extends CI_Controller
     {
         parent::__construct();
         // Panggil fungsi check login
+        Home();
         $this->load->helper('text');
     }
     

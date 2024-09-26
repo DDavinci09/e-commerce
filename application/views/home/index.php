@@ -241,7 +241,7 @@
                                         <span class="text-danger">
                                             Rp.<?= number_format($tb['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
-                                        <span class="text-muted text-decoration-line-through">
+                                        <span class="text-muted text-decoration-line-through small">
                                             <s>
                                                 <?= number_format($tb['harga_produk'], 0, ',', '.'); ?>
                                             </s>
@@ -269,7 +269,7 @@
                                     <div class="col">
                                         <span>
                                             <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                            </i> Nama Kota
+                                            </i> <?= $tb['alamat_toko'] ?>
                                         </span>
                                     </div>
                                 </div>
@@ -345,7 +345,7 @@
                                         <span class="text-danger">
                                             Rp.<?= number_format($dk['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
-                                        <span class="text-muted text-decoration-line-through">
+                                        <span class="text-muted text-decoration-line-through small">
                                             <s>
                                                 <?= number_format($dk['harga_produk'], 0, ',', '.'); ?>
                                             </s>
@@ -373,7 +373,7 @@
                                     <div class="col">
                                         <span>
                                             <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                            </i> Nama Kota
+                                            </i> <?= $dk['alamat_toko'] ?>
                                         </span>
                                     </div>
                                 </div>
@@ -449,7 +449,7 @@
                                         <span class="text-danger">
                                             Rp.<?= number_format($tr['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
-                                        <span class="text-muted text-decoration-line-through">
+                                        <span class="text-muted text-decoration-line-through small">
                                             <s>
                                                 <?= number_format($tr['harga_produk'], 0, ',', '.'); ?>
                                             </s>
@@ -477,7 +477,7 @@
                                     <div class="col">
                                         <span>
                                             <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                            </i> Nama Kota
+                                            </i> <?= $tr['alamat_toko'] ?>
                                         </span>
                                     </div>
                                 </div>
@@ -561,7 +561,7 @@
                                         <span class="text-danger">
                                             Rp.<?= number_format($db['harga_diskon'], 0, ',', '.'); ?>
                                         </span> |
-                                        <span class="text-muted text-decoration-line-through">
+                                        <span class="text-muted text-decoration-line-through small">
                                             <s>
                                                 <?= number_format($db['harga_produk'], 0, ',', '.'); ?>
                                             </s>
@@ -589,7 +589,7 @@
                                     <div class="col">
                                         <span>
                                             <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                            </i> Nama Kota
+                                            </i> <?= $db['alamat_toko'] ?>
                                         </span>
                                     </div>
                                 </div>

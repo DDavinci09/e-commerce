@@ -115,7 +115,7 @@
                                                 <span class="text-danger">
                                                     Rp.<?= number_format($p['harga_diskon'], 0, ',', '.'); ?>
                                                 </span> |
-                                                <span class="text-muted text-decoration-line-through">
+                                                <span class="text-muted text-decoration-line-through small">
                                                     <s>
                                                         <?= number_format($p['harga_produk'], 0, ',', '.'); ?>
                                                     </s>
@@ -143,7 +143,7 @@
                                             <div class="col">
                                                 <span>
                                                     <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                                    </i> Nama Kota
+                                                    </i> <?= $p['alamat_toko'] ?>
                                                 </span>
                                             </div>
                                         </div>

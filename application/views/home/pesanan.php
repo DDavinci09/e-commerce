@@ -88,7 +88,7 @@
                                             <div class="col">
                                                 <span>
                                                     <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                                    </i> Nama Kota
+                                                    </i> <?= $ps['alamat_toko'] ?>
                                                 </span>
                                             </div>
                                         </div>

@@ -39,6 +39,7 @@ class modelPesanan extends CI_Model
     $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
     $this->db->join('user', 'pesanan.id_user = user.id_user');
     $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
     
     return $this->db->get_where('pesanan', ['id_pesanan' => $id_pesanan])->row_array();
   }
@@ -209,6 +210,56 @@ class modelPesanan extends CI_Model
   public function hapus($id_pesanan)
   {
     $this->db->delete('pesanan', ['id_pesanan' => $id_pesanan]);
-  }  
+  }
+
+  public function telahBayar() 
+  {
+    // Melakukan join dengan tabel terkait
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    
+    // Memastikan bukti pembayaran tidak kosong
+    $this->db->where('bukti_bayar IS NOT NULL');
+    $this->db->where('bukti_bayar !=', ''); 
+    
+    // Memastikan status bayar adalah 'Belum bayar'
+    $this->db->where('status_bayar', 'Belum bayar'); 
+    
+    // Mengelompokkan hasil berdasarkan ID pesanan
+    $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('id_pesanan', 'DESC');
+    
+    // Mengambil data dari tabel pesanan
+    $query = $this->db->get('pesanan'); // Pastikan untuk menyebutkan tabel 'pesanan'
+    
+    return $query->result_array(); // Mengembalikan hasil dalam bentuk array
+  }
+  
+  public function menungguProses() 
+{
+    $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+    $this->db->join('user', 'pesanan.id_user = user.id_user');
+    
+    // Memastikan alumni sesuai dengan session id_alumni
+    $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+
+    // Memastikan bukti pembayaran tidak kosong
+    $this->db->where('pesanan.bukti_bayar IS NOT NULL'); 
+    
+    // Memastikan status bayar adalah 'Lunas'
+    $this->db->where('pesanan.status_bayar', 'Lunas'); 
+    
+    // Memastikan status pesanan bukan 'Diproses'
+    $this->db->where('pesanan.status_pesanan', 'Diproses');
+
+    $this->db->group_by('pesanan.id_pesanan');
+    $this->db->order_by('pesanan.id_pesanan', 'DESC');
+
+    return $this->db->get('pesanan')->result_array();        
+}
 
 }

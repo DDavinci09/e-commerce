@@ -7,6 +7,59 @@
                 <div class="col-sm-6">
                     <h1>Dashboard <?= $user['role']; ?></h1>
                 </div>
+                <div class="col-sm-6 text-right text-light">
+                    <?php if ($this->session->userdata('role') == 'Admin') { ?>
+                    <a class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i> <span><?= count($pesanan_pending) ?></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+                        <span class="dropdown-item dropdown-header">Menunggu Verifikasi Pembayaran
+                            (<?= count($pesanan_pending) ?>)</span>
+                        <div class="dropdown-divider"></div>
+
+                        <?php if (!empty($pesanan_pending)): ?>
+                        <?php $i=1; foreach ($pesanan_pending as $pesanan): ?>
+                        <a href="#" class="dropdown-item">
+                            <?= $i++; ?>. <?= $pesanan['nama_user'] ?> |
+                            <?= $pesanan['total_pembayaran'] ?> |
+                            <?= date('d M Y', strtotime($pesanan['tgl_pesanan'])) ?>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <a href="#" class="dropdown-item text-center">Tidak ada notifikasi</a>
+                        <?php endif; ?>
+
+                        <a href="<?= base_url() ?>Admin/PesananStatusBayar" class="dropdown-item dropdown-footer">Lihat
+                            Semua . . . </a>
+                    </div>
+                    <?php } else { ?>
+                    <a class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i> <span><?= count($menungguProses) ?></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+                        <span class="dropdown-item dropdown-header">Menunggu Proses Pesanan
+                            (<?= count($menungguProses) ?>)</span>
+                        <div class="dropdown-divider"></div>
+
+                        <?php if (!empty($menungguProses)): ?>
+                        <?php $i=1; foreach ($menungguProses as $menunggu): ?>
+                        <a href="#" class="dropdown-item">
+                            <?= $i++; ?>. <?= $menunggu['nama_user'] ?> |
+                            <?= $menunggu['status_pesanan'] ?> |
+                            <?= date('d M Y', strtotime($menunggu['tgl_pesanan'])) ?>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <a href="#" class="dropdown-item text-center">Tidak ada notifikasi</a>
+                        <?php endif; ?>
+
+                        <a href="<?= base_url() ?>Alumni/PesananDiproses" class="dropdown-item dropdown-footer">Lihat
+                            Semua . . .</a>
+                    </div>
+                    <?php } ?>
+                </div>
             </div>
             <?php if ($this->session->flashdata('message')): ?>
             <div class="row">

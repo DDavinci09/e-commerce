@@ -6,15 +6,21 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Panggil fungsi check login
+        // Panggil fungsi check login\
+        $this->load_pesanan();
         loginAdmin();
+    }
+
+    private function load_pesanan()
+    {
+        
     }
     
     // Halaman Dashboard Admin
     public function index()
     {
-        $data['dashboard'] = "Selamat Datang";
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan_pending'] = $this->modelPesanan->telahBayar();
         $data['totalUser'] = count($this->modelUser->getAll());
         $data['totalAlumni'] = count($this->modelAlumni->getAll());
         $data['totalApprove'] = count($this->modelAlumni->getApprove());
@@ -177,6 +183,18 @@ class Admin extends CI_Controller
         $this->load->view('layoutDashboard/footer', $data);
     }
     
+    public function getProdukKategori($id_kategori)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
     public function DetailProduk($id_produk)
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
@@ -195,6 +213,18 @@ class Admin extends CI_Controller
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
         $data['pesanan'] = $this->modelPesanan->getPesananAdmin();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function PesananStatusBayar()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->telahBayar();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);

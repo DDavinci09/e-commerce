@@ -37,6 +37,7 @@
                                         <th>No</th>
                                         <th>Nama Kategori</th>
                                         <th>Keteragan</th>
+                                        <th>Produk</th>
                                         <th>Aski</th>
                                     </tr>
                                 </thead>
@@ -48,7 +49,18 @@
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $kt['nama_kategori'] ?></td>
-                                        <td style="width: 550px;"><?= $kt['keterangan_kategori'] ?></td>
+                                        <td style="width: 500px;"><?= $kt['keterangan_kategori'] ?></td>
+                                        <td>
+                                            <?php if ($this->session->userdata('role') == 'Admin') { ?>
+                                            <a class="btn btn-sm btn-success"
+                                                href="<?= base_url() ?>Admin/getProdukKategori/<?= $kt['id_kategori'] ?>"><i
+                                                    class="fas fa-box fa-sm"></i> <?= $kt['total_produk'] ?></a>
+                                            <?php } else { ?>
+                                            <a class="btn btn-sm btn-success"
+                                                href="<?= base_url() ?>Alumni/getProdukKategori/<?= $kt['id_kategori'] ?>"><i
+                                                    class="fas fa-box fa-sm"></i> <?= $kt['total_produk'] ?></a>
+                                            <?php } ?>
+                                        </td>
                                         <td>
                                             <?php if ($this->session->userdata('role') == 'Admin') { ?>
                                             <a class="btn btn-info btn-sm"

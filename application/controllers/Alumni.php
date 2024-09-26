@@ -13,8 +13,8 @@ class Alumni extends CI_Controller
     // Halaman Dashboard ALumni
     public function index()
     {
-        $data['dashboard'] = "Selamat Datang";
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['menungguProses'] = $this->modelPesanan->menungguProses();
         $data['totalProduk'] = count($this->modelProduk->getProdukAlumni());
         $data['totalPesanan'] = count($this->modelPesanan->getPesananAlumni());
         $data['totalBelumBayar'] = count($this->modelPesanan->getAlumniBelumBayar());
@@ -48,7 +48,7 @@ class Alumni extends CI_Controller
     public function DataKategori()
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
-        $data['kategori'] = $this->modelKategori->getAll();
+        $data['kategori'] = $this->modelKategori->getAllKategoriAlumni();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
@@ -74,6 +74,18 @@ class Alumni extends CI_Controller
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
         $data['produk'] = $this->modelProduk->getProdukAlumni();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function getProdukKategori($id_kategori)
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['produk'] = $this->modelProduk->getKategoriProdukAlumni($id_kategori);
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
@@ -246,6 +258,18 @@ class Alumni extends CI_Controller
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
         $data['pesanan'] = $this->modelPesanan->getPesananAlumni();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function PesananDiproses()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->menungguProses();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);

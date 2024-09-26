@@ -17,7 +17,6 @@ class Auth extends CI_Controller
         } else {
             $this->_Auth();
         }
-
     }
     
     private function _Auth() 
@@ -51,12 +50,28 @@ class Auth extends CI_Controller
 
             // Cek password
             if (password_verify($password, $user['password'])) {
+                if ($role == 'User') {
+                    $data = [
+                        'id_user' => $user['id_user'],
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ];
+                } else if ($role == 'Alumni') {
+                    $data = [
+                        'id_alumni' => $user['id_alumni'],
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ];
+                } else {
+                    $data = [
+                        'id_admin' => $user['id_admin'],
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ];
+                }
+                
                 // Jika password benar, set session
-                $this->session->set_userdata([
-                    'username' => $user['username'],
-                    'role' => $role,
-                    'logged_in' => true
-                ]);
+                $this->session->set_userdata($data);
 
                 // Redirect sesuai role
                 if ($role == 'Admin') {

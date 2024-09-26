@@ -32,6 +32,8 @@
                                         <th>No</th>
                                         <th>Data Produk</th>
                                         <th>Data Pesanan</th>
+                                        <th>Bukti Pembayaran</th>
+                                        <th>Status Pembayaran</th>
                                         <th>Status Pesanan</th>
                                         <th>Aski</th>
                                     </tr>
@@ -86,7 +88,7 @@
                                                             <span>
                                                                 <i class="fas fa-map-marker fa-sm"
                                                                     style="color: black;">
-                                                                </i> <?= $ps['alamat_toko'] ?>
+                                                                </i> Nama Kota
                                                             </span>
                                                         </div>
                                                     </div>
@@ -94,131 +96,69 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="card" style="width: 320px;">
-                                                <div class="card-body m-0">
+                                            <div class="card" style="width: 250px;">
+                                                <div class="card-body">
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Pembeli</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            : <?= $ps['nama_user'] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Pembayaran</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            : <?= $ps['pembayaran'] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Tanggal</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            : <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Jumlah</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            : <?= $ps['jml_pesanan'] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Harga</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            :
-                                                            Rp.<?= number_format($ps['harga_pesanan'], 0, ',', '.'); ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col col-sm-5">
-                                                            <b>Total</b>
-                                                        </div>
-                                                        <div class="col col-sm-5">
-                                                            :
-                                                            Rp.<?= number_format($ps['total_pembayaran'], 0, ',', '.'); ?>
+                                                        <div class="col">
+                                                            <strong>Pembeli:</strong> <?= $ps['nama_user'] ?><br>
+                                                            <strong>Pembayaran:</strong> <?= $ps['pembayaran'] ?><br>
+                                                            <strong>Tanggal:</strong>
+                                                            <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?><br>
+                                                            <strong>Jumlah:</strong> <?= $ps['jml_pesanan'] ?><br>
+                                                            <strong>Harga:</strong> Rp.
+                                                            <?= number_format($ps['harga_pesanan'], 0, ',', '.'); ?><br>
+                                                            <strong>Total:</strong> Rp.
+                                                            <?= number_format($ps['total_pembayaran'], 0, ',', '.'); ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="card" style="width: 310px;">
-                                                <div class="card-body">
-                                                    <div class="row my-2">
-                                                        <div class="col col-md-5">
-                                                            <b>Bukti Bayar</b>
-                                                        </div>
-                                                        <div class="col col-md-7">
-                                                            :
-                                                            <?php if(!$ps['bukti_bayar']) { ?>
-                                                            Menunggu Upload
-                                                            <?php } else { ?>
-                                                            <a class="btn btn-sm btn-success"
-                                                                href="<?= base_url('./assets/upload/bukti/') ?><?= $ps['bukti_bayar'] ?>"
-                                                                target="_blank">
-                                                                <i class="fas fa-sticky-note"></i> Bukti
-                                                            </a>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row my-2">
-                                                        <div class="col col-md-5">
-                                                            <b>Status Bayar</b>
-                                                        </div>
-                                                        <div class="col col-md-7">
-                                                            :
-                                                            <?php if ($user['role'] == 'Admin') { ?>
-                                                            <a class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>"
-                                                                data-toggle="modal"
-                                                                data-target="#status-bayar<?= $ps['id_pesanan'] ?>">
-                                                                <i
-                                                                    class="fas <?= $ps['status_bayar'] == 'Belum Bayar' ? 'fa-times-circle' : 'fa-check-circle' ?>"></i>
-                                                                <?= $ps['status_bayar'] ?>
-                                                            </a>
-                                                            <?php } else { ?>
-                                                            <a
-                                                                class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>">
-                                                                <i
-                                                                    class="fas <?= $ps['status_bayar'] == 'Belum Bayar' ? 'fa-times-circle' : 'fa-check-circle' ?>"></i>
-                                                                <?= $ps['status_bayar'] ?>
-                                                            </a>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row my-2">
-                                                        <div class="col col-md-5">
-                                                            <b>Status Pesanan</b>
-                                                        </div>
-                                                        <div class="col col-md-7">
-                                                            :
-                                                            <?php if ($user['role'] == 'Alumni') { ?>
-                                                            <a class="btn btn-sm <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>"
-                                                                data-toggle="modal"
-                                                                data-target="#status-pesanan<?= $ps['id_pesanan'] ?>">
-                                                                <i
-                                                                    class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
-                                                                <?= $ps['status_pesanan'] ?>
-                                                            </a>
-                                                            <?php } else { ?>
-                                                            <a
-                                                                class="btn btn-sm <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>">
-                                                                <i
-                                                                    class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
-                                                                <?= $ps['status_pesanan'] ?>
-                                                            </a>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <td style="width: 80px;">
+                                            <?php if(!$ps['bukti_bayar']) { ?>
+                                            Belum Diupload
+                                            <?php } else { ?>
+                                            <a class="btn btn-sm btn-success"
+                                                href="<?= base_url('./assets/upload/bukti/') ?><?= $ps['bukti_bayar'] ?>"
+                                                target="_blank">
+                                                <i class="fas fa-sticky-note"></i> Bukti
+                                            </a>
+                                            <?php } ?>
+                                        </td>
+                                        <td style="width: 115px;">
+                                            <?php if ($user['role'] == 'Admin') { ?>
+                                            <a class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>"
+                                                data-toggle="modal" data-target="#status-bayar<?= $ps['id_pesanan'] ?>">
+                                                <i
+                                                    class="fas <?= $ps['status_bayar'] == 'Belum Bayar' ? 'fa-times-circle' : 'fa-check-circle' ?>"></i>
+                                                <?= $ps['status_bayar'] ?>
+                                            </a>
+                                            <?php } else { ?>
+                                            <a
+                                                class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>">
+                                                <i
+                                                    class="fas <?= $ps['status_bayar'] == 'Belum Bayar' ? 'fa-times-circle' : 'fa-check-circle' ?>"></i>
+                                                <?= $ps['status_bayar'] ?>
+                                            </a>
+                                            <?php } ?>
+                                        </td>
+                                        <td style="width: 110px;">
+                                            <?php if ($user['role'] == 'Alumni') { ?>
+                                            <a class="btn btn-sm <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>"
+                                                data-toggle="modal"
+                                                data-target="#status-pesanan<?= $ps['id_pesanan'] ?>">
+                                                <i
+                                                    class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
+                                                <?= $ps['status_pesanan'] ?>
+                                            </a>
+                                            <?php } else { ?>
+                                            <a
+                                                class="btn btn-sm <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>">
+                                                <i
+                                                    class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
+                                                <?= $ps['status_pesanan'] ?>
+                                            </a>
+                                            <?php } ?>
                                         </td>
                                         <td>
                                             <?php if ($this->session->userdata('role') !== 'Admin') { ?>
