@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Sep 2024 pada 19.01
+-- Waktu pembuatan: 28 Sep 2024 pada 04.55
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -73,7 +73,7 @@ INSERT INTO `alumni` (`id_alumni`, `username`, `password`, `nama`, `email`, `nam
 (1, 'adit', '$2y$10$zlfU8Hr/xMX1ws69bM4YIuisfeecNSHdyBhHWej/vfaJrQDPIU9GS', 'Adit', 'adit@gmail.com', 'Toko Adit', 'Menjual Perlengkapan IT', '089999999999', '123999999999', 'Padang', 'Alumni', 'Approve'),
 (2, 'rafli', '$2y$10$O8Z8LfGxKQfgKW2ufBpI.uvhx03sPOE.letuWU7eja3xNi4Cgtt5C', 'Rafli', 'rafli@gmail.com', 'Toko Raflie', 'Jasa pembuatan sistem informasi berbasis web, desktop, dan mobile.', '098888888888', '123888888888', 'Bukittinggi', 'Alumni', 'Approve'),
 (3, 'reska', '$2y$10$Py/b3QTGWnWeqISQ0xZlkeklDhRL5Vq5OPd8lOCuF/aGuqPiFYO6a', 'Reska', 'reska@gmail.com', 'Toko PC Reska', 'Menjual perlengkapan PC, Laptop dan lainnya', '0877777777', '123321231', 'Batusangkar', 'Alumni', 'Approve'),
-(4, 'hafiz', '$2y$10$/XbPPhM1RxtPvIZ0IS5aL.xpAx87SP3OKXi0oKI2y/Fe3Z6IpTgoa', 'hafiz', 'hafiz@gmail.com', 'Toko hafiz', 'menjual apa saja', '087777777', '8732367812', 'Payakumbuh', 'Alumni', 'Approve');
+(4, 'hafiz', '$2y$10$/XbPPhM1RxtPvIZ0IS5aL.xpAx87SP3OKXi0oKI2y/Fe3Z6IpTgoa', 'hafiz', 'hafiz@gmail.com', 'Toko hafiz', 'menjual apa saja', '087777777', '8732367812', 'Payakumbuh', 'Alumni', 'Decline');
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,8 @@ INSERT INTO `pesanan` (`id_pesanan`, `id_produk`, `id_user`, `id_alumni`, `tgl_p
 (16, 22, 4, 3, '2024-09-26 16:23:45', 1, 800000, 800000, 'COD', 'Bukti_Bayar_25.pdf', 'Lunas', 'Selesai'),
 (17, 23, 4, 3, '2024-09-26 16:41:04', 4, 156000, 624000, 'Transfer Bank', 'Bukti_bayar_16.png', 'Lunas', 'Selesai'),
 (18, 23, 1, 3, '2024-09-26 16:42:24', 2, 156000, 312000, 'COD', 'Bukti_Bayar_26.pdf', 'Lunas', 'Selesai'),
-(19, 23, 2, 3, '2024-09-26 16:43:49', 12, 156000, 1872000, 'Transfer Bank', 'Bukti_Bayar_27.pdf', 'Lunas', 'Selesai');
+(19, 23, 2, 3, '2024-09-26 16:43:49', 12, 156000, 1872000, 'Transfer Bank', 'Bukti_Bayar_27.pdf', 'Lunas', 'Selesai'),
+(20, 22, 1, 3, '2024-09-27 04:50:52', 1, 800000, 800000, 'Transfer Bank', 'Bukti_bayar_17.png', 'Lunas', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,7 @@ INSERT INTO `produk` (`id_produk`, `id_alumni`, `id_kategori`, `nama_produk`, `j
 (19, 1, 4, 'Logitech M241 Mouse Wireless Bluetooth', 'Barang', 'Mouse ramping yang nyaman dan dapat dibawa bepergian ini cukup kecil untuk dimasukkan ke dalam tas. Desainnya yang sangat cerdas akan memandu tangan kanan atau kirimu ke posisi yang nyaman.\r\nMouse Bluetooth dengan jangkauan jauh yang andal ini dapat digunakan hingga 10m dari komputermu.', 340, 250000, 0, 0, 'mouselogitetch.jpg', '2024-09-24 08:55:15', '2024-09-24 08:55:28'),
 (20, 2, 1, 'Website Perusahaan', 'Jasa', ' Layanan pembuatan website perusahaan dengan desain modern, halaman profil, layanan, dan blog. Termasuk manajemen konten (CMS) dan optimasi SEO dasar.', 449, 9000000, 30, 0, '', '2024-09-24 08:56:47', '2024-09-24 08:56:47'),
 (21, 2, 6, 'Aplikasi Android E-Commerce', 'Jasa', 'Layanan pengembangan aplikasi Android untuk e-commerce. Fitur termasuk katalog produk, keranjang belanja, checkout, dan notifikasi push. Integrasi pembayaran online dan manajemen produk.', 40, 1500000, 20, 0, '', '2024-09-24 08:57:48', '2024-09-24 08:57:48'),
-(22, 3, 4, 'Printer epson', 'Barang', 'Printer terbaru', 2, 1000000, 20, 5, 'printeredpson.jpg', '2024-09-25 04:40:45', '2024-09-25 04:41:12'),
+(22, 3, 4, 'Printer epson', 'Barang', 'Printer terbaru', 1, 1000000, 20, 4, 'printeredpson.jpg', '2024-09-25 04:40:45', '2024-09-25 04:41:12'),
 (23, 3, 10, 'Maspion Kipas Angin Meja', 'Barang', 'Maspion Desk fan 12 Inch EF-30 P2 :\r\n\r\n• BLADE SIZE : 300 mm (12”)\r\n\r\n• VOLTAGE : 220V~ 50Hz\r\n\r\n• WATTAGE : 40W\r\n\r\n• MANUAL SWITCH ( 3 SPEED & OFF )\r\n\r\n• L - R OSCILLATION\r\n\r\n• THERMOFUSE PROTECTION\r\n\r\n• RPM : 1190 - 1400 Rpm/Min.\r\n\r\n• AIR VELOCITY : 246 M/Min. 3\r\n\r\n• AIR DELIVERY : 48 M /Min. E', 212, 240000, 35, 2, 'kipasberu.jpg', '2024-09-26 16:33:06', '2024-09-26 16:33:06');
 
 -- --------------------------------------------------------
@@ -228,7 +229,8 @@ INSERT INTO `review` (`id_review`, `id_produk`, `id_user`, `isi_review`, `rating
 (8, 22, 4, 'Puas dengan barang', 5, '2024-09-26 16:21:50'),
 (9, 23, 4, 'produk kw', 2, '2024-09-26 16:41:23'),
 (10, 23, 1, 'lumayan bagus walau kw', 3, '2024-09-26 16:42:54'),
-(11, 23, 2, 'Buruk sekali', 1, '2024-09-26 16:44:12');
+(11, 23, 2, 'Buruk sekali', 1, '2024-09-26 16:44:12'),
+(12, 22, 1, 'bgasu', 3, '2024-09-27 04:55:10');
 
 -- --------------------------------------------------------
 
@@ -328,7 +330,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
@@ -340,7 +342,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT untuk tabel `review`
 --
 ALTER TABLE `review`
-  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
