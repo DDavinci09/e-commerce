@@ -142,6 +142,14 @@
                                         <div class="row">
                                             <div class="col">
                                                 <span>
+                                                    <i class="fas fa-store fa-sm" style="color: brown;">
+                                                    </i> <?= $p['nama_toko'] ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <span>
                                                     <i class="fas fa-map-marker fa-sm" style="color: black;">
                                                     </i> <?= $p['alamat_toko'] ?>
                                                 </span>
