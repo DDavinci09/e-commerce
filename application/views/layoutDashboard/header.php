@@ -7,8 +7,7 @@
     <title>E-Commerce : Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -24,15 +23,6 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Ekko Lightbox CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <!-- BG Image -->
-    <style>
-    /* Atur background image */
-    .content-wrapper {
-        background-image: url('<?= base_url("assets/dist/img/bg2.jpg"); ?>');
-        background-size: cover;
-        /* Membuat background memenuhi layar */
-    }
-    </style>
     <!-- Diskon -->
     <style>
     .discount-badge {
@@ -66,6 +56,6 @@
     </style>
 </head>
 
-<body class="hold-transition layout-fixed layout-navbar-fixed" style="font-family: 'Times New Roman', serif;">
+<body class="hold-transition layout-fixed layout-navbar-fixed" style="font-family: 'Roboto', serif;">
     <!-- Site wrapper -->
     <div class="wrapper">

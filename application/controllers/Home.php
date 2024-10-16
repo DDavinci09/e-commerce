@@ -14,6 +14,7 @@ class Home extends CI_Controller
     // Halaman home
     public function index()
     {
+        $data['active_menu'] = "home";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['terbaru'] = $this->modelProduk->getProdukterbaru();
         $data['diskon'] = $this->modelProduk->getProdukdiskon();
@@ -29,6 +30,7 @@ class Home extends CI_Controller
     // halaman shop
     public function shop()
     {
+        $data['active_menu'] = "shop";
         $data['title'] = "Semua Produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getAll();
@@ -42,6 +44,7 @@ class Home extends CI_Controller
 
     public function Pencarian()
     {
+        $data['active_menu'] = "shop";
         // Ambil kata kunci dari input form (GET)
         $keyword = $this->input->get('keyword');
         
@@ -57,7 +60,8 @@ class Home extends CI_Controller
     }    
     
     public function getJenisProduk($jenis_produk)
-    {        
+    {   
+        $data['active_menu'] = "shop";
         $data['title'] = "Jenis : $jenis_produk";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getJenisProduk($jenis_produk);
@@ -71,6 +75,7 @@ class Home extends CI_Controller
     
     public function getKategoriProduk($id_kategori)
     {
+        $data['active_menu'] = "shop";
         $data['kategori'] = $this->modelKategori->getAll();
         $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
         $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
@@ -86,6 +91,7 @@ class Home extends CI_Controller
     // Halaman detail
     public function detail($id_produk)
     {
+        $data['active_menu'] = "detail";
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);        
         $data['review'] =$this->modelReview->getProdukReview($id_produk);
         
@@ -98,7 +104,8 @@ class Home extends CI_Controller
     // halaman contact
     public function Contact()
     {   
-        $data['contact'] = "Kontak";
+        $data['active_menu'] = "contact";
+        $data['contact'] = "Contact";
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -109,6 +116,7 @@ class Home extends CI_Controller
     // halaman about us
     public function AboutUs()
     {   
+        $data['active_menu'] = "aboutus";
         $data['aboutUs'] = "About us";
         
         $this->load->view('layoutHome/header', $data);

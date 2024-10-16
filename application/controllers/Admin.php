@@ -6,14 +6,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Panggil fungsi check login\
-        $this->load_pesanan();
         loginAdmin();
-    }
-
-    private function load_pesanan()
-    {
-        
     }
     
     // Halaman Dashboard Admin
@@ -257,7 +250,7 @@ class Admin extends CI_Controller
     // Halaman Data Review
     public function DataReview()
     {
-        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
         $data['review'] = $this->modelReview->getAll();
 
         $this->load->view('layoutDashboard/header', $data);

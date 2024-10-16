@@ -14,6 +14,7 @@ class User extends CI_Controller
     // Halaman Landing Page/Home User
     public function index()
     {
+        $data['active_menu'] = "home";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['kategori'] = $this->modelKategori->getAll();
         $data['terbaru'] = $this->modelProduk->getProdukterbaru();
@@ -31,6 +32,7 @@ class User extends CI_Controller
     // Halaman pembelian produk user
     public function shop()
     {
+        $data['active_menu'] = "shop";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['title'] = "Semua Produk";
         $data['kategori'] = $this->modelKategori->getAll();
@@ -46,6 +48,7 @@ class User extends CI_Controller
     // Halaman pembelian produk user
     public function Pencarian()
     {
+        $data['active_menu'] = "shop";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         // Ambil kata kunci dari input form (GET)
         $keyword = $this->input->get('keyword');
@@ -64,6 +67,7 @@ class User extends CI_Controller
     // Halaman pembelian produk user berdasarkan jenis produk
     public function getJenisProduk($jenis_produk)
     {
+        $data['active_menu'] = "shop";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['title'] = "Jenis Produk : $jenis_produk";
         $data['kategori'] = $this->modelKategori->getAll();
@@ -79,6 +83,7 @@ class User extends CI_Controller
     // Halaman pembelian produk user berdasarkan kategori produk
     public function getKategoriProduk($id_kategori)
     {
+        $data['active_menu'] = "shop";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['kategori'] = $this->modelKategori->getAll();
         $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
@@ -95,6 +100,7 @@ class User extends CI_Controller
     // Halaman detail produk user
     public function detail($id_produk)
     {
+        $data['active_menu'] = "shop";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);
         $data['review'] =$this->modelReview->getProdukReview($id_produk);
@@ -170,6 +176,7 @@ class User extends CI_Controller
     // Halaman Data Pesanan Produk yang dibeli oleh User
     public function DataPesanan()
     {
+        $data['active_menu'] = "pesanan";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['pesanan'] = $this->modelPesanan->getPesananUser();
 
@@ -329,6 +336,7 @@ class User extends CI_Controller
     // Halaman Contact
     public function contact()
     {   
+        $data['active_menu'] = "contact";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['contact'] = "Kontak";
         
@@ -341,6 +349,7 @@ class User extends CI_Controller
     // Halaman About Us
     public function aboutUs()
     {   
+        $data['active_menu'] = "aboutus";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['aboutUs'] = "About us";
         
