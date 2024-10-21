@@ -333,6 +333,15 @@ class User extends CI_Controller
         redirect('User/detail/'.$id_produk.'#review');
     }
 
+    public function editStatusPesanan()
+    {
+        $this->modelPesanan->editStatusPesanan();
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Status Pesanan Berhasil Diperbaharui!
+        </div>');
+        redirect('User/DataPesanan');
+    }
+
     // Halaman Contact
     public function contact()
     {   

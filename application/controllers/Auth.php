@@ -166,12 +166,21 @@ class Auth extends CI_Controller
             $this->load->view('auth/registerAlumni');
             $this->load->view('layoutHome/authfooter');
         } else {
+            // Data Provinsi dan Kota Asal
+            $id_provinsi = $this->input->post('id_provinsi');
+            $nama_provinsi = $this->input->post('nama_provinsi');
+            $id_kota = $this->input->post('id_kota');
+            $nama_kota = $this->input->post('nama_kota');
             // Prepare data to be inserted into the alumni table
             $data = [
                 'nama' => $this->input->post('nama', true),
                 'nama_toko' => $this->input->post('nama_toko', true),
                 'keterangan_toko' => $this->input->post('keterangan_toko', true),
                 'alamat_toko' => $this->input->post('alamat_toko', true),
+                'id_provinsi' => $id_provinsi,
+                'nama_provinsi' => $nama_provinsi,
+                'id_kota' => $id_kota,
+                'nama_kota' => $nama_kota,
                 'no_telp' => $this->input->post('no_telp', true),
                 'no_rekening' => $this->input->post('no_rekening', true),
                 'email' => $this->input->post('email', true),

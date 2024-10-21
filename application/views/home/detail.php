@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="card">
-                            <?php if ($produk['diskon_produk'] > 0 ) { ?>
+                            <?php if ($produk['diskon_produk'] > 0) { ?>
                             <span class="discount-badge position-absolute">
                                 <?= $produk['diskon_produk'] ?>%
                             </span>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-10">
                                 <h5>:
-                                    <?php if ($produk['diskon_produk'] > 0 ) { ?>
+                                    <?php if ($produk['diskon_produk'] > 0) { ?>
                                     <span class="text-danger">
                                         Rp.<?= number_format($produk['harga_diskon'], 0, ',', '.'); ?>
                                     </span> |
@@ -89,8 +89,8 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col">
-                                <form action="<?= base_url('User/detail/'.$produk['id_produk']); ?>" method="post">
-                                    <?php if ($produk['diskon_produk'] > 0 ) { ?>
+                                <form action="<?= base_url('User/detail/' . $produk['id_produk']); ?>" method="post">
+                                    <?php if ($produk['diskon_produk'] > 0) { ?>
                                     <input type="hidden" name="harga_pesanan" value="<?= $produk['harga_diskon'] ?>">
                                     <?php } else { ?>
                                     <input type="hidden" name="harga_pesanan" value="<?= $produk['harga_produk'] ?>">
@@ -100,14 +100,14 @@
                                     <?php if (empty($this->session->userdata('role') !== 'User')) { ?>
                                     <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
                                     <?php } ?>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="pembayaran">Metode Pembayaran</label>
+                                                <label for="pembayaran" style="margin: 0;">Metode Pembayaran</label>
                                                 <div class="input-group">
                                                     <select class="form-control" id="pembayaran" name="pembayaran"
-                                                        value="<?= set_value('pemabayaran'); ?>">
-                                                        <option value="">~ Pilih Metode Pembayaran ~</option>
+                                                        value="<?= set_value('pembayaran'); ?>">
+                                                        <option selected>Pilih disini:</option>
                                                         <option value="Transfer Bank">Transfer Bank</option>
                                                         <option value="COD">COD</option>
                                                     </select>
@@ -120,12 +120,12 @@
                                                 <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-5">
                                             <div class="form-group">
-                                                <label for="jml_pesanan">Jumlah Pesanan</label>
+                                                <label for="jml_pesanan" style="margin: 0;">Jumlah Pesanan</label>
                                                 <div class="input-group">
                                                     <input type="number" class="form-control"
-                                                        placeholder="Jumlah Pesanan" id="jml_pesanan" name="jml_pesanan"
+                                                        placeholder="0" id="jml_pesanan" name="jml_pesanan"
                                                         value="<?= set_value('jml_pesanan'); ?>">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
@@ -136,14 +136,52 @@
                                                 <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
+                                    <!-- test -->
                                     <div class="row">
-                                        <div class="col text-center">
-                                            <button type="submit" class="btn btn-danger"> Beli </button>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label for="pembayaran" style="margin: 0;">Metode Pembayaran</label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="pembayaran" name="pembayaran"
+                                                        value="<?= set_value('pembayaran'); ?>"
+                                                        style="height: 40px; line-height: 40px; padding: 0 12px;">
+                                                        <!-- Set tinggi -->
+                                                        <option selected>Pilih disini:</option>
+                                                        <option value="Transfer Bank">Transfer Bank</option>
+                                                        <option value="COD">COD</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text" style="height: 40px;">
+                                                            <span class="fas fa-money-check"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="jml_pesanan" style="margin: 0;">Jumlah Pesanan</label>
+                                                <div class="input-group">
+                                                    <input type="number" min="0" class="form-control" placeholder="0"
+                                                        id="jml_pesanan" name="jml_pesanan"
+                                                        value="<?= set_value('jml_pesanan'); ?>" style="height: 40px;">
+                                                    <!-- Set tinggi -->
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text" style="height: 40px;">
+                                                            <span class="fas fa-boxes"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-danger btnbelicustom">Beli</button>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -244,17 +282,17 @@
                                 <div class="box_total">
                                     <h5>Overall Rating</h5>
                                     <h4>
-                                        <?php 
-                // Tampilkan bintang untuk rating produk
-                $overallRating = $produk['rating_produk']; 
-                for ($i = 1; $i <= 5; $i++) {
-                    if ($i <= $overallRating) {
-                        echo '<i class="fa fa-star" style="color: yellow;"></i>'; // Bintang aktif
-                    } else {
-                        echo '<i class="fa fa-star" style="color: gray;"></i>'; // Bintang tidak aktif
-                    }
-                }
-                ?>
+                                        <?php
+                                        // Tampilkan bintang untuk rating produk
+                                        $overallRating = $produk['rating_produk'];
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $overallRating) {
+                                                echo '<i class="fa fa-star" style="color: yellow;"></i>'; // Bintang aktif
+                                            } else {
+                                                echo '<i class="fa fa-star" style="color: gray;"></i>'; // Bintang tidak aktif
+                                            }
+                                        }
+                                        ?>
                                     </h4>
                                     <h6><?= count($review) ?> Review</h6>
                                 </div>
@@ -271,25 +309,24 @@
                                         </h4>
                                         <!-- Menampilkan bintang berdasarkan rating -->
                                         <?php
-                    // Ambil rating
-                    $rating = $r['rating_review'];
+                                            // Ambil rating
+                                            $rating = $r['rating_review'];
 
-                    // Tampilkan bintang
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= $rating) {
-                            echo '<i class="fa fa-star"></i>'; // Bintang aktif
-                        } else {
-                            echo '<i class="fa fa-star" style="color: gray;"></i>'; // Bintang tidak aktif
-                        }
-                    }
-                    ?>
+                                            // Tampilkan bintang
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= $rating) {
+                                                    echo '<i class="fa fa-star"></i>'; // Bintang aktif
+                                                } else {
+                                                    echo '<i class="fa fa-star" style="color: gray;"></i>'; // Bintang tidak aktif
+                                                }
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                                 <p><?= $r['isi_review']; ?></p>
                             </div>
                             <?php endforeach; ?>
                         </div>
-
                     </div>
                     <div class="col-lg-6">
                         <div class="review">

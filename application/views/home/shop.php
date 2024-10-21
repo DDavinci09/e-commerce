@@ -3,32 +3,6 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-3 col-lg-4 col-md-5">
-                <!-- Jenis -->
-                <div class="sidebar-categories">
-                    <div class="head">Jenis Produk</div>
-                    <ul class="main-categories">
-                        <li class="common-filter">
-                            <form action="#">
-                                <ul>
-                                    <?php 
-                                // Tentukan controller berdasarkan peran
-                                $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
-                                ?>
-                                    <li class="filter-list"><a href="<?= base_url($controller . '/shop/') ?>">Semua
-                                            Kategori</a></label></li>
-                                    <li class="filter-list"><a
-                                            href="<?= base_url($controller . '/getJenisProduk/Barang') ?>">Barang</a></label>
-                                    </li>
-                                    <li class="filter-list"><a
-                                            href="<?= base_url($controller . '/getJenisProduk/Jasa') ?>">Jasa</a></label>
-                                    </li>
-
-                                </ul>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-
                 <!-- Kategori -->
                 <div class="sidebar-categories">
                     <div class="head">Kategori Produk</div>
@@ -56,13 +30,13 @@
             </div>
             <div class="col-xl-9 col-lg-8 col-md-7">
                 <!-- Start Filter Bar -->
-                <div class="filter-bar">
+                <div class="filter-bar" style="background-color: #384AEB;">
                     <div class="row">
-                        <div class="col">
-                            <h5><?= $title; ?></h5>
+                        <div class="col mt-1">
+                            <h5 style="color:white;"><?= $title; ?></h5>
                         </div>
-                        <div class="col text-right">
-                            <h5>Total Produk : <?= $totalproduk; ?></h5>
+                        <div class="col text-right mt-1">
+                            <h5 style="color:white;">Total Produk : <?= $totalproduk; ?></h5>
                         </div>
                     </div>
                 </div>
@@ -90,7 +64,9 @@
                                         style="height: 250px; width: 250px;">
                                     <?php } ?>
                                     <ul class="card-product__imgOverlay">
-                                        <li><button><i class="ti-search"></i></button></li>
+                                        <li><a
+                                                href="<?= base_url($controller . '/detail/' . urlencode($p['id_produk'])) ?>"><button><i
+                                                        class="ti-search"></i></button></a></li>
                                         <li><button><i class="ti-shopping-cart"></i></button></li>
                                         <li><button><i class="ti-heart"></i></button></li>
                                     </ul>

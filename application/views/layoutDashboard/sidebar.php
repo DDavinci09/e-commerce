@@ -22,6 +22,35 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Menu Admin
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="./index.html" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>No Rekening</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./index.html" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>Kontak</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./index.html" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>Banner</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">Users</li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>Admin/DataUser" class="nav-link">

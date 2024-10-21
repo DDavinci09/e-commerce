@@ -3,7 +3,7 @@
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand logo_h" href="index.php"><img src="<?= base_url('assets'); ?>/home/img/logo.png"
+                <a class="navbar-brand logo_h" href="#"><img src="<?= base_url('assets'); ?>/home/img/logo.png"
                         alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -32,21 +32,21 @@
                                     <input class="form-control mr-sm-2" type="search" name="keyword"
                                         placeholder="Search products..." aria-label="Search" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-success" type="submit">
+                                        <button class="btn btncustom" type="submit">
                                             <i class="ti-search"></i>
                                         </button>
                                     </div>
                                 </div>
                             </form>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="margin-right: 0;">
                             <!-- Tombol Login -->
-                            <a class="btn btn-success btn-sm" href="<?= base_url(); ?>Auth">
+                            <a class="btn btncustom" href="<?= base_url(); ?>Auth">
                                 <i class="fas fa-sign-in-alt"></i> Login
                             </a>
 
                             <!-- Tombol Dropdown Registrasi -->
-                            <a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" href="#"
+                            <a class="btn btncustom  dropdown-toggle" data-toggle="dropdown" href="#"
                                 id="registerDropdown">
                                 <i class="fas fa-registered"></i> Register
                             </a>
@@ -77,13 +77,13 @@
                                 href="<?= base_url(); ?>User/AboutUs">About Us</a></li>
                         <!-- Search form -->
                         <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0" action="<?= base_url(); ?>User/Pencarian"
+                            <form class="form-inline my-2 my-lg-0" action="<?= base_url(); ?>home/Pencarian"
                                 method="get">
                                 <div class="input-group">
                                     <input class="form-control mr-sm-2" type="search" name="keyword"
                                         placeholder="Search products..." aria-label="Search" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-success" type="submit">
+                                        <button class="btn btncustom" type="submit">
                                             <i class="ti-search"></i>
                                         </button>
                                     </div>

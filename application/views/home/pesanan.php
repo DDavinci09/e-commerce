@@ -2,6 +2,13 @@
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">
+            <?php if ($this->session->flashdata('message')): ?>
+            <div class="row">
+                <div class="col text-center">
+                    <h5><?= $this->session->flashdata('message'); ?></h5>
+                </div>
+            </div>
+            <?php endif; ?>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -94,12 +101,14 @@
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
-                                        <a
-                                            class="btn btn-sm  text-light <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>">
+                                        <a class="btn btn-sm text-light <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>"
+                                            <?php if($ps['status_pesanan'] == 'Dikirim'): ?> data-toggle="modal"
+                                            data-target="#status-pesanan<?= $ps['id_pesanan'] ?>" <?php endif; ?>>
                                             <i
                                                 class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
                                             <?= $ps['status_pesanan'] ?>
                                         </a>
+
                                     </div>
                                 </div>
                             </td>
@@ -246,6 +255,54 @@
                     <button type="submit" class="btn btn-primary">Edit Data</button>
                 </div>
             </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal Status Pesanan -->
+<div class="modal fade" id="status-pesanan<?= $ps['id_pesanan'] ?>">
+    <div class="modal-dialog dialog-center">
+        <div class="modal-content">
+            <div class="modal-header  bg-success">
+                <h4 class="modal-title">Status Pesanan</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php echo form_open('User/editStatusPesanan'); ?>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
+                            <label for="status_bayar">Status Pesanan</label>
+                            <div class="input-group">
+                                <select type="text" class="form-control" id="status_pesanan" name="status_pesanan">
+                                    <option value="Dikirim"
+                                        <?= $ps['status_pesanan'] == 'Dikirim' ? 'selected' : ''; ?>>Dikirim
+                                    </option>
+                                    <option value="Selesai"
+                                        <?= $ps['status_pesanan'] == 'Selesai' ? 'selected' : ''; ?>>Selesai
+                                    </option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-money-check"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            <?php echo form_close(); ?>
         </div>
         <!-- /.modal-content -->
     </div>

@@ -43,6 +43,68 @@
         font-weight: bold;
         /* Mengatur tulisan menjadi bold */
     }
+
+    .btncustom {
+        background-color: #384AEB;
+        color: white;
+
+    }
+
+    .btncustom:hover {
+        background-color: #091057;
+        color: gray;
+
+    }
+
+    .btncustomSrc {
+        background-color: #384AEB;
+        color: white;
+
+    }
+
+    .btncustomSrc:hover {
+        background-color: #091057;
+        color: gray;
+    }
+
+    .inputcustom {
+        height: 38px;
+    }
+
+    .form-control {
+        height: 40px;
+        /* Tinggi yang seragam */
+        line-height: 40px;
+        /* Sesuaikan line-height dengan tinggi */
+        padding: 0 12px;
+        /* Sesuaikan padding dalam select */
+    }
+
+    /* Khusus untuk option di dalam select */
+    select.form-control option {
+        height: 40px;
+        /* Sesuaikan tinggi option */
+        line-height: 40px;
+        /* Pastikan line-height option sama */
+    }
+
+    .btnbelicustom {
+        margin-top: 24px;
+        height: 40px;
+        /* Sesuaikan dengan input dan select */
+        line-height: 40px;
+        /* Pastikan teks di dalamnya rata */
+        padding: 0 20px;
+        /* Padding horizontal */
+    }
+
+    .sidebar-categories a {
+        color: black;
+    }
+
+    .sidebar-categories a:hover {
+        color: #384AEB;
+    }
     </style>
 </head>
 

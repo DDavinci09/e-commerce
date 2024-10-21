@@ -53,3 +53,6 @@ $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['User/Detail/(:num)'] = 'User/Detail/$1';
+$route['Rajaongkir/provinsi'] = 'Rajaongkir/provinsi';
+$route['Rajaongkir/cities/(:any)'] = 'Rajaongkir/cities/$1';
+$route['Rajaongkir/cost'] = 'Rajaongkir/cost';

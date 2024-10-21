@@ -1,6 +1,6 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+-- version 4.8.5`e-commerce``e-commerce``e-commerce`information_schemainformation_schema`e-commerce`
+-- https://www.phpmyadmin.net/information_schemainformation_schemamysqlmysqlperformance_schemaperformance_schemasyssys
 --
 -- Host: 127.0.0.1
 -- Waktu pembuatan: 28 Sep 2024 pada 04.55
@@ -354,3 +354,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+`e-commerce`

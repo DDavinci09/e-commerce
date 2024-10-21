@@ -102,6 +102,27 @@
                 </div>
                 <div class="row">
                     <div class="col">
+                        <!-- Provinsi Asal -->
+                        <div class="form-group">
+                            <label for="originProvince">Provinsi Asal:</label>
+                            <select class="form-control" id="originProvince" name="id_provinsi" required>
+                                <option value="">-- Pilih Provinsi Asal --</option>
+                            </select>
+                            <input type="hidden" id="namaProvinsi" name="nama_provinsi">
+                        </div>
+
+                        <!-- Kota Asal -->
+                        <div class="form-group">
+                            <label for="origin">Kota Asal:</label>
+                            <select class="form-control" id="origin" name="id_kota" required>
+                                <option value="">-- Pilih Kota Asal --</option>
+                            </select>
+                            <input type="hidden" id="namaKota" name="nama_kota">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="nama_toko" id="nama_toko"

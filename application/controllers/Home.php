@@ -91,7 +91,7 @@ class Home extends CI_Controller
     // Halaman detail
     public function detail($id_produk)
     {
-        $data['active_menu'] = "detail";
+        $data['active_menu'] = "shop";
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);        
         $data['review'] =$this->modelReview->getProdukReview($id_produk);
         

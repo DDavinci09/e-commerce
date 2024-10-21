@@ -320,11 +320,14 @@
                     <div class="col">
                         <div class="form-group">
                             <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
-                            <label for="statu_bayar">Status Pesanan</label>
+                            <label for="status_bayar">Status Pesanan</label>
                             <div class="input-group">
                                 <select type="text" class="form-control" id="status_pesanan" name="status_pesanan">
                                     <option value="Diproses"
                                         <?= $ps['status_pesanan'] == 'Diproses' ? 'selected' : ''; ?>>Diproses
+                                    </option>
+                                    <option value="Dikirim"
+                                        <?= $ps['status_pesanan'] == 'Dikirim' ? 'selected' : ''; ?>>Dikirim
                                     </option>
                                     <option value="Selesai"
                                         <?= $ps['status_pesanan'] == 'Selesai' ? 'selected' : ''; ?>>Selesai

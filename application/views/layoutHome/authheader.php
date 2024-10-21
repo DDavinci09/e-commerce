@@ -7,22 +7,13 @@
     <title>E-Commerce : Login</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/dist/css/adminlte.min.css">
-    <style>
-    /* Atur background image */
-    body {
-        background-image: url('<?= base_url("assets/dist/img/bg2.jpg"); ?>');
-        background-size: cover;
-        /* Membuat background memenuhi layar */
-    }
-    </style>
 </head>
 
-<body class="hold-transition login-page" style="font-family: 'Times New Roman', serif;">
+<body class="hold-transition login-page" style="font-family: 'Roboto', serif;">
