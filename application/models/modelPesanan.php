@@ -164,6 +164,19 @@ class modelPesanan extends CI_Model
 
     return $this->db->get('pesanan')->result_array();
   }
+
+  // Mendapatkan Ongkir dan estimasi
+  public function updateOngkirEstimasi($id_pesanan, $ongkir_data, $estimasi_data, $total_bayar)
+{
+    $data = [
+      'total_pembayaran' => $total_bayar,
+      "ongkir" => $ongkir_data,
+      "estimasi" => $estimasi_data
+    ];
+    $this->db->where('id_pesanan', $id_pesanan);
+    return $this->db->update('pesanan', $data); // Ganti 'pesanan' dengan nama tabel yang sesuai
+}
+
     
   // Proses
   public function edit($id_pesanan, $dataPesanan)
@@ -185,7 +198,8 @@ class modelPesanan extends CI_Model
   public function editStatusPesanan()
   {
     $data = [
-      "status_pesanan" => $this->input->post('status_pesanan', true)
+      "status_pesanan" => $this->input->post('status_pesanan', true),
+      "keterangan_pesanan" => $this->input->post('keterangan', true)
     ];
 
     $this->db->where('id_pesanan', $this->input->post('id_pesanan'));

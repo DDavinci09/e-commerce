@@ -54,10 +54,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-3">
-                                                <h5>Jenis</h5>
+                                                <h5>Berat</h5>
                                             </div>
                                             <div class="col-9">
-                                                <h5>: <?= $produk['jenis_produk'] ?></h5>
+                                                <h5>: <?= $produk['berat_produk'] ?> gram</h5>
                                             </div>
                                         </div>
                                         <div class="row">

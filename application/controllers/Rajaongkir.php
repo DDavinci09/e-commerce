@@ -48,6 +48,18 @@ class Rajaongkir extends CI_Controller
         }
     }
 
+    public function getCitiesByProvince($provinceId)
+{
+    $data['provinsi'] = $this->modelRajaongkir->get_provinces();
+        
+        // Mendapatkan data kota berdasarkan ID provinsi user yang tersimpan
+        $provinsi_id = $data['user']['id_provinsi']; // Ganti 1 dengan default provinsi jika diperlukan
+        $data['kota'] = $this->modelRajaongkir->get_cities($provinsi_id); 
+    echo json_encode($cities);
+}
+
+    
+
     // Method untuk menghitung ongkos kirim
     public function get_shipping_cost()
     {
@@ -69,6 +81,35 @@ class Rajaongkir extends CI_Controller
             ));
         }
     }
+
+//     public function get_shipping_cost()
+// {
+//     $origin = $this->input->post('origin');
+//     $destination = $this->input->post('destination');
+//     $weight = $this->input->post('weight');
+//     $courier = $this->input->post('courier');
+
+//     // Panggil model untuk mendapatkan ongkir
+//     $shipping_cost_data = $this->modelRajaongkir->get_shipping_cost($origin, $destination, $weight, $courier);
+
+//     if ($shipping_cost_data && isset($shipping_cost_data[0]['costs'][0]['cost'][0])) {
+//         // Ambil ongkir dan estimasi dari hasil response API
+//         $ongkir = $shipping_cost_data[0]['costs'][0]['cost'][0]['value'];
+//         $estimasi = $shipping_cost_data[0]['costs'][0]['cost'][0]['etd'];
+
+//         echo json_encode(array(
+//             'status' => 'success',
+//             'ongkir' => $ongkir,
+//             'estimasi' => $estimasi
+//         ));
+//     } else {
+//         echo json_encode(array(
+//             'status' => 'error',
+//             'message' => 'Gagal menghitung ongkos kirim'
+//         ));
+//     }
+// }
+
 
     public function get_cities_by_keyword($keyword)
 {

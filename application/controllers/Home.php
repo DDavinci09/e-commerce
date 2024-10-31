@@ -20,6 +20,7 @@ class Home extends CI_Controller
         $data['diskon'] = $this->modelProduk->getProdukdiskon();
         $data['teratas'] = $this->modelProduk->getProdukteratas();
         $data['reviews'] = $this->modelReview->getAll();
+        $data['banner'] = $this->modelAdmin->getBannerAktif();
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -104,8 +105,8 @@ class Home extends CI_Controller
     // halaman contact
     public function Contact()
     {   
-        $data['active_menu'] = "contact";
-        $data['contact'] = "Contact";
+        $data['active_menu'] = "aboutus";
+        $data['contact'] = $this->modelAdmin->getKontak();
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -117,7 +118,7 @@ class Home extends CI_Controller
     public function AboutUs()
     {   
         $data['active_menu'] = "aboutus";
-        $data['aboutUs'] = "About us";
+        $data['profil'] = $this->modelAdmin->getProfile();
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);

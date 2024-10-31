@@ -17,13 +17,19 @@
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto align-items-center">
                         <li class="nav-item <?= ($active_menu == 'home') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>Home">Home</a></li>
+                        <li class="nav-item submenu dropdown <?= ($active_menu == 'aboutus') ? 'active' : '' ?>">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">About Us</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link"
+                                        href="<?= base_url(); ?>Home/AboutUs">Profile</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="<?= base_url(); ?>Home/Contact">Contact</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>Home/shop">Shop</a></li>
                         </li>
-                        <li class="nav-item <?= ($active_menu == 'contact') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>Home/Contact">Contact</a></li>
-                        <li class="nav-item <?= ($active_menu == 'aboutus') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>Home/AboutUs">About Us</a></li>
                         <!-- Search form -->
                         <li class="nav-item">
                             <form class="form-inline my-2 my-lg-0" action="<?= base_url(); ?>home/Pencarian"
@@ -66,15 +72,21 @@
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto align-items-center">
                         <li class="nav-item <?= ($active_menu == 'home') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>User">Home</a></li>
+                        <li class="nav-item submenu dropdown <?= ($active_menu == 'aboutus') ? 'active' : '' ?>">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">About Us</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="nav-link"
+                                        href="<?= base_url(); ?>User/AboutUs">Profile</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="<?= base_url(); ?>User/Contact">Contact</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>User/shop">Shop</a></li>
                         <li class="nav-item <?= ($active_menu == 'pesanan') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>User/DataPesanan">Pesanan</a>
                         </li>
-                        <li class="nav-item <?= ($active_menu == 'contact') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>User/Contact">Contact</a></li>
-                        <li class="nav-item <?= ($active_menu == 'aboutus') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>User/AboutUs">About Us</a></li>
                         <!-- Search form -->
                         <li class="nav-item">
                             <form class="form-inline my-2 my-lg-0" action="<?= base_url(); ?>home/Pencarian"
@@ -98,8 +110,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="fas fa-cogs"></i> Settings
+                                    <a class="nav-link" href="<?= base_url(); ?>User/MyProfile">
+                                        <i class="fas fa-user"></i> My Profile
                                     </a>
                                 </li>
                                 <li class="nav-item">

@@ -14,9 +14,20 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/linericon/style.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/css/style.css">
     <!-- Ekko Lightbox CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
     <!-- Diskon -->
     <style>
     .discount-badge {
@@ -105,7 +116,71 @@
     .sidebar-categories a:hover {
         color: #384AEB;
     }
+
+    .modal {
+        z-index: 1055;
+        /* Pastikan z-index lebih tinggi dari navbar */
+    }
+
+    .modal-backdrop {
+        z-index: 1050;
+        /* Pastikan backdrop modal di bawah modal tetapi di atas elemen lainnya */
+    }
+
+    .header_area {
+        z-index: 1000;
+        /* Pastikan navbar memiliki z-index lebih rendah dari modal */
+    }
+
+    /* Carousel */
+    /* Style untuk tombol carousel dengan warna biru dan bentuk kotak */
+    .custom-carousel-control {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 123, 255, 0.8);
+        /* Biru dengan transparansi */
+        border-radius: 0;
+        /* Hapus border-radius untuk bentuk kotak */
+        top: 50%;
+        /* Posisikan di tengah secara vertikal */
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        /* Warna icon putih */
+    }
+
+    .custom-carousel-control:hover {
+        background-color: rgba(0, 123, 255, 1);
+        /* Warna biru lebih pekat saat hover */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-size: 20px 20px;
+        /* Sesuaikan ukuran icon */
+    }
+
+    .carousel-control-prev {
+        left: -25px;
+        /* Sesuaikan jarak ke kiri */
+    }
+
+    .carousel-control-next {
+        right: -25px;
+        /* Sesuaikan jarak ke kanan */
+    }
+
+    /* Ukuran gambar default di layar besar */
+    .custom-carousel-img {
+        height: 500px;
+        /* tinggi gambar untuk layar besar */
+        object-fit: cover;
+    }
     </style>
+
+
 </head>
 
 <body>

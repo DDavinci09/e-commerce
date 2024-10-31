@@ -43,6 +43,70 @@ class Alumni extends CI_Controller
         $this->load->view('dashboard/myprofile', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    public function editProfile()
+    {
+        $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
+        $id_alumni = $data['user']['id_alumni'];
+
+        // Form Validation
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('nama_toko', 'Nama Toko', 'required|trim');
+        $this->form_validation->set_rules('keterangan_toko', 'Keterangan Toko', 'required|trim');
+        $this->form_validation->set_rules('alamat_toko', 'Alamat Toko', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('no_telp', 'No Telp', 'required|trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('layoutDashboard/header', $data);
+            $this->load->view('layoutDashboard/sidebar', $data);
+            $this->load->view('layoutDashboard/navbar', $data);
+            $this->load->view('dashboard/editprofile', $data);
+            $this->load->view('layoutDashboard/footer', $data);
+        } else {
+            $this->modelAlumni->editAlumni($id_alumni);
+            redirect('Alumni/MyProfile');
+        }
+    }
+
+    public function editUsernamePassword()
+{
+    // Validasi form input
+    $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[alumni.username]', [
+            'is_unique' => 'This username has already registered!'
+        ]);
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Passwords do not match!',
+            'min_length' => 'Password is too short!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim|matches[password1]');
+
+    if ($this->form_validation->run() == FALSE) {
+        // Jika validasi gagal, tampilkan modal kembali dengan error
+        $this->session->set_flashdata('error', validation_errors());
+        // Set flashdata agar modal tetap terbuka
+        $this->session->set_flashdata('edit_modal', true);
+        redirect('Alumni/MyProfile');
+    } else {
+        $username = $this->input->post('username');
+        $new_password = $this->input->post('password1');
+
+        $data = [
+            'username' => htmlspecialchars($this->input->post('username', true)),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+        ];
+
+        // Update data di database
+        $this->db->where('id_alumni', $this->session->userdata('id_alumni'));
+        $this->db->update('alumni', $data);
+
+        $this->session->set_userdata($data);
+
+        $this->session->set_flashdata('message', 'Data berhasil diupdate');
+        redirect('Alumni/MyProfile');
+    }
+}
+
 
     // Halaman Kategori
     public function DataKategori()
@@ -114,7 +178,7 @@ class Alumni extends CI_Controller
 
         $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'required');
         $this->form_validation->set_rules('id_kategori', 'Nama Kategori', 'required');
-        $this->form_validation->set_rules('jenis_produk', 'Jenis Produk', 'required');
+        $this->form_validation->set_rules('berat_produk', 'Berat Produk', 'required');
         $this->form_validation->set_rules('keterangan_produk', 'Keterangan Produk', 'required');
         $this->form_validation->set_rules('stok_produk', 'Stok Produk', 'required');
         $this->form_validation->set_rules('harga_produk', 'Harga Produk', 'required');
@@ -162,11 +226,10 @@ class Alumni extends CI_Controller
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->getidProduk($id_produk);
-        $data['jenis'] = ['Barang', 'Jasa'];
 
         $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'required');
         $this->form_validation->set_rules('id_kategori', 'Nama Kategori', 'required');
-        $this->form_validation->set_rules('jenis_produk', 'Jenis Produk', 'required');
+        $this->form_validation->set_rules('berat_produk', 'Berat Produk', 'required');
         $this->form_validation->set_rules('keterangan_produk', 'Keterangan Produk', 'required');
         $this->form_validation->set_rules('stok_produk', 'Stok Produk', 'required');
         $this->form_validation->set_rules('harga_produk', 'Harga Produk', 'required');

@@ -32,19 +32,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="<?= base_url(); ?>Admin/Rekening" class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
                                 <p>No Rekening</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="<?= base_url(); ?>Admin/Kontak" class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
                                 <p>Kontak</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="<?= base_url(); ?>Admin/Profile" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url(); ?>Admin/Banner" class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
                                 <p>Banner</p>
                             </a>

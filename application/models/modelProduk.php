@@ -55,7 +55,7 @@ class modelProduk extends CI_Model
     return $produkAll;
   }
     
-  public function getProdukterbaru($limit = 6)
+  public function getProdukterbaru($limit = 8)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
@@ -71,7 +71,7 @@ class modelProduk extends CI_Model
       return $produkTerbaru;
   }
   
-  public function getProdukdiskon($limit = 6)
+  public function getProdukdiskon($limit = 8)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
@@ -88,7 +88,7 @@ class modelProduk extends CI_Model
       return $produkDiskon;
   }
 
-  public function getProdukteratas($limit = 6)
+  public function getProdukteratas($limit = 8)
   {
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
@@ -104,18 +104,19 @@ class modelProduk extends CI_Model
       return $produkTerbaru;
   }
   
-  public function getProdukbarudibeli($limit = 6)
+  public function getProdukbarudibeli($limit = 8)
 {
     $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
     $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
     $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
     $this->db->join('user', 'pesanan.id_user = user.id_user');
     $this->db->where('alumni.status', 'Approve');
-    
     $this->db->where(['pesanan.id_user' => $this->session->userdata('id_user')]);
+    $this->db->where('pesanan.status_pesanan', 'Selesai');
     $this->db->group_by('produk.id_produk');
     $this->db->order_by('produk.id_produk', 'DESC');
     
+    // Ambil data dengan limit
     $query = $this->db->get('pesanan', $limit);
 
     // Cek apakah query gagal
@@ -123,21 +124,22 @@ class modelProduk extends CI_Model
         // Menampilkan error jika query gagal
         $error = $this->db->error();
         log_message('error', 'Query Error: ' . $error['message']);
-        return false;
+        return []; // Kembalikan array kosong jika query gagal
     }
 
-    $produkTerbaru = $query->result_array();
+    // Ambil hasil query
+    $produkBarudibeli = $query->result_array();
 
-    if (!empty($produkTerbaru)) {
-        foreach ($produkTerbaru as &$produk) {
+    // Hitung harga diskon jika ada produk
+    if (!empty($produkBarudibeli)) {
+        foreach ($produkBarudibeli as &$produk) {
             $produk['harga_diskon'] = $this->hitungDiskon($produk['harga_produk'], $produk['diskon_produk']);
         }
-    } else {
-        return [];
     }
 
-    return $produkTerbaru;
+    return $produkBarudibeli; // Kembalikan produk yang ditemukan atau array kosong
 }
+
 
   public function getProdukAdmin()
   {
@@ -237,7 +239,7 @@ class modelProduk extends CI_Model
       "id_alumni" => $this->input->post('id_alumni', true),
       "id_kategori" => $this->input->post('id_kategori', true),
       "nama_produk" => $this->input->post('nama_produk', true),
-      "jenis_produk" => $this->input->post('jenis_produk', true),
+      "berat_produk" => $this->input->post('berat_produk', true),
       "keterangan_produk" => $this->input->post('keterangan_produk', true),
       "stok_produk" => $this->input->post('stok_produk', true),
       "harga_produk" => $this->input->post('harga_produk', true),
@@ -255,7 +257,7 @@ class modelProduk extends CI_Model
       "id_alumni" => $this->input->post('id_alumni', true),
       "id_kategori" => $this->input->post('id_kategori', true),
       "nama_produk" => $this->input->post('nama_produk', true),
-      "jenis_produk" => $this->input->post('jenis_produk', true),
+      "berat_produk" => $this->input->post('berat_produk', true),
       "keterangan_produk" => $this->input->post('keterangan_produk', true),
       "stok_produk" => $this->input->post('stok_produk', true),
       "harga_produk" => $this->input->post('harga_produk', true),
@@ -274,7 +276,7 @@ class modelProduk extends CI_Model
       "id_alumni" => $this->input->post('id_alumni', true),
       "id_kategori" => $this->input->post('id_kategori', true),
       "nama_produk" => $this->input->post('nama_produk', true),
-      "jenis_produk" => $this->input->post('jenis_produk', true),
+      "berat_produk" => $this->input->post('berat_produk', true),
       "keterangan_produk" => $this->input->post('keterangan_produk', true),
       "stok_produk" => $this->input->post('stok_produk', true),
       "harga_produk" => $this->input->post('harga_produk', true),
@@ -292,7 +294,7 @@ class modelProduk extends CI_Model
       "id_alumni" => $this->input->post('id_alumni', true),
       "id_kategori" => $this->input->post('id_kategori', true),
       "nama_produk" => $this->input->post('nama_produk', true),
-      "jenis_produk" => $this->input->post('jenis_produk', true),
+      "berat_produk" => $this->input->post('berat_produk', true),
       "keterangan_produk" => $this->input->post('keterangan_produk', true),
       "stok_produk" => $this->input->post('stok_produk', true),
       "harga_produk" => $this->input->post('harga_produk', true),

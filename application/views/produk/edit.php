@@ -52,19 +52,11 @@
                                             <?= form_error('id_kategori', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <label for="jenis_produk">Jenis Produk</label>
-                                            <select type="text" name="jenis_produk" class="form-control"
-                                                id="jenis_produk" value="<?= $produk['jenis_produk'] ?>"
-                                                placeholder="Masukkan jenis produk">
-                                                <?php foreach ($jenis as $jns): ?>
-                                                <?php if ($jns == $produk['jenis_produk']): ?>
-                                                <option value="<?= $jns; ?>" selected><?= $jns; ?></option>
-                                                <?php else: ?>
-                                                <option value="<?= $jns; ?>"><?= $jns; ?></option>
-                                                <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <?= form_error('jenis_produk', '<small class="text-danger">', '</small>'); ?>
+                                            <label for="berat_produk">Berat Produk (gram)</label>
+                                            <input type="number" name="berat_produk" class="form-control"
+                                                id="berat_produk" value="<?= $produk['berat_produk'] ?>"
+                                                placeholder="Masukkan berat produk">
+                                            <?= form_error('berat_produk', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="keterangan_produk">Keterangan Produk</label>

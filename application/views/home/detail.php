@@ -50,10 +50,10 @@
                         </div>
                         <div class="row">
                             <div class="col-2">
-                                <h5>Jenis</h5>
+                                <h5>Berat</h5>
                             </div>
                             <div class="col-10">
-                                <h5>: <?= $produk['jenis_produk'] ?></h5>
+                                <h5>: <?= $produk['berat_produk'] ?> Gram</h5>
                             </div>
                         </div>
                         <div class="row">
@@ -100,87 +100,80 @@
                                     <?php if (empty($this->session->userdata('role') !== 'User')) { ?>
                                     <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
                                     <?php } ?>
-                                    <!-- <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="pembayaran" style="margin: 0;">Metode Pembayaran</label>
-                                                <div class="input-group">
-                                                    <select class="form-control" id="pembayaran" name="pembayaran"
-                                                        value="<?= set_value('pembayaran'); ?>">
-                                                        <option selected>Pilih disini:</option>
-                                                        <option value="Transfer Bank">Transfer Bank</option>
-                                                        <option value="COD">COD</option>
-                                                    </select>
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-money-check"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="form-group">
-                                                <label for="jml_pesanan" style="margin: 0;">Jumlah Pesanan</label>
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control"
-                                                        placeholder="0" id="jml_pesanan" name="jml_pesanan"
-                                                        value="<?= set_value('jml_pesanan'); ?>">
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-boxes"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
-                                            </div>
-                                        </div>
-                                    </div> -->
 
-                                    <!-- test -->
                                     <div class="row">
-                                        <div class="col-5">
+                                        <!-- Metode Pembayaran -->
+                                        <div class="col-6">
                                             <div class="form-group">
                                                 <label for="pembayaran" style="margin: 0;">Metode Pembayaran</label>
-                                                <div class="input-group">
-                                                    <select class="form-control" id="pembayaran" name="pembayaran"
-                                                        value="<?= set_value('pembayaran'); ?>"
-                                                        style="height: 40px; line-height: 40px; padding: 0 12px;">
-                                                        <!-- Set tinggi -->
-                                                        <option selected>Pilih disini:</option>
-                                                        <option value="Transfer Bank">Transfer Bank</option>
-                                                        <option value="COD">COD</option>
-                                                    </select>
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text" style="height: 40px;">
-                                                            <span class="fas fa-money-check"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <select class="form-control" id="pembayaran" name="pembayaran"
+                                                    value="<?= set_value('pembayaran'); ?>">
+                                                    <option selected>Pilih disini:</option>
+                                                    <option value="Transfer Bank">Transfer Bank</option>
+                                                    <option value="COD">COD</option>
+                                                </select>
                                                 <?= form_error('pembayaran', '<small class="text-danger">', '</small>'); ?>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+
+                                        <!-- Jumlah Pesanan -->
+                                        <div class="col-6">
                                             <div class="form-group">
                                                 <label for="jml_pesanan" style="margin: 0;">Jumlah Pesanan</label>
-                                                <div class="input-group">
-                                                    <input type="number" min="0" class="form-control" placeholder="0"
-                                                        id="jml_pesanan" name="jml_pesanan"
-                                                        value="<?= set_value('jml_pesanan'); ?>" style="height: 40px;">
-                                                    <!-- Set tinggi -->
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text" style="height: 40px;">
-                                                            <span class="fas fa-boxes"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <input type="number" class="form-control" placeholder="0"
+                                                    id="jml_pesanan" name="jml_pesanan"
+                                                    value="<?= set_value('jml_pesanan'); ?>">
                                                 <?= form_error('jml_pesanan', '<small class="text-danger">', '</small>'); ?>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!-- Berat Produk dan Kota Asal -->
+                                    <input type="hidden" name="berat_pesanan" value="<?= $produk['berat_produk'] ?>">
+                                    <input type="hidden" name="origin" id="origin" value="<?= $produk['id_kota'] ?>">
+                                    <input type="hidden" name="nama_kotaAsal" id="nama_kotaAsal"
+                                        value="<?= $produk['nama_kota'] ?>">
+
+                                    <div class="row">
                                         <div class="col">
-                                            <button type="submit" class="btn btn-danger btnbelicustom">Beli</button>
+                                            <!-- Provinsi Tujuan -->
+                                            <div class="form-group">
+                                                <label for="destinationProvince">Provinsi Tujuan:</label>
+                                                <select class="form-control" id="destinationProvince"
+                                                    name="destinationProvince" required>
+                                                    <option value="">-- Pilih Provinsi Tujuan --</option>
+                                                    <!-- Options provinsi tujuan akan diisi dengan JavaScript -->
+                                                </select>
+                                                <input type="hidden" id="namaProvinsiTujuan" name="nama_provinsiTujuan">
+                                            </div>
                                         </div>
+                                        <div class="col">
+                                            <!-- Kota Tujuan -->
+                                            <div class="form-group">
+                                                <label for="destination">Kota Tujuan:</label>
+                                                <select class="form-control" id="destination" name="destination"
+                                                    required>
+                                                    <option value="">-- Pilih Kota Tujuan --</option>
+                                                    <!-- Options kota tujuan akan diisi dengan JavaScript -->
+                                                </select>
+                                                <input type="hidden" id="namaKotaTujuan" name="nama_kotaTujuan">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Ekspedisi -->
+                                    <div class="form-group">
+                                        <label for="courier">Ekspedisi:</label>
+                                        <select class="form-control" id="courier" name="courier" required>
+                                            <option value="">-- Pilih Ekspedisi --</option>
+                                            <option value="jne">JNE</option>
+                                            <option value="pos">POS Indonesia</option>
+                                            <option value="tiki">TIKI</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Tombol Beli -->
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-danger btnbelicustom">Beli</button>
                                     </div>
                                 </form>
                             </div>
@@ -213,7 +206,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <p>
-                    <?= $produk['keterangan_produk'] ?>
+                    <?= nl2br(htmlspecialchars($produk['keterangan_produk'])); ?>
                 </p>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -399,119 +392,3 @@
     </div>
 </section>
 <!--================End Product Description Area =================-->
-
-<!--================ Start related Product area =================-->
-<section class="related-product-area section-margin--small mt-0">
-    <div class="container">
-        <div class="section-intro pb-60px">
-            <p>Popular Item in the market</p>
-            <h2>Top <span class="section-intro__style">Product</span></h2>
-        </div>
-        <div class="row mt-30">
-            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="single-search-product-wrapper">
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-1.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-2.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-3.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="single-search-product-wrapper">
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-4.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-5.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-6.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="single-search-product-wrapper">
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-7.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-8.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-9.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="single-search-product-wrapper">
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-1.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-2.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                    <div class="single-search-product d-flex">
-                        <a href="#"><img src="../assets/home/img/product/product-sm-3.png" alt=""></a>
-                        <div class="desc">
-                            <a href="#" class="title">Gray Coffee Cup</a>
-                            <div class="price">$170.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================ end related Product area =================-->

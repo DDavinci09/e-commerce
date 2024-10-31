@@ -33,7 +33,6 @@
                                         <th>Data Produk</th>
                                         <th>Data Pesanan</th>
                                         <th>Status Pesanan</th>
-                                        <th>Aski</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,8 +40,8 @@
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td>
-                                            <div class="card m-1" style="width: 200px;">
-                                                <div class="card-body p-1">
+                                            <div class="card" style="width: 250px;">
+                                                <div class="card-header">
                                                     <?php if ($ps['diskon_produk'] > 0 ) { ?>
                                                     <span class="discount-badge position-absolute">
                                                         <?= $ps['diskon_produk'] ?>%
@@ -52,50 +51,41 @@
                                                     <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
                                                         href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
                                                         class="img-fluid rounded" data-toggle="lightbox"
-                                                        style="width: 300px; height: 130px;">
+                                                        style="width: 200px; height: 200px;">
                                                     <?php } else { ?>
                                                     <img src="<?= base_url('./assets/upload/produk/') . $ps['image']; ?>"
                                                         href="<?= base_url('./assets/upload/produk/') ?><?= $ps['image']; ?>"
                                                         class="img-fluid rounded" data-toggle="lightbox"
-                                                        style="width: 300px; height: 130px;">
+                                                        style="width: 200px; height: 200px;">
                                                     <?php } ?>
+                                                </div>
+                                                <div class="card-body p-1">
                                                     <div class="row">
                                                         <div class="col text-left">
-                                                            <b><?= word_limiter($ps['nama_produk'], 3); ?></b>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col text-left">
-                                                            <?= word_limiter($ps['nama_kategori'], 3); ?>
+                                                            <b><?= $ps['nama_produk']; ?></b>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col text-left">
-                                                            <i class="fas fa-star fa-sm" style="color: orange;">
-                                                                <?= $ps['rating_produk'] ?></i>
-                                                        </div>
-                                                        <div class="col text-center">
-                                                            | <?= $ps['stok_produk'] ?> |
-                                                        </div>
-                                                        <div class="col text-right">
-                                                            <?= $ps['jenis_produk'] ?>
+                                                            <?= $ps['nama_kategori']; ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <span>
-                                                                <i class="fas fa-store fa-sm" style="color: brown;">
-                                                                </i> <?= $ps['nama_toko'] ?>
-                                                            </span>
+                                                        <div class="col-sm-1 mx-auto">
+                                                            <i class="fas fa-store fa-sm" style="color: brown;">
+                                                            </i>
+                                                        </div>
+                                                        <div class="col-sm-11">
+                                                            <?= $ps['nama_toko'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <span>
-                                                                <i class="fas fa-map-marker fa-sm"
-                                                                    style="color: black;">
-                                                                </i> <?= $ps['alamat_toko'] ?>
-                                                            </span>
+                                                        <div class="col-sm-1 mx-auto">
+                                                            <i class="fas fa-map-marker fa-sm" style="color: black;">
+                                                            </i>
+                                                        </div>
+                                                        <div class="col-sm-11">
+                                                            <?= $ps['alamat_toko'] ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -105,51 +95,51 @@
                                             <div class="card" style="width: 320px;">
                                                 <div class="card-body m-0">
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Pembeli</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             : <?= $ps['nama_user'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Pembayaran</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             : <?= $ps['pembayaran'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Tanggal</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             : <?= date("d-m-Y", strtotime($ps['tgl_pesanan'])) ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Jumlah</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             : <?= $ps['jml_pesanan'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Harga</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             :
                                                             Rp.<?= number_format($ps['harga_pesanan'], 0, ',', '.'); ?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-5">
                                                             <b>Total</b>
                                                         </div>
-                                                        <div class="col col-sm-5">
+                                                        <div class="col col-md-7">
                                                             :
                                                             Rp.<?= number_format($ps['total_pembayaran'], 0, ',', '.'); ?>
                                                         </div>
@@ -161,10 +151,10 @@
                                             <div class="card" style="width: 310px;">
                                                 <div class="card-body">
                                                     <div class="row my-2">
-                                                        <div class="col col-md-5">
+                                                        <div class="col col-md-6">
                                                             <b>Bukti Bayar</b>
                                                         </div>
-                                                        <div class="col col-md-7">
+                                                        <div class="col col-md-6">
                                                             :
                                                             <?php if(!$ps['bukti_bayar']) { ?>
                                                             Menunggu Upload
@@ -178,10 +168,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="row my-2">
-                                                        <div class="col col-md-5">
+                                                        <div class="col col-md-6">
                                                             <b>Status Bayar</b>
                                                         </div>
-                                                        <div class="col col-md-7">
+                                                        <div class="col col-md-6">
                                                             :
                                                             <?php if ($user['role'] == 'Admin') { ?>
                                                             <a class="btn btn-sm <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>"
@@ -202,10 +192,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="row my-2">
-                                                        <div class="col col-md-5">
+                                                        <div class="col col-md-6">
                                                             <b>Status Pesanan</b>
                                                         </div>
-                                                        <div class="col col-md-7">
+                                                        <div class="col col-md-6">
                                                             :
                                                             <?php if ($user['role'] == 'Alumni') { ?>
                                                             <a class="btn btn-sm <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>"
@@ -227,17 +217,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <?php if ($this->session->userdata('role') !== 'Admin') { ?>
-                                            <a class="btn btn-info btn-sm"
-                                                href="<?= base_url() ?>Alumni/DetailPesanan/<?= $ps['id_pesanan'] ?>"><i
-                                                    class="fa fa-eye"></i></a>
-                                            <?php } else { ?>
-                                            <a class="btn btn-info btn-sm"
-                                                href="<?= base_url() ?>Admin/DetailPesanan/<?= $ps['id_pesanan'] ?>"><i
-                                                    class="fa fa-eye"></i></a>
-                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

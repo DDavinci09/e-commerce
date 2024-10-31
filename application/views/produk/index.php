@@ -40,7 +40,7 @@
                                         <th>Nama Alumni</th>
                                         <?php } ?>
                                         <th>Kategori</th>
-                                        <th>Jenis</th>
+                                        <th>Berat</th>
                                         <th>Stok</th>
                                         <th>Harga</th>
                                         <th>Diskon</th>
@@ -60,7 +60,7 @@
                                         <td><?= $p['nama'] ?></td>
                                         <?php } ?>
                                         <td><?= $p['nama_kategori'] ?></td>
-                                        <td><?= $p['jenis_produk'] ?></td>
+                                        <td><?= $p['berat_produk'] ?> gram</td>
                                         <td><?= $p['stok_produk'] ?></td>
                                         <td>Rp.<?= number_format($p['harga_produk'], 0, ',', '.'); ?></td>
                                         <td><?= $p['diskon_produk'] ?>%</td>

@@ -1,56 +1,22 @@
 <main class="site-main">
 
-    <!--================ Hero banner start =================-->
-    <section class="hero-banner">
-        <div class="container">
-            <div class="row no-gutters align-items-center pt-60px">
-                <div class="col-5 d-none d-sm-block">
-                    <div class="hero-banner__img">
-                        <img class="img-fluid" src="../assets/home/img/home/hero-banner.png" alt="">
-                    </div>
+    <div class="container ">
+        <!-- carousel banner -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <div class="carousel-inner">
+                <?php foreach ($banner as $index => $bn) { ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                    <img src="<?= base_url('./assets/upload/banner/'); ?><?= $bn['file'] ?>" class="d-block w-100"
+                        alt="...">
                 </div>
-                <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
-                    <div class="hero-banner__content">
-                        <h4>Shop is fun</h4>
-                        <h1>Browse Our Premium Product</h1>
-                        <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth
-                            without morning over third. Their male dry. They are great appear whose land fly grass.
-                        </p>
-                        <a class="button button-hero" href="#">Browse Now</a>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
-    </section>
-    <!--================ Hero banner start =================-->
+        <!-- end -->
 
-    <!--================ Hero Carousel start =================-->
-    <section class="section-margin mt-0">
-        <div class="owl-carousel owl-theme hero-carousel">
-            <div class="hero-carousel__slide">
-                <img src="<?= base_url() ?>assets/home/img/home/hero-slide1.png" alt="" class="img-fluid">
-                <a href="#" class="hero-carousel__slideOverlay">
-                    <h3>Wireless Headphone</h3>
-                    <p>Accessories Item</p>
-                </a>
-            </div>
-            <div class="hero-carousel__slide">
-                <img src="<?= base_url() ?>assets/home/img/home/hero-slide2.png" alt="" class="img-fluid">
-                <a href="#" class="hero-carousel__slideOverlay">
-                    <h3>Wireless Headphone</h3>
-                    <p>Accessories Item</p>
-                </a>
-            </div>
-            <div class="hero-carousel__slide">
-                <img src="<?= base_url() ?>assets/home/img/home/hero-slide3.png" alt="" class="img-fluid">
-                <a href="#" class="hero-carousel__slideOverlay">
-                    <h3>Wireless Headphone</h3>
-                    <p>Accessories Item</p>
-                </a>
-            </div>
-        </div>
-    </section>
-    <!--================ Hero Carousel end =================-->
+
+
+    </div>
 
     <!-- ================ trending product section start ================= -->
     <section class="section-margin calc-60px">
@@ -119,129 +85,172 @@
     </section>
     <!-- ================ trending product section end ================= -->
 
-    <!-- ================ Best Selling item  carousel ================= -->
+    <!-- Produk Terbaru -->
     <section class="section-margin calc-60px">
         <div class="container">
             <div class="section-intro pb-60px">
                 <h2>Produk <span class="section-intro__style">Terbaru</span></h2>
             </div>
-            <div class="owl-carousel owl-theme" id="bestSellerCarousel">
-                <?php foreach ($terbaru as $tb) : ?>
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <?php if ($tb['diskon_produk'] > 0 ) { ?>
-                        <div class="discount-badge">
-                            <?= $tb['diskon_produk'] ?>%
-                        </div>
-                        <?php } ?>
-                        <?php if (!$tb['image']) { ?>
-                        <img class="card-img mx-auto" src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
-                            href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>" alt=""
-                            style="height: 200px; width: 200px;">
-                        <?php } else { ?>
-                        <img class="card-img mx-auto" src="<?= base_url('./assets/upload/produk/') . $tb['image']; ?>"
-                            href="<?= base_url('./assets/upload/produk/') ?><?= $tb['image']; ?>" alt=""
-                            style="height: 200px; width: 200px;">
-                        <?php } ?>
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p><?= $tb['nama_kategori']; ?></p>
-                        <?php 
-                                    // Tentukan controller berdasarkan peran
-                                    $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
+            <div id="carouselTerbaru" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <?php 
+                    $isActive = true;
+                    $counter = 0;
+                    
+                    foreach ($terbaru as $tb) :
+                        // Buka carousel-item baru dan row baru setiap 4 produk
+                        if ($counter % 4 == 0): ?>
+                    <div class="carousel-item <?= $isActive ? 'active' : ''; ?>">
+                        <div class="row">
+                            <?php $isActive = false; endif; ?>
+
+                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                <div class="card text-center card-product">
+                                    <div class="card-product__img">
+                                        <?php if ($tb['diskon_produk'] > 0 ) { ?>
+                                        <div class="discount-badge"><?= $tb['diskon_produk'] ?>%</div>
+                                        <?php } ?>
+                                        <img class="card-img mx-auto"
+                                            src="<?= base_url('./assets/upload/produk/') . ($tb['image'] ?: 'no_image.jpg'); ?>"
+                                            alt="" style="height: 200px; width: 200px;">
+                                        <ul class="card-product__imgOverlay">
+                                            <li><button><i class="ti-search"></i></button></li>
+                                            <li><button><i class="ti-shopping-cart"></i></button></li>
+                                            <li><button><i class="ti-heart"></i></button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?= $tb['nama_kategori']; ?></p>
+                                        <?php 
+                                        $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
                                     ?>
-                        <h4 class="card-product__title"><a
-                                href="<?= base_url($controller . '/detail/' . urlencode($tb['id_produk'])) ?>"><?= $tb['nama_produk']; ?></a>
-                        </h4>
-                        <p class="card-product__price">
-                            <?php if ($tb['diskon_produk'] > 0 ) { ?>
-                            <span class="text-danger">
-                                Rp.<?= number_format($tb['harga_diskon'], 0, ',', '.'); ?>
-                            </span> |
-                            <span class="text-muted text-decoration-line-through small">
-                                <s>
-                                    <?= number_format($tb['harga_produk'], 0, ',', '.'); ?>
-                                </s>
-                            </span>
-                            <?php } else { ?>
-                            <span>
-                                Rp.<?= number_format($tb['harga_produk'], 0, ',', '.'); ?>
-                            </span>
-                            <?php } ?>
-                        </p>
+                                        <h4 class="card-product__title">
+                                            <a
+                                                href="<?= base_url($controller . '/detail/' . urlencode($tb['id_produk'])) ?>"><?= word_limiter($tb['nama_produk'], 3.5); ?></a>
+                                        </h4>
+                                        <p class="card-product__price">
+                                            <?php if ($tb['diskon_produk'] > 0 ) { ?>
+                                            <span
+                                                class="text-danger">Rp.<?= number_format($tb['harga_diskon'], 0, ',', '.'); ?></span>
+                                            |
+                                            <span class="text-muted text-decoration-line-through small">
+                                                <s><?= number_format($tb['harga_produk'], 0, ',', '.'); ?></s>
+                                            </span>
+                                            <?php } else { ?>
+                                            <span>Rp.<?= number_format($tb['harga_produk'], 0, ',', '.'); ?></span>
+                                            <?php } ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php 
+                        $counter++;
+                        // Tutup carousel-item dan row setelah 4 produk
+                        if ($counter % 4 == 0 || $counter == count($terbaru)): ?>
+                        </div>
                     </div>
+                    <?php endif; 
+                    endforeach; ?>
                 </div>
-                <?php endforeach; ?>
+
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev custom-carousel-control" href="#carouselTerbaru" role="button"
+                    data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next custom-carousel-control" href="#carouselTerbaru" role="button"
+                    data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </section>
-    <!-- ================ Best Selling item  carousel end ================= -->
 
-    <!-- Best Rating -->
+    <!-- Produk Diskon -->
     <section class="section-margin calc-60px">
         <div class="container">
             <div class="section-intro pb-60px">
-                <p>Produk yang memiliki Diskon</p>
                 <h2>Produk <span class="section-intro__style">Diskon</span></h2>
             </div>
-            <div class="owl-carousel owl-theme" id="bestRatingCarousel">
-                <?php foreach ($diskon as $dk) : ?>
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <?php if ($dk['diskon_produk'] > 0 ) { ?>
-                        <span class="badge badge-danger discount-badge">
-                            <?= $dk['diskon_produk'] ?>%
-                        </span>
-                        <?php } ?>
-                        <?php if (!$dk['image']) { ?>
-                        <img class="card-img mx-auto" src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
-                            href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>" alt=""
-                            style="height: 200px; width: 200px;">
-                        <?php } else { ?>
-                        <img class="card-img  mx-auto" src="<?= base_url('./assets/upload/produk/') . $dk['image']; ?>"
-                            href="<?= base_url('./assets/upload/produk/') ?><?= $dk['image']; ?>" alt=""
-                            style="height: 200px; width: 200px;">
-                        <?php } ?>
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p><?= $dk['nama_kategori']; ?></p>
-                        <?php 
-                                    // Tentukan controller berdasarkan peran
-                                    $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
+            <div id="carouselDiskon" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <?php 
+                    $isActive = true;
+                    $counter = 0;
+                    
+                    foreach ($diskon as $dk) :
+                        // Buka carousel-item baru dan row baru setiap 4 produk
+                        if ($counter % 4 == 0): ?>
+                    <div class="carousel-item <?= $isActive ? 'active' : ''; ?>">
+                        <div class="row">
+                            <?php $isActive = false; endif; ?>
+
+                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                <div class="card text-center card-product">
+                                    <div class="card-product__img">
+                                        <?php if ($dk['diskon_produk'] > 0 ) { ?>
+                                        <div class="discount-badge"><?= $dk['diskon_produk'] ?>%</div>
+                                        <?php } ?>
+                                        <img class="card-img mx-auto"
+                                            src="<?= base_url('./assets/upload/produk/') . ($dk['image'] ?: 'no_image.jpg'); ?>"
+                                            alt="" style="height: 200px; width: 200px;">
+                                        <ul class="card-product__imgOverlay">
+                                            <li><button><i class="ti-search"></i></button></li>
+                                            <li><button><i class="ti-shopping-cart"></i></button></li>
+                                            <li><button><i class="ti-heart"></i></button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><?= $dk['nama_kategori']; ?></p>
+                                        <?php 
+                                        $controller = ($this->session->userdata('role') !== 'User') ? 'Home' : 'User';
                                     ?>
-                        <h4 class="card-product__title"><a
-                                href="<?= base_url($controller . '/detail/' . urlencode($tb['id_produk'])) ?>"><?= $tb['nama_produk']; ?></a>
-                        </h4>
-                        <p class="card-product__price">
-                            <?php if ($dk['diskon_produk'] > 0 ) { ?>
-                            <span class="text-danger">
-                                Rp.<?= number_format($dk['harga_diskon'], 0, ',', '.'); ?>
-                            </span> |
-                            <span class="text-muted text-decoration-line-through small">
-                                <s>
-                                    <?= number_format($dk['harga_produk'], 0, ',', '.'); ?>
-                                </s>
-                            </span>
-                            <?php } else { ?>
-                            <span>
-                                Rp.<?= number_format($dk['harga_produk'], 0, ',', '.'); ?>
-                            </span>
-                            <?php } ?>
-                        </p>
+                                        <h4 class="card-product__title">
+                                            <a
+                                                href="<?= base_url($controller . '/detail/' . urlencode($dk['id_produk'])) ?>"><?= word_limiter($dk['nama_produk'], 3.5); ?></a>
+                                        </h4>
+                                        <p class="card-product__price">
+                                            <?php if ($dk['diskon_produk'] > 0 ) { ?>
+                                            <span
+                                                class="text-danger">Rp.<?= number_format($dk['harga_diskon'], 0, ',', '.'); ?></span>
+                                            |
+                                            <span class="text-muted text-decoration-line-through small">
+                                                <s><?= number_format($dk['harga_produk'], 0, ',', '.'); ?></s>
+                                            </span>
+                                            <?php } else { ?>
+                                            <span>Rp.<?= number_format($dk['harga_produk'], 0, ',', '.'); ?></span>
+                                            <?php } ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php 
+                        $counter++;
+                        // Tutup carousel-item dan row setelah 4 produk
+                        if ($counter % 4 == 0 || $counter == count($diskon)): ?>
+                        </div>
                     </div>
+                    <?php endif; 
+                    endforeach; ?>
                 </div>
-                <?php endforeach; ?>
+
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev custom-carousel-control" href="#carouselDiskon" role="button"
+                    data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next custom-carousel-control" href="#carouselDiskon" role="button"
+                    data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
     </section>
+
 </main>

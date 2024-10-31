@@ -22,6 +22,7 @@ class User extends CI_Controller
         $data['teratas'] = $this->modelProduk->getProdukteratas();
         $data['barudibeli'] = $this->modelProduk->getProdukbarudibeli();
         $data['reviews'] = $this->modelReview->getAll();
+        $data['banner'] = $this->modelAdmin->getBannerAktif();
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -113,6 +114,10 @@ class User extends CI_Controller
 
         $harga_pesanan = $this->input->post('harga_pesanan', true);
         $jumlah_pesanan = $this->input->post('jml_pesanan', true);
+        $berat_barang = $this->input->post('berat_pesanan', true); // Dapatkan berat per barang
+
+        // Hitung total berat
+        $total_berat = $berat_barang * $jumlah_pesanan;
 
         if ($this->form_validation->run() == FALSE) {
         $this->load->view('layoutHome/header', $data);
@@ -134,9 +139,14 @@ class User extends CI_Controller
                 'id_alumni' => $this->input->post('id_alumni', true),
                 'id_produk' => $this->input->post('id_produk', true),
                 'pembayaran' => $this->input->post('pembayaran', true),
+                'berat_pesanan' => $this->input->post('berat_pesanan', true),
+                'id_kota_asal' => $this->input->post('origin', true),
+                'kota_asal' => $this->input->post('nama_kotaAsal', true),
+                'id_kota_tujuan' => $this->input->post('destination', true),
+                'kota_tujuan' => $this->input->post('nama_kotaTujuan', true),
+                'kurir' => $this->input->post('courier'),
                 'harga_pesanan' => $harga_pesanan,
                 'jml_pesanan' => $jumlah_pesanan,
-                'total_pembayaran' => $total_harga,
                 'tgl_pesanan' => date('Y-m-d H:i:s'),
                 'status_bayar' => 'Belum Bayar',
                 'status_pesanan' => 'Diproses'
@@ -147,8 +157,57 @@ class User extends CI_Controller
 
             // Simpan pesanan
             $this->modelPesanan->tambah($dataPesanan);
+            // Ambil id_pesanan yang baru dimasukkan
+            $id_pesanan = $this->db->insert_id();
             if ($this->db->trans_status() === FALSE) {
                 log_message('error', 'Gagal menyimpan pesanan: ' . json_encode($dataPesanan));
+            }
+
+            // Menghitung ongkos kirim
+            $ongkir = $this->modelRajaongkir->get_shipping_cost(
+                $dataPesanan['id_kota_asal'],
+                $dataPesanan['id_kota_tujuan'],
+                $total_berat,
+                $dataPesanan['kurir']
+            );
+
+            if ($ongkir) {
+                $reguler_cost = null;
+                $other_cost = null;
+
+                // Loop untuk memeriksa apakah ada ongkos kirim "reguler" dan menyimpan lainnya
+                foreach ($ongkir as $result) {
+                    if (isset($result['costs'])) {
+                        foreach ($result['costs'] as $cost) {
+                            if (stripos($cost['service'], 'reguler') !== false) {
+                                $reguler_cost = $cost; // Simpan ongkos kirim reguler
+                                break 2; // Keluar dari kedua loop
+                            } else {
+                                // Jika reguler tidak ditemukan, simpan biaya lainnya
+                                $other_cost = $cost; // Simpan ongkos kirim lainnya
+                            }
+                        }
+                    }
+                }
+
+                // Pilih ongkir reguler jika ada, jika tidak pilih lainnya
+                if ($reguler_cost) {
+                    $ongkir_data = $reguler_cost['cost'][0]['value']; // Ambil nilai ongkir reguler
+                    $estimasi_data = $reguler_cost['cost'][0]['etd']; // Ambil estimasi reguler
+                } elseif ($other_cost) {
+                    $ongkir_data = $other_cost['cost'][0]['value']; // Ambil nilai ongkir lainnya
+                    $estimasi_data = $other_cost['cost'][0]['etd']; // Ambil estimasi lainnya
+                } else {
+                    // Tangani jika tidak ada layanan ongkos kirim
+                    $this->session->set_flashdata('message', 'Layanan ongkos kirim tidak tersedia.');
+                    redirect('User/detail/' . $id_produk);
+                }
+
+                // Update total pembayaran dengan ongkos kirim
+                $total_bayar = $total_harga + $ongkir_data;
+
+                // Update data pesanan dengan ongkos kirim dan estimasi
+                $this->modelPesanan->updateOngkirEstimasi($id_pesanan, $ongkir_data, $estimasi_data, $total_bayar);
             }
 
             // Update stok
@@ -179,7 +238,8 @@ class User extends CI_Controller
         $data['active_menu'] = "pesanan";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['pesanan'] = $this->modelPesanan->getPesananUser();
-
+        $data['rekening'] = $this->modelAdmin->getRekeningAktif();
+        
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
         $this->load->view('home/pesanan', $data);
@@ -342,12 +402,62 @@ class User extends CI_Controller
         redirect('User/DataPesanan');
     }
 
+    // Profile User
+    public function MyProfile()
+    {
+        $data['active_menu'] = "myprofile";
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->load->view('layoutHome/header', $data);
+        $this->load->view('layoutHome/navbar', $data);
+        $this->load->view('home/userProfile', $data);
+        $this->load->view('layoutHome/footer', $data);
+    }
+
+    public function editUsernamePassword()
+    {
+        // Validasi form input
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[alumni.username]', [
+                'is_unique' => 'This username has already registered!'
+            ]);
+            $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+                'matches' => 'Passwords do not match!',
+                'min_length' => 'Password is too short!'
+            ]);
+            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim|matches[password1]');
+
+        if ($this->form_validation->run() == FALSE) {
+            // Jika validasi gagal, tampilkan modal kembali dengan error
+            $this->session->set_flashdata('error', validation_errors());
+            // Set flashdata agar modal tetap terbuka
+            $this->session->set_flashdata('edit_Username', true);
+            redirect('User/MyProfile');
+        } else {
+            $username = $this->input->post('username');
+            $new_password = $this->input->post('password1');
+
+            $data = [
+                'username' => htmlspecialchars($this->input->post('username', true)),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            ];
+
+            // Update data di database
+            $this->db->where('id_user', $this->session->userdata('id_user'));
+            $this->db->update('user', $data);
+
+            $this->session->set_userdata($data);
+
+            $this->session->set_flashdata('message', 'Data berhasil diupdate');
+            redirect('User/MyProfile');
+        }
+    }
+
     // Halaman Contact
     public function contact()
     {   
-        $data['active_menu'] = "contact";
+        $data['active_menu'] = "aboutus";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['contact'] = "Kontak";
+        $data['contact'] = $this->modelAdmin->getKontak();
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -360,7 +470,7 @@ class User extends CI_Controller
     {   
         $data['active_menu'] = "aboutus";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['aboutUs'] = "About us";
+        $data['profil'] = $this->modelAdmin->getProfile();
         
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);

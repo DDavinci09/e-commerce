@@ -61,12 +61,15 @@
 <script src="<?= base_url('assets'); ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
 $(function() {
-    $("#example1").DataTable({
+    $('#example1').DataTable({
         "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        "lengthChange": true,
+        "autoWidth": true,
+        "paging": true, // Mengaktifkan pagination
+        "searching": true, // Mengaktifkan pencarian
+        "ordering": false, // Mengaktifkan pengurutan
+        "info": true // Menampilkan informasi tabel
+    });
     $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -95,6 +98,99 @@ function deleteConfirmation(url) {
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
+});
+</script>
+<!-- Keterangan Pesanan -->
+<script>
+$(document).ready(function() {
+    // Buat event listener dinamis untuk setiap dropdown status_pesanan
+    $('[id^=status_pesanan]').each(function() {
+        var pesananId = $(this).attr('id').split('_')[2]; // Ambil ID pesanan dari ID element
+        var $statusPesanan = $('#status_pesanan_' + pesananId);
+        var $keteranganPesanan = $('#keterangan_pesanan_' + pesananId);
+
+        // Saat dropdown berubah
+        $statusPesanan.change(function() {
+            if ($(this).val() == 'Dibatalkan') {
+                $keteranganPesanan.show();
+            } else {
+                $keteranganPesanan.hide();
+            }
+        });
+
+        // Cek saat halaman dimuat apakah status 'Dibatalkan' sudah dipilih
+        if ($statusPesanan.val() == 'Dibatalkan') {
+            $keteranganPesanan.show();
+        } else {
+            $keteranganPesanan.hide();
+        }
+    });
+});
+</script>
+
+<!-- Mendapatkan Provinsi dan Kota Asal -->
+<script>
+$(document).ready(function() {
+    // Ambil data provinsi asal
+    $.ajax({
+        url: "<?php echo base_url('rajaongkir/get_provinces'); ?>",
+        method: "GET",
+        success: function(response) {
+            const data = JSON.parse(response);
+            if (data.status === 'success') {
+                data.data.forEach(function(provinsi) {
+                    $('#originProvince').append(
+                        `<option value="${provinsi.province_id}">${provinsi.province}</option>`
+                    );
+                });
+            }
+        }
+    });
+
+    // Ambil kota asal berdasarkan provinsi asal
+    $('#originProvince').change(function() {
+        const provinceId = $(this).val();
+        if (provinceId) {
+            $.ajax({
+                url: "<?php echo base_url('rajaongkir/get_cities/') ?>" + provinceId,
+                method: "POST",
+                success: function(response) {
+                    const data = JSON.parse(response);
+                    $('#origin').empty().append(
+                        "<option value=''>-- Pilih Kota Asal --</option>");
+                    if (data.status === 'success') {
+                        data.data.forEach(function(kota) {
+                            $('#origin').append(
+                                `<option value="${kota.city_id}">${kota.city_name}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    // Set nama provinsi ketika memilih provinsi
+    $('#originProvince').change(function() {
+        const selectedOption = $(this).find('option:selected');
+        $('#namaProvinsi').val(selectedOption.text());
+    });
+
+    // Set nama kota ketika memilih kota
+    $('#origin').change(function() {
+        const selectedOption = $(this).find('option:selected');
+        $('#namaKota').val(selectedOption.text());
+    });
+});
+</script>
+
+
+<!-- Script untuk menampilkan modal jika validasi gagal -->
+<script>
+$(document).ready(function() {
+    <?php if ($this->session->flashdata('edit_modal')): ?>
+    $('#editModal').modal('show');
+    <?php endif; ?>
 });
 </script>
 </body>

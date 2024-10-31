@@ -259,4 +259,271 @@ class Admin extends CI_Controller
         $this->load->view('review/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    // Menu Admin
+    public function Rekening() 
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['rekening'] = $this->modelAdmin->getallRekening();
+
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank', 'required');
+        $this->form_validation->set_rules('no_rekening', 'No Rekening', 'required');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('layoutDashboard/header', $data);
+            $this->load->view('layoutDashboard/sidebar', $data);
+            $this->load->view('layoutDashboard/navbar', $data);
+            $this->load->view('admin/rekening', $data);
+            $this->load->view('layoutDashboard/footer', $data);
+        } else {
+            $this->modelAdmin->tambahRekening();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Data Rekening Berhasil Ditambahkan!
+        </div>');
+            redirect('Admin/Rekening'); 
+        }
+    }
+
+    public function editRekening($id_rekening) 
+    {
+        $data['rekening'] = $this->modelAdmin->getidRekening($id_rekening);
+
+        $this->modelAdmin->editRekening($id_rekening);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+        Data Rekening Berhasil Diedit!
+        </div>');
+        redirect('Admin/Rekening'); 
+    }
+
+    public function hapusRekening($id_rekening) 
+    {
+        $data['rekening'] = $this->modelAdmin->getidRekening($id_rekening);
+
+        $this->modelAdmin->hapusRekening($id_rekening);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        Data Rekening Berhasil Dihapus!
+        </div>');
+        redirect('Admin/Rekening'); 
+    }
+    
+    public function statusRekening($id_rekening, $status) 
+    {
+        $status = str_replace('_', ' ', $status); // Ubah kembali underscore ke spasi
+
+        $statusData = [
+            "status" => $status
+        ];
+
+        $this->db->update('rekening', $statusData, ['id_rekening' => $id_rekening]);
+
+        // Set flash message
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Status Rekening Berhasil Diperbarui!
+        </div>');
+
+        // Redirect kembali ke halaman rekening
+        redirect('Admin/Rekening'); 
+    }
+
+    public function Kontak() 
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();        
+        $data['kontak'] = $this->modelAdmin->getKontak();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('admin/kontak', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function editKontak() 
+    {
+        $id_kontak = $this->input->post('id_kontak'); // Ambil id_kontak dari input
+        $data = [
+            'email' => $this->input->post('email'),
+            'instagram' => $this->input->post('instagram'),
+            'tiktok' => $this->input->post('tiktok'),
+            'youtube' => $this->input->post('youtube'),
+            'whatsapp' => $this->input->post('whatsapp'),
+            'alamat' => $this->input->post('alamat'),
+        ];
+
+        $this->modelAdmin->updateKontak($id_kontak, $data);
+        // Set flash message
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Kontak Berhasil Diperbarui!
+        </div>');
+        redirect('Admin/Kontak');
+    }
+
+    public function Profile() 
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();        
+        $data['profil'] = $this->modelAdmin->getProfile();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('admin/profile', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function editProfile()
+{
+    $id_profile = $this->input->post('id_profile'); // Ambil ID profil
+
+    // Ambil input dari form
+    $data = [
+        'nama_profil' => $this->input->post('nama_profil'),
+        'isi_profil' => $this->input->post('isi_profil')
+    ];
+
+    // Cek apakah ada file gambar yang diupload
+    if (!empty($_FILES['gambar_profil']['name'])) {
+        $config['upload_path'] = './assets/upload/profile/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 2048; // Maksimal 2MB
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('gambar_profil')) {
+            // Jika upload berhasil, simpan nama file baru di database
+            $upload_data = $this->upload->data();
+            $data['gambar_profil'] = $upload_data['file_name'];
+
+            // Hapus gambar lama (opsional)
+            $old_image = $this->modelAdmin->getProfileById($id_profile)['gambar_profil'];
+            if (file_exists('./assets/upload/profile/' . $old_image)) {
+                unlink('./assets/upload/profile/' . $old_image);
+            }
+        } else {
+            // Jika gagal upload, tampilkan pesan error
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">'
+            . $this->upload->display_errors() . '</div>');
+            redirect('Admin/editProfile');
+        }
+    }
+
+    // Update data profil di database
+    $this->modelAdmin->updateProfile($id_profile, $data);
+
+    // Set flash message
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil Berhasil Diperbarui!</div>');
+    redirect('Admin/Profile');
+}
+
+    public function Banner() 
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['banner'] = $this->modelAdmin->getallBanner();
+
+        $this->form_validation->set_rules('nama_banner', 'Nama Banner', 'required');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('layoutDashboard/header', $data);
+            $this->load->view('layoutDashboard/sidebar', $data);
+            $this->load->view('layoutDashboard/navbar', $data);
+            $this->load->view('admin/banner', $data);
+            $this->load->view('layoutDashboard/footer', $data);
+        } else {
+            // Konfigurasi upload file
+            $config['upload_path'] = './assets/upload/banner';
+            $config['allowed_types'] = 'jpg|jpeg|png|PNG';
+            $config['max_size'] = '10000';
+
+            $this->load->library('upload', $config);
+
+            // Initialize config upload
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('file')) {
+                // Ambil data upload
+                $upload_data = $this->upload->data();
+
+                // Simpan data banner ke database
+                $data = [
+                    'nama_banner' => $this->input->post('nama_banner'), // Ganti dengan nama input form Anda
+                    'file' => $upload_data['file_name'], // Nama file yang diupload
+                    'status' => 'Aktif'
+                ];
+
+                $this->modelAdmin->tambahBanner($data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                    Data Banner Berhasil Ditambahkan!
+                </div>');
+                redirect('Admin/Banner'); 
+            } else {
+                // Jika upload gagal
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Gagal menambahkan data banner! Error: ' . $this->upload->display_errors() . '
+                </div>');
+                redirect('Admin/Banner'); 
+            }
+        }
+    }
+
+    public function statusBanner($id_banner, $status) 
+    {
+        $status = str_replace('_', ' ', $status); // Ubah kembali underscore ke spasi
+
+        $statusData = [
+            "status" => $status
+        ];
+
+        $this->db->update('banner', $statusData, ['id_banner' => $id_banner]);
+
+        // Set flash message
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Status Banner Berhasil Diperbarui!
+        </div>');
+
+        // Redirect kembali ke halaman rekening
+        redirect('Admin/Banner'); 
+    }
+
+    public function hapusBanner($id_banner)
+{
+    // Ambil data banner berdasarkan ID
+    $data['banner'] = $this->modelAdmin->getidBanner($id_banner);
+    
+    if (empty($data['banner'])) {
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+            Banner tidak ditemukan!
+        </div>');
+        redirect('Admin/Banner');
+        return;
+    }
+
+    $file = './assets/upload/banner/' . $data['banner']['file'];
+
+    // Cek apakah file ada dan dapat dibaca
+    if (is_readable($file)) {
+        // Coba hapus file
+        if (unlink($file)) {
+            // Jika berhasil hapus file
+            $this->modelAdmin->hapusBanner($id_banner);
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Data Banner Berhasil Dihapus!
+            </div>');
+        } else {
+            // Jika gagal hapus file
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                Gagal menghapus file banner, tetapi data tetap dihapus dari database.
+            </div>');
+            // Tetap hapus banner dari database
+            $this->modelAdmin->hapusBanner($id_banner);
+        }
+    } else {
+        // Jika file tidak ditemukan, tetap hapus banner dari database
+        $this->modelAdmin->hapusBanner($id_banner);
+        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+            File banner tidak ditemukan, tetapi data berhasil dihapus dari database.
+        </div>');
+    }
+
+    redirect('Admin/Banner');
+}
+
+
+
 }

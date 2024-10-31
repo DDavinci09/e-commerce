@@ -46,15 +46,11 @@
                                             <?= form_error('id_kategori', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <label for="jenis_produk">Jenis Produk</label>
-                                            <select type="text" name="jenis_produk" class="form-control"
-                                                id="jenis_produk" value="<?= set_value('jenis_produk'); ?>"
-                                                placeholder="Masukkan jenis produk">
-                                                <option value="">-- Pilih jenis produk --</option>
-                                                <option value="Barang">Barang</option>
-                                                <option value="Jasa">Jasa</option>
-                                            </select>
-                                            <?= form_error('jenis_produk', '<small class="text-danger">', '</small>'); ?>
+                                            <label for="berat_produk">Berat Produk (gram)</label>
+                                            <input type="number" name="berat_produk" class="form-control"
+                                                id="berat_produk" value="<?= set_value('berat_produk'); ?>"
+                                                placeholder="Masukkan berat produk (gram)">
+                                            <?= form_error('berat_produk', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="keterangan_produk">Keterangan Produk</label>
@@ -88,11 +84,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Gambar Produk</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="image" name="image"
-                                                    value="<?= set_value('image'); ?>">
-                                                <label class="custom-file-label" for="image">Pilih gambar produk</label>
-                                            </div>
+                                            <input type="file" class="form-control" id="image" name="image"
+                                                value="<?= set_value('image'); ?>">
                                             <?= form_error('image', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                     </div>

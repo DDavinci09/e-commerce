@@ -20,10 +20,10 @@
 
   <!--================ Start footer Area  =================-->
   <footer class="footer">
-      <div class="footer-area">
+      <div class="footer-area p-5">
           <div class="container">
               <div class="row section_gap">
-                  <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="single-footer-widget tp_widgets">
                           <h4 class="footer_title large_title">Our Mission</h4>
                           <p>
@@ -36,33 +36,7 @@
                           </p>
                       </div>
                   </div>
-                  <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
-                      <div class="single-footer-widget tp_widgets">
-                          <h4 class="footer_title">Quick Links</h4>
-                          <ul class="list">
-                              <li><a href="#">Home</a></li>
-                              <li><a href="#">Shop</a></li>
-                              <li><a href="#">Blog</a></li>
-                              <li><a href="#">Product</a></li>
-                              <li><a href="#">Brand</a></li>
-                              <li><a href="#">Contact</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-lg-2 col-md-6 col-sm-6">
-                      <div class="single-footer-widget instafeed">
-                          <h4 class="footer_title">Gallery</h4>
-                          <ul class="list instafeed d-flex flex-wrap">
-                              <li><img src="img/gallery/r1.jpg" alt=""></li>
-                              <li><img src="img/gallery/r2.jpg" alt=""></li>
-                              <li><img src="img/gallery/r3.jpg" alt=""></li>
-                              <li><img src="img/gallery/r5.jpg" alt=""></li>
-                              <li><img src="img/gallery/r7.jpg" alt=""></li>
-                              <li><img src="img/gallery/r8.jpg" alt=""></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                  <div class="offset-lg-1 col-lg-5 col-md-6 col-sm-6">
                       <div class="single-footer-widget tp_widgets">
                           <h4 class="footer_title">Contact Us</h4>
                           <div class="ml-40">
@@ -208,6 +182,99 @@ document.querySelector('.custom-file-input').addEventListener('change', function
     nextSibling.innerText = fileName; // Ubah teks label menjadi nama file
 });
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Mendapatkan Kota Tujuan -->
+  <script>
+$(document).ready(function() {
+    // Ambil data provinsi tujuan
+    $.ajax({
+        url: "<?php echo base_url('rajaongkir/get_provinces'); ?>", // Ganti dengan URL API yang sesuai
+        method: "GET",
+        success: function(response) {
+            const data = JSON.parse(response);
+            if (data.status === 'success') {
+                // Mengisi dropdown provinsi tujuan
+                data.data.forEach(function(provinsi) {
+                    $('#destinationProvince').append(
+                        `<option value="${provinsi.province_id}" data-nama="${provinsi.province}">${provinsi.province}</option>`
+                    );
+                });
+            } else {
+                console.error("Gagal mengambil provinsi:", data.message);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Request gagal:", textStatus, errorThrown);
+        }
+    });
+
+    // Ambil kota tujuan berdasarkan provinsi yang dipilih
+    $('#destinationProvince').change(function() {
+        const provinceId = $(this).val();
+        $('#destination').empty().append(
+            "<option value=''>-- Pilih Kota Tujuan --</option>"); // Reset kota
+        $('#namaProvinsiTujuan').val(""); // Reset nama provinsi
+
+        if (provinceId) {
+            const namaProvinsi = $(this).find(':selected').data('nama'); // Ambil nama provinsi
+            $('#namaProvinsiTujuan').val(namaProvinsi); // Set nama provinsi ke input hidden
+
+            $.ajax({
+                url: "<?php echo base_url('rajaongkir/get_cities/') ?>" +
+                    provinceId, // Ganti dengan URL API yang sesuai
+                method: "GET",
+                success: function(response) {
+                    const data = JSON.parse(response);
+                    if (data.status === 'success') {
+                        // Mengisi dropdown kota tujuan
+                        data.data.forEach(function(kota) {
+                            $('#destination').append(
+                                `<option value="${kota.city_id}" data-nama="${kota.city_name}">${kota.city_name}</option>`
+                            );
+                        });
+                    } else {
+                        console.error("Gagal mengambil kota:", data.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Request gagal:", textStatus, errorThrown);
+                }
+            });
+        }
+    });
+
+    // Ambil nama kota tujuan ketika kota dipilih
+    $('#destination').change(function() {
+        const namaKota = $(this).find(':selected').data('nama'); // Ambil nama kota
+        $('#namaKotaTujuan').val(namaKota); // Set nama kota ke input hidden
+    });
+});
+  </script>
+
+  <script>
+let currentIndexes = {
+    'carousel-top-products': 0,
+    'carousel-latest-products': 0
+};
+
+function moveCarousel(carouselId, direction) {
+    const carousel = document.getElementById(carouselId);
+    const items = carousel.querySelectorAll('.carousel-item');
+    let index = currentIndexes[carouselId];
+
+    // Mengatur indeks baru dengan menambahkan direction (-1 untuk prev, +1 untuk next)
+    index += direction;
+    if (index >= items.length) index = 0; // Jika indeks melewati jumlah item, kembali ke awal
+    if (index < 0) index = items.length - 1; // Jika indeks kurang dari nol, kembali ke akhir
+
+    currentIndexes[carouselId] = index;
+
+    // Update posisi carousel
+    const offset = -index * 100;
+    carousel.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+}
+  </script>
+
   </body>
 
   </html>

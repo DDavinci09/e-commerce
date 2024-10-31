@@ -104,7 +104,6 @@
                     <div class="col">
                         <!-- Provinsi Asal -->
                         <div class="form-group">
-                            <label for="originProvince">Provinsi Asal:</label>
                             <select class="form-control" id="originProvince" name="id_provinsi" required>
                                 <option value="">-- Pilih Provinsi Asal --</option>
                             </select>
@@ -113,7 +112,6 @@
 
                         <!-- Kota Asal -->
                         <div class="form-group">
-                            <label for="origin">Kota Asal:</label>
                             <select class="form-control" id="origin" name="id_kota" required>
                                 <option value="">-- Pilih Kota Asal --</option>
                             </select>

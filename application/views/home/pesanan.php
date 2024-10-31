@@ -1,142 +1,134 @@
 <!--================Cart Area =================-->
-<section class="cart_area">
+<section class="section">
     <div class="container">
-        <div class="cart_inner">
-            <?php if ($this->session->flashdata('message')): ?>
-            <div class="row">
-                <div class="col text-center">
-                    <h5><?= $this->session->flashdata('message'); ?></h5>
-                </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>PESANAN</h3>
             </div>
-            <?php endif; ?>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr align="center">
-                            <th scope="col">No</th>
-                            <th scope="col">Produk</th>
-                            <th scope="col">Pesanan</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1; foreach ($pesanan as $ps): ?>
-                        <tr>
-                            <td><?= $i++; ?></td>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <?php if (!$ps['image']) { ?>
-                                        <img src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
-                                            href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
-                                            class="img-fluid rounded" style="width: 100px; height: 100px;">
-                                        <?php } else { ?>
-                                        <img src="<?= base_url('./assets/upload/produk/') . $ps['image']; ?>"
-                                            href="<?= base_url('./assets/upload/produk/') ?><?= $ps['image']; ?>"
-                                            class="img-fluid rounded" style="width: 100px; height: 100px;">
-                                        <?php } ?>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4><?= $ps['nama_produk'] ?></h4>
-                                        <p><?= $ps['nama_kategori'] ?></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="padding: 15px; vertical-align: middle;">
-                                <div class="row">
-                                    <div class="col-4 col-sm-3 font-weight-bold">
-                                        Jumlah
-                                    </div>
-                                    <div class="col-8 col-sm-9">
-                                        : <?= $ps['jml_pesanan'] ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 col-sm-3 font-weight-bold">
-                                        Harga
-                                    </div>
-                                    <div class="col-8 col-sm-9">
-                                        : Rp.<?= number_format($ps['harga_pesanan'], 0, ',', '.'); ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 col-sm-3 font-weight-bold">
-                                        Total
-                                    </div>
-                                    <div class="col-8 col-sm-9">
-                                        : Rp.<?= number_format($ps['total_pembayaran'], 0, ',', '.'); ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 col-sm-3 font-weight-bold">
-                                        Bukti
-                                    </div>
-                                    <div class="col-8 col-sm-9">
-                                        : <?php if(!$ps['bukti_bayar']) { ?>
-                                        <a class="btn btn-sm btn-info text-light" data-toggle="modal"
-                                            data-target="#upload-bukti<?= $ps['id_pesanan'] ?>">
-                                            <i class="fas fa-upload"></i> Upload
-                                        </a>
-                                        <?php } else { ?>
-                                        <a class="btn btn-sm btn-success"
-                                            href="<?= base_url('./assets/upload/bukti/') . $ps['bukti_bayar'] ?>"
-                                            target="_blank">
-                                            <i class="fas fa-sticky-note"></i> Bukti
-                                        </a>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </td>
-                            <td align="center">
-                                <div class="row">
-                                    <div class="col">
+            <div class="card-body">
+                <div class="cart_inner">
+                    <?php if ($this->session->flashdata('message')): ?>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h5><?= $this->session->flashdata('message'); ?></h5>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Produk</th>
+                                    <th scope="col">Pesanan</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($pesanan as $ps): ?>
+                                <tr>
+                                    <!-- Produk -->
+                                    <td>
+                                        <div class="media" style="width: 350px;">
+                                            <img src="<?= base_url($ps['image'] ? './assets/upload/produk/' . $ps['image'] : './assets/upload/produk/no_image.jpg') ?>"
+                                                class="img-fluid rounded"
+                                                style="width: 80px; height: 80px; margin-right: 10px;">
+                                            <div class="media-body">
+                                                <h5 class="mt-0"><?= $ps['nama_produk'] ?></h5>
+                                                <small class="text-muted"><?= $ps['nama_kategori'] ?></small>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <ul class="list-unstyled" style="width: 250px;">
+                                            <li class="d-flex">
+                                                <strong class="col-5">Jumlah</strong>
+                                                <span class="col">: <?= $ps['jml_pesanan'] ?></span>
+                                            </li>
+                                            <li class="d-flex">
+                                                <strong class="col-5">Harga</strong>
+                                                <span class="col">:
+                                                    Rp.<?= number_format($ps['harga_pesanan'], 0, ',', '.') ?></span>
+                                            </li>
+                                            <li class="d-flex">
+                                                <strong class="col-5">Ongkir</strong>
+                                                <span class="col">:
+                                                    Rp.<?= number_format($ps['ongkir'], 0, ',', '.') ?></span>
+                                            </li>
+                                            <li class="d-flex">
+                                                <strong class="col-5">Total</strong>
+                                                <span class="col">:
+                                                    Rp.<?= number_format($ps['total_pembayaran'], 0, ',', '.') ?></span>
+                                                </span>
+                                            </li>
+                                            <li class="d-flex">
+                                                <strong class="col-5">Kurir</strong>
+                                                <span class="col">: <?= strtoupper($ps['kurir']) ?>
+                                                    (<?= $ps['estimasi'] ?>)</span>
+                                            </li>
+                                            <li class="d-flex">
+                                                <strong class="col-5">Bukti</strong>
+                                                <span class="col">:
+                                                    <?php if(!$ps['bukti_bayar']) { ?>
+                                                    <a class="btn btn-sm btn-info text-light" data-toggle="modal"
+                                                        data-target="#upload-bukti<?= $ps['id_pesanan'] ?>">
+                                                        <i class="fas fa-upload"></i> Upload
+                                                    </a>
+                                                    <?php } else { ?>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="<?= base_url('./assets/upload/bukti/') . $ps['bukti_bayar'] ?>"
+                                                        target="_blank">
+                                                        <i class="fas fa-sticky-note"></i> Bukti
+                                                    </a>
+                                                    <?php } ?>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+
+
+                                    <!-- Status -->
+                                    <td align="center">
                                         <a
-                                            class="btn btn-sm  text-light <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>">
+                                            class="btn btn-sm text-light <?= $ps['status_bayar'] == 'Belum Bayar' ? 'btn-danger' : 'btn-success' ?>">
                                             <i
                                                 class="fas <?= $ps['status_bayar'] == 'Belum Bayar' ? 'fa-times-circle' : 'fa-check-circle' ?>"></i>
                                             <?= $ps['status_bayar'] ?>
                                         </a>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col">
-                                        <a class="btn btn-sm text-light <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : 'btn-warning') ?>"
-                                            <?php if($ps['status_pesanan'] == 'Dikirim'): ?> data-toggle="modal"
-                                            data-target="#status-pesanan<?= $ps['id_pesanan'] ?>" <?php endif; ?>>
+                                        <br>
+                                        <a class="btn btn-sm mt-2 text-light <?= $ps['status_pesanan'] == 'Diproses' ? 'btn-primary' : ($ps['status_pesanan'] == 'Selesai' ? 'btn-success' : ($ps['status_pesanan'] == 'Dibatalkan' ? 'btn-danger' : 'btn-warning')) ?>"
+                                            <?php if($ps['status_pesanan'] == 'Dikirim' || $ps['status_pesanan'] == 'Dibatalkan'): ?>
+                                            data-toggle="modal" data-target="#status-pesanan<?= $ps['id_pesanan'] ?>"
+                                            <?php endif; ?>>
                                             <i
-                                                class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : 'fa-times-circle') ?>"></i>
+                                                class="fas <?= $ps['status_pesanan'] == 'Diproses' ? 'fa-spinner' : ($ps['status_pesanan'] == 'Selesai' ? 'fa-check-circle' : ($ps['status_pesanan'] == 'Dibatalkan' ? 'fa-times-circle' : 'fa-truck')) ?>"></i>
                                             <?= $ps['status_pesanan'] ?>
                                         </a>
+                                    </td>
 
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        <?php if($ps['status_pesanan'] !== 'Selesai' ) { ?>
-                                        <a class="btn btn-sm btn-info  text-light" data-toggle="modal"
-                                            data-target="#edit-pesanan<?= $ps['id_pesanan'] ?>">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-danger  text-light"
+                                    <!-- Aksi -->
+                                    <td align="center">
+                                        <?php if($ps['status_pesanan'] !== 'Selesai') { ?>
+                                        <a class="btn btn-sm btn-danger text-light"
                                             onclick="deleteConfirmation('<?= base_url(); ?>User/hapusPesanan/<?= $ps['id_pesanan']; ?>')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                         <?php } else { ?>
-                                        <a class="btn btn-sm btn-secondary  text-light"
+                                        <a class="btn btn-sm btn-secondary text-light"
                                             href="<?= base_url() ?>User/Detail/<?= $ps['id_produk'] ?>">
                                             <i class="fas fa-sticky-note"></i> Review
                                         </a>
                                         <?php } ?>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -162,14 +154,14 @@
                                 <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
                                 <div class="form-group">
                                     <label for="no_rekening">No Rekening :</label>
-                                    <p>
-                                        <b>
-                                            123-345-567-789 (BRI) <br>
-                                            987-765-543-321 (BCA)
-                                        </b>
-                                    </p>
-                                    <input type="file" class="form-control" id="bukti_bayar" name="bukti_bayar"
-                                        required>
+                                    <?php foreach($rekening as $rek): ?>
+                                    <div class="row">
+                                        <div class="col">
+                                            <b><?= $rek['no_rekening'] ?></b> (<?= $rek['nama_bank'] ?>)
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                    <input type="file" class="mt-2" id="bukti_bayar" name="bukti_bayar" required>
                                 </div>
                             </div>
                         </div>
@@ -277,6 +269,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
+                            <?php if($ps['status_pesanan'] == "Dikirim") { ?>
                             <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
                             <label for="status_bayar">Status Pesanan</label>
                             <div class="input-group">
@@ -294,13 +287,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php } else { ?>
+                            <div class="form-group">
+                                <label for="status_pesanan">Status Pesanan</label>
+                                <div class="input-group">
+                                    <input type="text" name="nama_kategori" class="form-control" id="nama_kategori"
+                                        value="<?= $ps['status_pesanan'] ?>" placeholder="Masukkan nama kategori"
+                                        readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-money-check"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Input keterangan pesanan, disembunyikan secara default -->
+                            <div class="form-group">
+                                <label for="keterangan">Keterangan Pembatalan</label>
+                                <textarea class="form-control" name="keterangan" rows="3"
+                                    readonly><?= $ps['keterangan_pesanan'] ?></textarea>
+                            </div>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <?php if($ps['status_pesanan'] == "Dikirim") { ?>
                 <button type="submit" class="btn btn-primary">Simpan</button>
+                <?php } ?>
             </div>
             <?php echo form_close(); ?>
         </div>
