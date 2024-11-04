@@ -80,7 +80,7 @@ class Home extends CI_Controller
         $data['kategori'] = $this->modelKategori->getAll();
         $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
         $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
-        $data['title'] = "Ketegori : " . $data['nama_kategori']['nama_kategori'];
+        $data['title'] = $data['nama_kategori']['nama_kategori'];
         $data['totalproduk'] = count($data['produk']);
 
         $this->load->view('layoutHome/header', $data);

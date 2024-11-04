@@ -29,15 +29,19 @@
                                 <tr>
                                     <!-- Produk -->
                                     <td>
-                                        <div class="media" style="width: 350px;">
-                                            <img src="<?= base_url($ps['image'] ? './assets/upload/produk/' . $ps['image'] : './assets/upload/produk/no_image.jpg') ?>"
-                                                class="img-fluid rounded"
-                                                style="width: 80px; height: 80px; margin-right: 10px;">
-                                            <div class="media-body">
-                                                <h5 class="mt-0"><?= $ps['nama_produk'] ?></h5>
-                                                <small class="text-muted"><?= $ps['nama_kategori'] ?></small>
+                                        <a href="<?= base_url(); ?>User/detail/<?= $ps['id_produk'] ?>"
+                                            style="text-decoration: none; color: inherit;">
+                                            <div class="media" style="width: 350px;">
+                                                <img src="<?= base_url($ps['image'] ? './assets/upload/produk/' . $ps['image'] : './assets/upload/produk/no_image.jpg') ?>"
+                                                    class="img-fluid rounded"
+                                                    style="width: 100px; height: 100px; margin-right: 10px;">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0"><?= $ps['nama_produk'] ?></h5>
+                                                    <small class="text-muted"><?= $ps['nama_kategori'] ?></small>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
+
                                     </td>
 
                                     <td>
@@ -65,7 +69,7 @@
                                             <li class="d-flex">
                                                 <strong class="col-5">Kurir</strong>
                                                 <span class="col">: <?= strtoupper($ps['kurir']) ?>
-                                                    (<?= $ps['estimasi'] ?>)</span>
+                                                    (<?= $ps['estimasi'] ?> hari)</span>
                                             </li>
                                             <li class="d-flex">
                                                 <strong class="col-5">Bukti</strong>

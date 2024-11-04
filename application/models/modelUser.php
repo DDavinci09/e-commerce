@@ -27,4 +27,9 @@ class modelUser extends CI_Model
     return $this->db->get('user')->result_array();
   }
 
+  public function getidUser($id_user)
+  {
+    return $this->db->get_where('user', ['id_user' => $id_user])->row_array();
+  }
+
 }

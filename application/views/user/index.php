@@ -40,21 +40,23 @@
                                 <tbody>
                                     <?php
                                         $i = 1;
-                                        foreach ($users as $user):
+                                        foreach ($users as $us):
                                             ?>
                                     <tr>
                                         <td>
                                             <?= $i++; ?>
                                         </td>
-                                        <td><?= $user['username'] ?></td>
-                                        <td><?= $user['nama_user'] ?></td>
-                                        <td><?= $user['email'] ?></td>
-                                        <td><?= $user['no_telp'] ?></td>
+                                        <td><?= $us['username'] ?></td>
+                                        <td><?= $us['nama_user'] ?></td>
+                                        <td><?= $us['email'] ?></td>
+                                        <td><?= $us['no_telp'] ?></td>
                                         <td>
-                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal"
-                                                data-bs-target=""><i class="fa fa-edit"></i></a>
-
-                                            <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-info btn-sm mb-1"
+                                                href="<?= base_url() ?>Admin/ProfileUser/<?= $us['id_user'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <a class="btn btn-danger  btn-sm" href="#"
+                                                onclick="deleteConfirmation('<?= base_url(); ?>Admin/deleteAlumni/<?= $alm['id_user']; ?>')"><i
+                                                    class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

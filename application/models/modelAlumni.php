@@ -20,7 +20,7 @@ class modelAlumni extends CI_Model
 
   public function getidAlumni($id_alumni)
   {
-    return $this->db->get('alumni', ['id_alumni' => $id_alumni])->row_array();
+    return $this->db->get_where('alumni', ['id_alumni' => $id_alumni])->row_array();
   }
 
   // Model (modelAlumni.php)

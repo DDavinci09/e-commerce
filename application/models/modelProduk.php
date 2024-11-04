@@ -162,6 +162,23 @@ class modelProduk extends CI_Model
 
     return $this->db->get('produk')->result_array();
   }
+  
+  public function getProdukAlumnibyId($id_alumni)
+  {
+    $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+    $this->db->join('alumni', 'produk.id_alumni = alumni.id_alumni');
+    $this->db->where(['produk.id_alumni' => $id_alumni]);
+    $this->db->group_by('produk.id_produk');
+    $this->db->order_by('id_produk', 'DESC');
+
+    return $this->db->get('produk')->result_array();
+  }
+
+  public function getProdukByAlumni($id_alumni)
+{
+    return $this->db->get_where('produk', ['id_alumni' => $id_alumni])->result_array();
+}
+
 
   public function getidProduk($id_produk)
   {

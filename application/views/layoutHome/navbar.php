@@ -17,6 +17,9 @@
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto align-items-center">
                         <li class="nav-item <?= ($active_menu == 'home') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>Home">Home</a></li>
+                        <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
+                                href="<?= base_url(); ?>Home/shop">Shop</a></li>
+                        </li>
                         <li class="nav-item submenu dropdown <?= ($active_menu == 'aboutus') ? 'active' : '' ?>">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                 aria-haspopup="true" aria-expanded="false">About Us</a>
@@ -26,9 +29,6 @@
                                 <li class="nav-item"><a class="nav-link"
                                         href="<?= base_url(); ?>Home/Contact">Contact</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>Home/shop">Shop</a></li>
                         </li>
                         <!-- Search form -->
                         <li class="nav-item">
@@ -72,6 +72,11 @@
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto align-items-center">
                         <li class="nav-item <?= ($active_menu == 'home') ? 'active' : '' ?>"><a class="nav-link"
                                 href="<?= base_url(); ?>User">Home</a></li>
+                        <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
+                                href="<?= base_url(); ?>User/shop">Shop</a></li>
+                        <li class="nav-item <?= ($active_menu == 'pesanan') ? 'active' : '' ?>"><a class="nav-link"
+                                href="<?= base_url(); ?>User/DataPesanan">Pesanan</a>
+                        </li>
                         <li class="nav-item submenu dropdown <?= ($active_menu == 'aboutus') ? 'active' : '' ?>">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                 aria-haspopup="true" aria-expanded="false">About Us</a>
@@ -81,11 +86,6 @@
                                 <li class="nav-item"><a class="nav-link"
                                         href="<?= base_url(); ?>User/Contact">Contact</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item <?= ($active_menu == 'shop') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>User/shop">Shop</a></li>
-                        <li class="nav-item <?= ($active_menu == 'pesanan') ? 'active' : '' ?>"><a class="nav-link"
-                                href="<?= base_url(); ?>User/DataPesanan">Pesanan</a>
                         </li>
                         <!-- Search form -->
                         <li class="nav-item">

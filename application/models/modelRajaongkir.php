@@ -109,6 +109,47 @@ class modelRajaongkir extends CI_Model
     }
 }
 
+// Method untuk menghitung ongkos kirim berdasarkan asal, tujuan, berat, dan kurir
+public function get_ongkir($origin, $destination, $weight, $courier)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query(array(
+                'origin' => $origin,
+                'destination' => $destination,
+                'weight' => $weight,
+                'courier' => $courier
+            )),
+            CURLOPT_HTTPHEADER => array(
+                "key: " . $this->api_key
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            log_message('error', "cURL Error #: " . $err);
+            return false;
+        } else {
+            $array_response = json_decode($response, true);
+            
+            if (isset($array_response['rajaongkir']['results'][0]['costs'])) {
+                return $array_response['rajaongkir']['results'][0]['costs'];
+            } else {
+                log_message('error', "Response tidak valid: " . $response);
+                return false;
+            }
+        }
+    }
+
+
 
     public function get_cities_by_keyword($keyword)
 {

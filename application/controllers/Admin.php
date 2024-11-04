@@ -47,6 +47,31 @@ class Admin extends CI_Controller
         $this->load->view('alumni/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    public function ProfileAlumni($id_alumni)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['alumni'] = $this->modelAlumni->getidAlumni($id_alumni);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('alumni/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+    
+    public function ProdukAlumni($id_alumni)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['alumni'] = $this->modelAlumni->getidAlumni($id_alumni);
+        $data['produk'] = $this->modelProduk->getProdukAlumnibyId($id_alumni);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('produk/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
 
     // Fungsi untuk mengubah status alumni
     public function editStatus($id_alumni, $status)
@@ -69,6 +94,36 @@ class Admin extends CI_Controller
         redirect('Admin/DataAlumni');
     }
 
+    // Hapus Alumni
+    public function deleteAlumni($id_alumni)
+    {
+        // Ambil semua data produk yang terkait dengan alumni ini
+        $produkList = $this->modelProduk->getProdukByAlumni($id_alumni);
+        
+        // Hapus semua file gambar produk yang terkait
+        foreach ($produkList as $produk) {
+            $file = './assets/upload/produk/' . $produk['image'];
+            
+            if (is_readable($file)) {
+                unlink($file); // Hapus file gambar produk jika ditemukan
+            }
+        }
+
+        // Hapus data produk terkait dari database
+        $this->db->where('id_alumni', $id_alumni);
+        $this->db->delete('produk');
+
+        // Hapus data alumni dari database
+        $this->db->where('id_alumni', $id_alumni);
+        $this->db->delete('alumni');
+
+        // Set pesan flash dan redirect ke halaman Alumni
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Data Alumni dan Produk Terkait Berhasil Dihapus Beserta File Gambar Produk!
+        </div>');
+        redirect('Admin/DataAlumni');
+    }
+
     // Halaman Data User
     public function DataUser()
     {
@@ -81,6 +136,32 @@ class Admin extends CI_Controller
         $this->load->view('user/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
     }
+    
+    public function ProfileUser($id_user)
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['users'] = $this->modelUser->getidUser($id_user);
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('user/detail', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function deleteUser($id_user)
+    {
+        // Hapus data user dari database
+        $this->db->where('id_user', $id_user);
+        $this->db->delete('user');
+
+        // Set pesan flash dan redirect ke halaman Users
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Data User Berhasil Dihapus!
+        </div>');
+        redirect('Admin/DataUser');
+    }
+
 
     // Halaman Data Kategori
     public function DataKategori()

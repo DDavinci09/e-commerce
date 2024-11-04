@@ -89,12 +89,12 @@
                         <p>Data Pesanan</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?= base_url(); ?>Admin/DataReview" class="nav-link">
                         <i class="nav-icon fas fa-star"></i>
                         <p>Data Review</p>
                     </a>
-                </li>
+                </li> -->
                 <?php } ?>
 
                 <!-- Dashboard Alumni -->

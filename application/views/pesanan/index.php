@@ -70,24 +70,6 @@
                                                             <?= $ps['nama_kategori']; ?>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-1 mx-auto">
-                                                            <i class="fas fa-store fa-sm" style="color: brown;">
-                                                            </i>
-                                                        </div>
-                                                        <div class="col-sm-11">
-                                                            <?= $ps['nama_toko'] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-1 mx-auto">
-                                                            <i class="fas fa-map-marker fa-sm" style="color: black;">
-                                                            </i>
-                                                        </div>
-                                                        <div class="col-sm-11">
-                                                            <?= $ps['alamat_toko'] ?>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
@@ -137,6 +119,24 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col col-md-5">
+                                                            <b>Kurir</b>
+                                                        </div>
+                                                        <div class="col col-md-7">
+                                                            :
+                                                            <?= strtoupper($ps['kurir']) ?> (<?= $ps['estimasi'] ?>)
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col col-md-5">
+                                                            <b>Ongkir</b>
+                                                        </div>
+                                                        <div class="col col-md-7">
+                                                            :
+                                                            Rp.<?= number_format($ps['ongkir'], 0, ',', '.'); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col col-md-5">
                                                             <b>Total</b>
                                                         </div>
                                                         <div class="col col-md-7">
@@ -148,7 +148,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="card" style="width: 310px;">
+                                            <div class="card" style="width: 320px;">
                                                 <div class="card-body">
                                                     <div class="row my-2">
                                                         <div class="col col-md-6">
@@ -301,19 +301,16 @@
                             <input type="hidden" name="id_pesanan" value="<?= $ps['id_pesanan'] ?>">
                             <label for="status_bayar">Status Pesanan</label>
                             <div class="input-group">
-                                <select type="text" class="form-control" id="status_pesanan" name="status_pesanan">
+                                <select class="form-control" id="status_pesanan" name="status_pesanan"
+                                    onchange="toggleAlasanField()">
                                     <option value="Diproses"
-                                        <?= $ps['status_pesanan'] == 'Diproses' ? 'selected' : ''; ?>>Diproses
-                                    </option>
+                                        <?= $ps['status_pesanan'] == 'Diproses' ? 'selected' : ''; ?>>Diproses</option>
                                     <option value="Dikirim"
-                                        <?= $ps['status_pesanan'] == 'Dikirim' ? 'selected' : ''; ?>>Dikirim
-                                    </option>
+                                        <?= $ps['status_pesanan'] == 'Dikirim' ? 'selected' : ''; ?>>Dikirim</option>
                                     <option value="Selesai"
-                                        <?= $ps['status_pesanan'] == 'Selesai' ? 'selected' : ''; ?>>Selesai
-                                    </option>
+                                        <?= $ps['status_pesanan'] == 'Selesai' ? 'selected' : ''; ?>>Selesai</option>
                                     <option value="Dibatalkan"
-                                        <?= $ps['status_pesanan'] == 'Dibatalkan' ? 'selected' : ''; ?>>
-                                        Dibatalkan
+                                        <?= $ps['status_pesanan'] == 'Dibatalkan' ? 'selected' : ''; ?>>Dibatalkan
                                     </option>
                                 </select>
                                 <div class="input-group-append">
@@ -321,6 +318,13 @@
                                         <span class="fas fa-money-check"></span>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- Alasan Batal -->
+                            <div class="form-group" id="alasanField" style="display: none;">
+                                <label for="keterangan">Alasan Pembatalan</label>
+                                <textarea class="form-control" id="keterangan" name="keterangan"
+                                    placeholder="Masukkan alasan pembatalan"></textarea>
                             </div>
                         </div>
                     </div>

@@ -82,6 +82,30 @@ class Rajaongkir extends CI_Controller
         }
     }
 
+
+    public function layanan()
+    {
+        $this->load->view('rajaongkir/layanan');
+    }
+
+    public function get_layanan()
+    {
+        $origin = $this->input->post('origin');
+        $destination = $this->input->post('destination');
+        $weight = $this->input->post('weight');
+        $courier = $this->input->post('courier');
+
+        $layanan = $this->modelRajaongkir->get_ongkir($origin, $destination, $weight, $courier);
+
+        if ($layanan) {
+            echo json_encode($layanan);
+        } else {
+            echo json_encode(['error' => 'Gagal mengambil layanan ekspedisi']);
+        }
+    }
+
+
+
 //     public function get_shipping_cost()
 // {
 //     $origin = $this->input->post('origin');

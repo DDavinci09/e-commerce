@@ -59,10 +59,12 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary  btn-sm" data-bs-toggle="modal"
-                                                data-bs-target=""><i class="fa fa-edit"></i></a>
-
-                                            <a class="btn btn-danger  btn-sm" href=""><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-info btn-sm"
+                                                href="<?= base_url() ?>Admin/ProfileAlumni/<?= $alm['id_alumni'] ?>"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <a class="btn btn-danger  btn-sm" href="#"
+                                                onclick="deleteConfirmation('<?= base_url(); ?>Admin/deleteAlumni/<?= $alm['id_alumni']; ?>')"><i
+                                                    class="fa fa-trash"></i></a>
                                         </td>
                                         <?php endforeach; ?>
                                     </tr>

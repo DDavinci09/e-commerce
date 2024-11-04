@@ -57,7 +57,7 @@ class User extends CI_Controller
         $data['kategori'] = $this->modelKategori->getAll();
         $data['produk'] = $this->modelProduk->cariProduk($keyword);
         $data['totalproduk'] = count($data['produk']);
-        $data['title'] = "Hasil Pencarian : ". $keyword;
+        $data['title'] = $keyword;
 
         $this->load->view('layoutHome/header', $data);
         $this->load->view('layoutHome/navbar', $data);
@@ -84,12 +84,12 @@ class User extends CI_Controller
     // Halaman pembelian produk user berdasarkan kategori produk
     public function getKategoriProduk($id_kategori)
     {
-        $data['active_menu'] = "shop";
+        $data['active_menu'] = "kategori";
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['kategori'] = $this->modelKategori->getAll();
         $data['nama_kategori'] = $this->modelKategori->getidKategori($id_kategori);
         $data['produk'] = $this->modelProduk->getKategoriProduk($id_kategori);
-        $data['title'] = "Ketegori : " . $data['nama_kategori']['nama_kategori'];
+        $data['title'] = $data['nama_kategori']['nama_kategori'];
         $data['totalproduk'] = count($data['produk']);
 
         $this->load->view('layoutHome/header', $data);
@@ -226,7 +226,7 @@ class User extends CI_Controller
                 </div>');
                 redirect('User/detail/'.$id_produk);
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pembelian berhasil! Total pembayaran: Rp ' . number_format($total_harga, 2) .'</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pembelian berhasil! Total pembayaran: Rp ' . number_format($total_bayar, 2) .'</div>');
                 redirect('User/DataPesanan');
             }
         }
@@ -412,6 +412,23 @@ class User extends CI_Controller
         $this->load->view('layoutHome/navbar', $data);
         $this->load->view('home/userProfile', $data);
         $this->load->view('layoutHome/footer', $data);
+    }
+
+    public function editProfile()
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        
+        $data = [
+            'nama_user' => $this->input->post('nama_user', true),
+            'no_telp' => $this->input->post('no_telp', true),
+            'email' => $this->input->post('email', true),
+            'alamat_user' => $this->input->post('alamat_user', true)
+        ];
+        // Update data di database
+        $this->db->where('id_user', $this->session->userdata('id_user'));
+        $this->db->update('user', $data);
+        
+        redirect('User/MyProfile');
     }
 
     public function editUsernamePassword()

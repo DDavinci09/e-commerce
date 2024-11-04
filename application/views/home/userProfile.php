@@ -20,8 +20,8 @@
                                     readonly>
                             </div>
                             <div class="form-group">
-                                <label for="nama">Nama Alumni</label>
-                                <input type="text" class="form-control" id="nama" value="<?= $user['nama_user'] ?>"
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" id="nama_user" value="<?= $user['nama_user'] ?>"
                                     readonly>
                             </div>
                             <div class="form-group">
@@ -33,6 +33,13 @@
                                 <label for="noTelp">No Telp</label>
                                 <input type="text" class="form-control" id="noTelp" value="<?= $user['no_telp'] ?>"
                                     readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat_user">Alamat Toko</label>
+                                <div class="form-group">
+                                    <textarea type="text-area" class="form-control" name="alamat_user" id="alamat_user"
+                                        placeholder="Alamat User" readonly><?= $user['alamat_user'] ?></textarea>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -60,7 +67,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="<?= base_url('User/editUsernamePassword'); ?>" method="post">
-                <div class="modal-header">
+                <div class="modal-header bg-warning">
                     <h5 class="modal-title" id="editUsernameLabel">Edit Username & Password</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -109,7 +116,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="<?= base_url('User/editProfile'); ?>" method="post">
-                <div class="modal-header">
+                <div class="modal-header bg-success">
                     <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -122,7 +129,7 @@
                             <label for="nama_user">Nama User</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="nama_user" id="nama_user"
-                                    value="<?= $user['nama_user'] ?>" placeholder="Nama user">
+                                    value="<?= $user['nama_user'] ?>" placeholder="Nama User . . ." required>
                                 <?= form_error('nama_user', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -133,7 +140,7 @@
                             <label for="email">Email</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="email" id="email"
-                                    value="<?= $user['email'] ?>" placeholder="Email">
+                                    value="<?= $user['email'] ?>" placeholder="Email . . ." required>
                                 <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -144,8 +151,24 @@
                             <label for="no_telp">No Telp</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="no_telp" id="no_telp"
-                                    value="<?= $user['no_telp'] ?>" placeholder="Email">
+                                    value="<?= $user['no_telp'] ?>" placeholder="No Telp . . ." required>
                                 <?= form_error('no_telp', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <!-- Alamat Toko -->
+                            <label for="alamat_user">Alamat Toko</label>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <textarea type="text-area" class="form-control" name="alamat_user"
+                                            id="alamat_user"
+                                            placeholder="Alamat User"><?= $user['alamat_user'] ?></textarea>
+                                    </div>
+                                    <?= form_error('alamat_user', '<small class="text-danger">', '</small>'); ?>
+                                </div>
                             </div>
                         </div>
                     </div>

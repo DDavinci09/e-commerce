@@ -27,9 +27,9 @@
             </div>
             <div class="row">
                 <?php foreach ($teratas as $tr) : ?>
-                <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                     <div class="card text-center card-product">
-                        <div class="card-product__img">
+                        <div class="card-product__img" style="aspect-ratio: 1 / 1; width: 100%; overflow: hidden;">
                             <?php if ($tr['diskon_produk'] > 0 ) { ?>
                             <div class="discount-badge">
                                 <?= $tr['diskon_produk'] ?>%
@@ -38,12 +38,12 @@
                             <?php if (!$tr['image']) { ?>
                             <img class="card-img mx-auto" src="<?= base_url('./assets/upload/produk/no_image.jpg') ?>"
                                 href="<?= base_url('./assets/upload/produk/no_image.jpg') ?>" alt=""
-                                style="height: 200px; width: 200px;">
+                                style="width: 100%; height: 100%; object-fit: cover;">
                             <?php } else { ?>
                             <img class="card-img mx-auto"
                                 src="<?= base_url('./assets/upload/produk/') . $tr['image']; ?>"
                                 href="<?= base_url('./assets/upload/produk/') ?><?= $tr['image']; ?>" alt=""
-                                style="height: 200px; width: 200px;">
+                                style="width: 100%; height: 100%; object-fit: cover;">
                             <?php } ?>
                             <ul class="card-product__imgOverlay">
                                 <li><button><i class="ti-search"></i></button></li>
@@ -86,7 +86,7 @@
     <!-- ================ trending product section end ================= -->
 
     <!-- Produk Terbaru -->
-    <section class="section-margin calc-60px">
+    <section class="section-margin">
         <div class="container">
             <div class="section-intro pb-60px">
                 <h2>Produk <span class="section-intro__style">Terbaru</span></h2>
@@ -104,15 +104,16 @@
                         <div class="row">
                             <?php $isActive = false; endif; ?>
 
-                            <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                                 <div class="card text-center card-product">
-                                    <div class="card-product__img">
+                                    <div class="card-product__img"
+                                        style="aspect-ratio: 1 / 1; width: 100%; overflow: hidden;">
                                         <?php if ($tb['diskon_produk'] > 0 ) { ?>
                                         <div class="discount-badge"><?= $tb['diskon_produk'] ?>%</div>
                                         <?php } ?>
                                         <img class="card-img mx-auto"
                                             src="<?= base_url('./assets/upload/produk/') . ($tb['image'] ?: 'no_image.jpg'); ?>"
-                                            alt="" style="height: 200px; width: 200px;">
+                                            alt="" style="width: 100%; height: 100%; object-fit: cover;">
                                         <ul class="card-product__imgOverlay">
                                             <li><button><i class="ti-search"></i></button></li>
                                             <li><button><i class="ti-shopping-cart"></i></button></li>
@@ -170,7 +171,7 @@
     </section>
 
     <!-- Produk Diskon -->
-    <section class="section-margin calc-60px">
+    <section class="section-margin">
         <div class="container">
             <div class="section-intro pb-60px">
                 <h2>Produk <span class="section-intro__style">Diskon</span></h2>
@@ -188,15 +189,16 @@
                         <div class="row">
                             <?php $isActive = false; endif; ?>
 
-                            <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                                 <div class="card text-center card-product">
-                                    <div class="card-product__img">
+                                    <div class="card-product__img"
+                                        style="aspect-ratio: 1 / 1; width: 100%; overflow: hidden;">
                                         <?php if ($dk['diskon_produk'] > 0 ) { ?>
                                         <div class="discount-badge"><?= $dk['diskon_produk'] ?>%</div>
                                         <?php } ?>
                                         <img class="card-img mx-auto"
                                             src="<?= base_url('./assets/upload/produk/') . ($dk['image'] ?: 'no_image.jpg'); ?>"
-                                            alt="" style="height: 200px; width: 200px;">
+                                            alt="" style="width: 100%; height: 100%; object-fit: cover;">
                                         <ul class="card-product__imgOverlay">
                                             <li><button><i class="ti-search"></i></button></li>
                                             <li><button><i class="ti-shopping-cart"></i></button></li>

@@ -19,72 +19,45 @@
   </div>
 
   <!--================ Start footer Area  =================-->
-  <footer class="footer">
-      <div class="footer-area p-5">
-          <div class="container">
-              <div class="row section_gap">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="single-footer-widget tp_widgets">
-                          <h4 class="footer_title large_title">Our Mission</h4>
-                          <p>
-                              So seed seed green that winged cattle in. Gathering thing made fly you're no
-                              divided deep moved us lan Gathering thing us land years living.
-                          </p>
-                          <p>
-                              So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep
-                              moved
-                          </p>
-                      </div>
-                  </div>
-                  <div class="offset-lg-1 col-lg-5 col-md-6 col-sm-6">
-                      <div class="single-footer-widget tp_widgets">
-                          <h4 class="footer_title">Contact Us</h4>
-                          <div class="ml-40">
-                              <p class="sm-head">
-                                  <span class="fa fa-location-arrow"></span>
-                                  Head Office
-                              </p>
-                              <p>123, Main Street, Your City</p>
-
-                              <p class="sm-head">
-                                  <span class="fa fa-phone"></span>
-                                  Phone Number
-                              </p>
-                              <p>
-                                  +123 456 7890 <br>
-                                  +123 456 7890
-                              </p>
-
-                              <p class="sm-head">
-                                  <span class="fa fa-envelope"></span>
-                                  Email
-                              </p>
-                              <p>
-                                  free@infoexample.com <br>
-                                  www.infoexample.com
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <div class="footer-bottom">
-          <div class="container">
-              <div class="row d-flex">
-                  <p class="col-lg-12 footer-text text-center">
-                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                      Copyright &copy;<script>
-                      document.write(new Date().getFullYear());
-                      </script> All rights reserved | This template is made with <i class="fa fa-heart"
-                          aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  <footer class="main-footer bg-dark text-white p-4">
+      <div class="container">
+          <div class="row">
+              <!-- Contact Information -->
+              <div class="col-md-4">
+                  <h5 class="text-white">Contact Us</h5>
+                  <p>
+                      <i class="fas fa-map-marker-alt"></i> Address: Jl. Contoh No.123, Jakarta<br>
+                      <i class="fas fa-phone-alt"></i> Phone: +62 123 456 789<br>
+                      <i class="fas fa-envelope"></i> Email: info@example.com
                   </p>
               </div>
+              <!-- Social Media Links -->
+              <div class="col-md-4">
+                  <h5 class="text-white">Follow Us</h5>
+                  <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+                  <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i> Twitter</a><br>
+                  <a href="#" class="text-white"><i class="fab fa-instagram"></i> Instagram</a>
+              </div>
+              <!-- Newsletter Subscription -->
+              <div class="col-md-4">
+                  <h5 class="text-white">Subscribe to Our Newsletter</h5>
+                  <form action="#" method="post">
+                      <div class="input-group">
+                          <input type="email" class="form-control" placeholder="Enter your email" required>
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit">Subscribe</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <hr class="bg-light">
+          <div class="text-center">
+              <p>&copy; 2024 Your Company. All Rights Reserved.</p>
           </div>
       </div>
   </footer>
+
   <!--================ End footer Area  =================-->
 
 

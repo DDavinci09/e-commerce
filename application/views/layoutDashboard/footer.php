@@ -193,6 +193,27 @@ $(document).ready(function() {
     <?php endif; ?>
 });
 </script>
+
+
+<script>
+function toggleAlasanField() {
+    var statusPesanan = document.getElementById("status_pesanan").value;
+    var alasanField = document.getElementById("alasanField");
+
+    // Menampilkan kolom alasan jika opsi "Dibatalkan" dipilih
+    if (statusPesanan === "Dibatalkan") {
+        alasanField.style.display = "block";
+    } else {
+        alasanField.style.display = "none";
+    }
+}
+
+// Memastikan tampilan awal sesuai dengan status pesanan saat halaman dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    toggleAlasanField();
+});
+</script>
+
 </body>
 
 </html>
