@@ -21,25 +21,40 @@
   <!--================ Start footer Area  =================-->
   <footer class="main-footer bg-dark text-white p-4">
       <div class="container">
+          <?php
+$kontak = $this->modelAdmin->getKontak();
+$profil = $this->modelAdmin->getProfile();
+        ?>
           <div class="row">
               <!-- Contact Information -->
-              <div class="col-md-4">
-                  <h5 class="text-white">Contact Us</h5>
-                  <p>
-                      <i class="fas fa-map-marker-alt"></i> Address: Jl. Contoh No.123, Jakarta<br>
-                      <i class="fas fa-phone-alt"></i> Phone: +62 123 456 789<br>
-                      <i class="fas fa-envelope"></i> Email: info@example.com
-                  </p>
-              </div>
-              <!-- Social Media Links -->
-              <div class="col-md-4">
-                  <h5 class="text-white">Follow Us</h5>
-                  <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i> Facebook</a><br>
-                  <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i> Twitter</a><br>
-                  <a href="#" class="text-white"><i class="fab fa-instagram"></i> Instagram</a>
+              <div class="col-md-6">
+                  <h3 class="text-light"><?= $profil['nama_profil'] ?></h3>
+                  <h5 class="text-light"><i class="fas fa-map-marker-alt"></i> <?= $kontak['alamat'] ?></h5>
+
+
+                  <div class="contact-info">
+                      <div>
+                          Email&nbsp;&nbsp;&nbsp;: <?= $kontak['email'] ?>
+                      </div>
+                      <div>
+                          Instagram&nbsp;: <?= $kontak['instagram'] ?>
+                      </div>
+                      <div>
+                          TikTok&nbsp;&nbsp;&nbsp;: <?= $kontak['tiktok'] ?>
+                      </div>
+                      <div>
+                          WhatsApp&nbsp;: <?= $kontak['whatsapp'] ?>
+                      </div>
+                      <div>
+                          YouTube&nbsp;&nbsp;&nbsp;: <?= $kontak['youtube'] ?>
+                      </div>
+                  </div>
+
+
+
               </div>
               <!-- Newsletter Subscription -->
-              <div class="col-md-4">
+              <div class="col-md-6">
                   <h5 class="text-white">Subscribe to Our Newsletter</h5>
                   <form action="#" method="post">
                       <div class="input-group">

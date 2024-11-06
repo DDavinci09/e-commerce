@@ -32,6 +32,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= base_url(); ?>Admin/MyProfile" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Profile Admin</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= base_url(); ?>Admin/Rekening" class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
                                 <p>No Rekening</p>

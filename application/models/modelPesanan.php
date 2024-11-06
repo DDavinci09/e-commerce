@@ -275,6 +275,47 @@ class modelPesanan extends CI_Model
 
     return $this->db->get('pesanan')->result_array();        
 }
+  
+    public function menungguProsesAdmin() 
+    {
+        $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+        $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+        $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+        $this->db->join('user', 'pesanan.id_user = user.id_user');
+                
+        // Memastikan status pesanan bukan 'Diproses'
+        $this->db->group_start()
+         ->where('pesanan.status_bayar !=', 'Lunas')
+         ->or_where_in('pesanan.status_pesanan', ['Diproses', 'Dikirim'])
+         ->group_end();
+
+        $this->db->group_by('pesanan.id_pesanan');
+        $this->db->order_by('pesanan.id_pesanan', 'DESC');
+
+        return $this->db->get('pesanan')->result_array();        
+    }
+    
+    public function menungguProsesAlumni() 
+    {
+        $this->db->join('produk', 'pesanan.id_produk = produk.id_produk');
+        $this->db->join('kategori', 'produk.id_kategori = kategori.id_kategori');
+        $this->db->join('alumni', 'pesanan.id_alumni = alumni.id_alumni');
+        $this->db->join('user', 'pesanan.id_user = user.id_user');
+        
+        // Memastikan alumni sesuai dengan session id_alumni
+        $this->db->where(['pesanan.id_alumni' => $this->session->userdata('id_alumni')]);
+        
+        // Memastikan status pesanan bukan 'Diproses'
+        $this->db->group_start()
+         ->where('pesanan.status_bayar !=', 'Lunas')
+         ->or_where_in('pesanan.status_pesanan', ['Diproses', 'Dikirim'])
+         ->group_end();
+
+        $this->db->group_by('pesanan.id_pesanan');
+        $this->db->order_by('pesanan.id_pesanan', 'DESC');
+
+        return $this->db->get('pesanan')->result_array();        
+    }
 
 public function cekPesanan($id_produk)
 {

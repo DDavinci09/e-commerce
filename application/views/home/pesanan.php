@@ -72,8 +72,15 @@
                                                     (<?= $ps['estimasi'] ?> hari)</span>
                                             </li>
                                             <li class="d-flex">
+                                                <?php if ($ps['pembayaran'] == "COD") { ?>
+                                                <strong class="col-5">Bayar</strong>
+                                                <?php } else { ?>
                                                 <strong class="col-5">Bukti</strong>
+                                                <?php } ?>
                                                 <span class="col">:
+                                                    <?php if ($ps['pembayaran'] == "COD") { ?>
+                                                    COD
+                                                    <?php } else { ?>
                                                     <?php if(!$ps['bukti_bayar']) { ?>
                                                     <a class="btn btn-sm btn-info text-light" data-toggle="modal"
                                                         data-target="#upload-bukti<?= $ps['id_pesanan'] ?>">
@@ -86,6 +93,8 @@
                                                         <i class="fas fa-sticky-note"></i> Bukti
                                                     </a>
                                                     <?php } ?>
+                                                    <?php } ?>
+
                                                 </span>
                                             </li>
                                         </ul>

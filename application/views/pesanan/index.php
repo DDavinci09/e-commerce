@@ -123,7 +123,8 @@
                                                         </div>
                                                         <div class="col col-md-7">
                                                             :
-                                                            <?= strtoupper($ps['kurir']) ?> (<?= $ps['estimasi'] ?>)
+                                                            <?= strtoupper($ps['kurir']) ?> (<?= $ps['estimasi'] ?>
+                                                            hari)
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -152,10 +153,17 @@
                                                 <div class="card-body">
                                                     <div class="row my-2">
                                                         <div class="col col-md-6">
+                                                            <?php if ($ps['pembayaran'] == "COD") { ?>
+                                                            <b>Pembayaran</b>
+                                                            <?php } else { ?>
                                                             <b>Bukti Bayar</b>
+                                                            <?php } ?>
                                                         </div>
                                                         <div class="col col-md-6">
                                                             :
+                                                            <?php if ($ps['pembayaran'] == "COD") { ?>
+                                                            COD
+                                                            <?php } else { ?>
                                                             <?php if(!$ps['bukti_bayar']) { ?>
                                                             Menunggu Upload
                                                             <?php } else { ?>
@@ -164,6 +172,7 @@
                                                                 target="_blank">
                                                                 <i class="fas fa-sticky-note"></i> Bukti
                                                             </a>
+                                                            <?php } ?>
                                                             <?php } ?>
                                                         </div>
                                                     </div>

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/linericon/style.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/home/vendors/owl-carousel/owl.theme.default.min.css">

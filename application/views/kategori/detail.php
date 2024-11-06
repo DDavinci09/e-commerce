@@ -20,17 +20,26 @@
                     <div class="card card-primary">
                         <form action="#" method="post">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="nama_kategori">Nama Kategori :</label>
-                                    <input type="text" name="nama_kategori" class="form-control" id="nama_kategori"
-                                        value="<?= $kategori['nama_kategori'] ?>" placeholder="Masukkan nama kategori"
-                                        readonly>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nama_kategori">Nama Kategori :</label>
+                                            <input type="text" name="nama_kategori" class="form-control"
+                                                id="nama_kategori" value="<?= $kategori['nama_kategori'] ?>"
+                                                placeholder="Masukkan nama kategori" readonly>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="keterangan_kategori">Keterangan :</label>
-                                    <textarea name="keterangan_kategori" class="form-control" id="keterangan_kategori"
-                                        rows="3" placeholder="Masukkan keterangan kategori"
-                                        readonly><?= $kategori['keterangan_kategori'] ?></textarea>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="keterangan_kategori">Keterangan :</label>
+                                            <textarea name="keterangan_kategori" class="form-control"
+                                                id="keterangan_kategori" rows="3"
+                                                placeholder="Masukkan keterangan kategori"
+                                                readonly><?= $kategori['keterangan_kategori'] ?></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

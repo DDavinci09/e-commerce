@@ -7,59 +7,6 @@
                 <div class="col-sm-6">
                     <h1>Dashboard <?= $user['role']; ?></h1>
                 </div>
-                <div class="col-sm-6 text-right text-light">
-                    <?php if ($this->session->userdata('role') == 'Admin') { ?>
-                    <a class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i> <span><?= count($pesanan_pending) ?></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-                        <span class="dropdown-item dropdown-header">Menunggu Verifikasi Pembayaran
-                            (<?= count($pesanan_pending) ?>)</span>
-                        <div class="dropdown-divider"></div>
-
-                        <?php if (!empty($pesanan_pending)): ?>
-                        <?php $i=1; foreach ($pesanan_pending as $pesanan): ?>
-                        <a href="#" class="dropdown-item">
-                            <?= $i++; ?>. <?= $pesanan['nama_user'] ?> |
-                            <?= $pesanan['total_pembayaran'] ?> |
-                            <?= date('d M Y', strtotime($pesanan['tgl_pesanan'])) ?>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <?php endforeach; ?>
-                        <?php else: ?>
-                        <a href="#" class="dropdown-item text-center">Tidak ada notifikasi</a>
-                        <?php endif; ?>
-
-                        <a href="<?= base_url() ?>Admin/PesananStatusBayar" class="dropdown-item dropdown-footer">Lihat
-                            Semua . . . </a>
-                    </div>
-                    <?php } else { ?>
-                    <a class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i> <span><?= count($menungguProses) ?></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-                        <span class="dropdown-item dropdown-header">Menunggu Proses Pesanan
-                            (<?= count($menungguProses) ?>)</span>
-                        <div class="dropdown-divider"></div>
-
-                        <?php if (!empty($menungguProses)): ?>
-                        <?php $i=1; foreach ($menungguProses as $menunggu): ?>
-                        <a href="#" class="dropdown-item">
-                            <?= $i++; ?>. <?= $menunggu['nama_user'] ?> |
-                            <?= $menunggu['status_pesanan'] ?> |
-                            <?= date('d M Y', strtotime($menunggu['tgl_pesanan'])) ?>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <?php endforeach; ?>
-                        <?php else: ?>
-                        <a href="#" class="dropdown-item text-center">Tidak ada notifikasi</a>
-                        <?php endif; ?>
-
-                        <a href="<?= base_url() ?>Alumni/PesananDiproses" class="dropdown-item dropdown-footer">Lihat
-                            Semua . . .</a>
-                    </div>
-                    <?php } ?>
-                </div>
             </div>
             <?php if ($this->session->flashdata('message')): ?>
             <div class="row">
@@ -79,7 +26,7 @@
                     <div class="row">
                         <?php if ($this->session->userdata('role') == 'Alumni') { ?>
                         <!-- Data Total Pesanan -->
-                        <div class="col-lg-6 col-6">
+                        <div class="col-xl-4 col-lg-5 col-md-6 col-12">
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>Rp.<?= number_format($totalPendapatan, 0, ',', '.'); ?></h3>
@@ -98,7 +45,7 @@
                     <div class="row">
                         <?php if ($this->session->userdata('role') == 'Admin') { ?>
                         <!-- Data User -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3><?= $totalUser; ?></h3>
@@ -114,7 +61,7 @@
                         <!-- ./col -->
 
                         <!-- Total Data Alumni -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3><?= $totalAlumni; ?></h3>
@@ -138,7 +85,7 @@
                     <!-- /.row -->
                     <div class="row">
                         <!-- Data Kategori -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3><?= $totalKategori; ?></h3>
@@ -156,7 +103,7 @@
                         <?php } ?>
 
                         <!-- Data Produk -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-primary">
                                 <div class="inner">
                                     <h3><?= $totalProduk; ?></h3>
@@ -173,7 +120,7 @@
 
 
                         <!-- Data Total Pesanan -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3><?= $totalPesanan; ?></h3>
@@ -199,8 +146,9 @@
                         </div>
                         <!-- ./col -->
 
+                        <?php if ($this->session->userdata('role') == 'Alumni') { ?>
                         <!-- Data Review -->
-                        <div class="col-lg-3 col-6">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                             <div class="small-box bg-secondary">
                                 <div class="inner">
                                     <h3><?= $totalReview; ?></h3>
@@ -214,6 +162,7 @@
                             </div>
                         </div>
                         <!-- ./col -->
+                        <?php } ?>
                     </div>
 
                 </div>

@@ -51,11 +51,11 @@
                                         <td><?= $us['email'] ?></td>
                                         <td><?= $us['no_telp'] ?></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm mb-1"
+                                            <a class="btn btn-info btn-sm"
                                                 href="<?= base_url() ?>Admin/ProfileUser/<?= $us['id_user'] ?>"><i
                                                     class="fa fa-eye"></i></a>
-                                            <a class="btn btn-danger  btn-sm" href="#"
-                                                onclick="deleteConfirmation('<?= base_url(); ?>Admin/deleteAlumni/<?= $alm['id_user']; ?>')"><i
+                                            <a class="btn btn-danger btn-sm" href="#"
+                                                onclick="deleteConfirmation('<?= base_url(); ?>Admin/deleteAlumni/<?= $us['id_user']; ?>')"><i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>

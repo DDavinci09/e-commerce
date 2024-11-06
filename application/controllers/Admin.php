@@ -26,13 +26,77 @@ class Admin extends CI_Controller
         $data['totalDiproses'] = count($this->modelPesanan->getAdminDiproses());
         $data['totalSelesai'] = count($this->modelPesanan->getAdminSelesai());
         $data['totalDibatalkan'] = count($this->modelPesanan->getAdminDibatalkan());
-        $data['totalReview'] = count($this->modelReview->getAll());
+        // $data['totalReview'] = count($this->modelReview->getAll());
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
         $this->load->view('layoutDashboard/navbar', $data);
         $this->load->view('dashboard/index', $data);
         $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function MyProfile()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('admin/myprofile', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function editProfileAdmin()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        
+        $data = [
+            'nama' => $this->input->post('nama', true),
+            'api_key' => $this->input->post('api_key', true)
+        ];
+        // Update data di database
+        $this->db->where('id_admin', $this->session->userdata('id_admin'));
+        $this->db->update('admin', $data);
+        
+        redirect('Admin/MyProfile');
+    }
+
+    public function editUsernamePassword()
+    {
+        // Validasi form input
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[alumni.username]', [
+                'is_unique' => 'This username has already registered!'
+            ]);
+            $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+                'matches' => 'Passwords do not match!',
+                'min_length' => 'Password is too short!'
+            ]);
+            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim|matches[password1]');
+
+        if ($this->form_validation->run() == FALSE) {
+            // Jika validasi gagal, tampilkan modal kembali dengan error
+            $this->session->set_flashdata('error', validation_errors());
+            // Set flashdata agar modal tetap terbuka
+            $this->session->set_flashdata('edit_modal', true);
+            redirect('Admin/MyProfile');
+        } else {
+            $username = $this->input->post('username');
+            $new_password = $this->input->post('password1');
+
+            $data = [
+                'username' => htmlspecialchars($this->input->post('username', true)),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            ];
+
+            // Update data di database
+            $this->db->where('id_admin', $this->session->userdata('id_admin'));
+            $this->db->update('admin', $data);
+
+            $this->session->set_userdata($data);
+
+            $this->session->set_flashdata('message', 'Data berhasil diupdate');
+            redirect('Admin/MyProfile');
+        }
     }
 
     // Halaman Dat Alumni
@@ -287,6 +351,18 @@ class Admin extends CI_Controller
     {
         $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
         $data['pesanan'] = $this->modelPesanan->getPesananAdmin();
+
+        $this->load->view('layoutDashboard/header', $data);
+        $this->load->view('layoutDashboard/sidebar', $data);
+        $this->load->view('layoutDashboard/navbar', $data);
+        $this->load->view('pesanan/index', $data);
+        $this->load->view('layoutDashboard/footer', $data);
+    }
+
+    public function PesananDiproses()
+    {
+        $data['user'] = $this->db->get_where('admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['pesanan'] = $this->modelPesanan->menungguProsesAdmin();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);

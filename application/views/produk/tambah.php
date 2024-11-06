@@ -23,7 +23,7 @@
                             <input type="hidden" name="id_alumni" value="<?= $user['id_alumni'] ?>">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="nama_produk">Nama Produk</label>
                                             <input type="text" name="nama_produk" class="form-control" id="nama_produk"
@@ -33,9 +33,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="id_kategori">Kategori Produk</label>
-                                            <select type="text" name="id_kategori" class="form-control" id="id_kategori"
-                                                value="<?= set_value('id_kategori'); ?>"
-                                                placeholder="Masukkan kategori produk">
+                                            <select name="id_kategori" class="form-control" id="id_kategori">
                                                 <option value="">-- Pilih kategori produk --</option>
                                                 <?php foreach ($kategori as $kt): ?>
                                                 <option value="<?= $kt['id_kategori'] ?>">
@@ -60,7 +58,8 @@
                                             <?= form_error('keterangan_produk', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                     </div>
-                                    <div class="col">
+
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="stok_produk">Stok Produk</label>
                                             <input type="number" name="stok_produk" class="form-control"
@@ -84,12 +83,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Gambar Produk</label>
-                                            <input type="file" class="form-control" id="image" name="image"
-                                                value="<?= set_value('image'); ?>">
+                                            <input type="file" class="form-control" id="image" name="image">
                                             <?= form_error('image', '<small class="text-danger">', '</small>'); ?>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-primary">Tambah Data</button>

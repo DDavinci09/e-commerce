@@ -332,7 +332,7 @@ class Alumni extends CI_Controller
     public function PesananDiproses()
     {
         $data['user'] = $this->db->get_where('alumni', ['username' => $this->session->userdata('username')])->row_array();
-        $data['pesanan'] = $this->modelPesanan->menungguProses();
+        $data['pesanan'] = $this->modelPesanan->menungguProsesAlumni();
 
         $this->load->view('layoutDashboard/header', $data);
         $this->load->view('layoutDashboard/sidebar', $data);
